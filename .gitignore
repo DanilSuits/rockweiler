@@ -1,0 +1,76 @@
+# Folders and files created by the build process
+target
+*.class
+
+# Project files for IntelliJ
+.idea
+*.iml
+*.ipr
+
+# Project files for Eclipse
+.project
+.classpath
+.settings
+
+# Others
+atlassian-ide-plugin.xml
+
+# /
+/# Folders and files created by the build process
+/target
+/*.class
+/# Project files for IntelliJ
+/.idea
+/*.iml
+/*.ipr
+/# Project files for Eclipse
+/.project
+/.classpath
+/.settings
+/# Others
+/atlassian-ide-plugin.xml
+
+# /common-data/
+/common-data/# Folders and files created by the build process
+/common-data/target
+/common-data/*.class
+/common-data/# Project files for IntelliJ
+/common-data/.idea
+/common-data/*.iml
+/common-data/*.ipr
+/common-data/# Project files for Eclipse
+/common-data/.project
+/common-data/.classpath
+/common-data/.settings
+/common-data/# Others
+/common-data/atlassian-ide-plugin.xml
+
+# /hadoop-core/
+/hadoop-core/# Folders and files created by the build process
+/hadoop-core/target
+/hadoop-core/*.class
+/hadoop-core/# Project files for IntelliJ
+/hadoop-core/.idea
+/hadoop-core/*.iml
+/hadoop-core/*.ipr
+/hadoop-core/# Project files for Eclipse
+/hadoop-core/.project
+/hadoop-core/.classpath
+/hadoop-core/.settings
+/hadoop-core/# Others
+/hadoop-core/atlassian-ide-plugin.xml
+
+# /hadoop-test/
+/hadoop-test/# Folders and files created by the build process
+/hadoop-test/target
+/hadoop-test/*.class
+/hadoop-test/# Project files for IntelliJ
+/hadoop-test/.idea
+/hadoop-test/*.iml
+/hadoop-test/*.ipr
+/hadoop-test/# Project files for Eclipse
+/hadoop-test/.project
+/hadoop-test/.classpath
+/hadoop-test/.settings
+/hadoop-test/# Others
+/hadoop-test/atlassian-ide-plugin.xml

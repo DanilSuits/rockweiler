@@ -55,7 +55,7 @@ public class DatabaseFactory {
         return database;
     }
 
-    public static Map<String,Player> createIdMap(Iterable<Player> database, IdReader idReader) {
+    public static Map<String,Player> createIdMap(Iterable<? extends Player> database, IdReader idReader) {
         Map<String, Player> mergeMap = Maps.newHashMap();
         for (Player p : database) {
             String key = null;

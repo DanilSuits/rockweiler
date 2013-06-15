@@ -18,6 +18,8 @@ public interface Player {
         void add(String key, String value);
         void merge(Ids rhs) throws IdConflictException;
         String get(String key);
+        int count();
+
         Iterable<String> all();
     }
 

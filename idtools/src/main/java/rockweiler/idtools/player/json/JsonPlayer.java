@@ -5,7 +5,6 @@
  */
 package rockweiler.idtools.player.json;
 
-import com.fasterxml.jackson.core.JsonGenerator;
 import rockweiler.idtools.player.Player;
 
 import java.util.Map;

@@ -5,9 +5,10 @@
  */
 package rockweiler.idtools;
 
-import com.beust.jcommander.internal.Lists;
 import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import rockweiler.idtools.player.BioReader;
 import rockweiler.idtools.player.IdConflictException;
@@ -17,9 +18,6 @@ import rockweiler.idtools.player.PlayerCollector;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -65,7 +63,7 @@ public class BootstrapMerge implements PlayerMerge {
 
     public void collectMasterDatabase(PlayerCollector collector) {
         for (Map.Entry<String, Player> crnt : master.entrySet()) {
-            if (!REJECTED.apply(crnt.getValue())) {
+            if (Predicates.not(REJECTED).apply(crnt.getValue())) {
                 collector.collect(crnt.getValue());
             }
         }
@@ -79,12 +77,6 @@ public class BootstrapMerge implements PlayerMerge {
                 rejected.add(crnt.getValue());
             }
         }
-
-        Collections.sort(rejected, new Comparator<Player>() {
-            public int compare(Player lhs, Player rhs) {
-                return lhs.getBio().getName().compareTo(rhs.getBio().getName());
-            }
-        });
 
         collector.collectAll(rejected);
     }

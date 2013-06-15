@@ -62,22 +62,12 @@ public class BootstrapMerge implements PlayerMerge {
     };
 
     public void collectMasterDatabase(PlayerCollector collector) {
-        for (Map.Entry<String, Player> crnt : master.entrySet()) {
-            if (Predicates.not(REJECTED).apply(crnt.getValue())) {
-                collector.collect(crnt.getValue());
-            }
-        }
+        Iterable<Player> accepted = Iterables.filter(master.values(),Predicates.not(REJECTED));
+        collector.collectAll(accepted);
     }
 
     public void collectMissingDatabase(PlayerCollector collector) {
-        List<Player> rejected = Lists.newArrayList();
-
-        for (Map.Entry<String, Player> crnt : master.entrySet()) {
-            if (REJECTED.apply(crnt.getValue())) {
-                rejected.add(crnt.getValue());
-            }
-        }
-
+        Iterable<Player> rejected = Iterables.filter(master.values(),REJECTED);
         collector.collectAll(rejected);
     }
 
@@ -94,9 +84,13 @@ public class BootstrapMerge implements PlayerMerge {
 
     public static void main(String[] args) throws IOException {
 
+        Iterable<? extends Player> players = DatabaseFactory.createDatabase("master.player.json");
+        players = Iterables.filter(players,HAS_BIO);
+
         IdReader idReader = new BioReader();
-        Map<String,Player> mergeMap = getBootstrapDatabase("master.player.json", idReader);
-        BootstrapMerge theMerge = new BootstrapMerge(mergeMap,idReader);
+        Map<String, Player> idMap = DatabaseFactory.createIdMap(players, idReader);
+
+        BootstrapMerge theMerge = new BootstrapMerge(idMap,idReader);
 
         String updates[] =
                 {
@@ -107,6 +101,7 @@ public class BootstrapMerge implements PlayerMerge {
                         // , "oliver.players.json"
                         , "rotoworld.players.json"
                         , "yahoo.players.json"
+                        , "baseballReference.players.json"
                 };
 
         for (String updateDatabase : updates) {
@@ -124,17 +119,4 @@ public class BootstrapMerge implements PlayerMerge {
         reader.onEnd();
 
     }
-
-    private static Map<String, Player> getCleanDatabase() {
-        return Maps.newHashMap();
-    }
-
-    private static Map<String, Player> getBootstrapDatabase(String masterDatabase, IdReader idReader) throws FileNotFoundException {
-
-        Iterable<? extends Player> players = DatabaseFactory.createDatabase(masterDatabase);
-        Map<String, Player> idMap = DatabaseFactory.createIdMap(players, idReader);
-
-        return idMap;
-    }
-
 }

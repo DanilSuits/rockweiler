@@ -24,6 +24,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintStream;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
@@ -33,6 +34,10 @@ import java.util.Scanner;
  * @author Danil Suits (danil@vast.com)
  */
 public class DatabaseFactory {
+    public static Iterable<Player> createEmptyDatabase() {
+        return Collections.EMPTY_LIST;
+    }
+
     public static Iterable<Player> createDatabase(String filename) throws FileNotFoundException {
         File dbSource = new File(filename);
         Scanner dbScanner = new Scanner(dbSource);
@@ -85,7 +90,6 @@ public class DatabaseFactory {
     };
 
     public static DatabaseWriter createWriter(final OutputStream out) throws IOException {
-        JsonGenerator generator = new JsonFactory().createJsonGenerator(out, JsonEncoding.UTF8);
 
         final JsonWriter json = new JsonWriter(out);
         final SortingCollector sort = new SortingCollector(json, NAME_ORDER);

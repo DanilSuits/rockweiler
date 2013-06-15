@@ -62,12 +62,12 @@ public class BootstrapMerge implements PlayerMerge {
     };
 
     public void collectMasterDatabase(PlayerCollector collector) {
-        Iterable<Player> accepted = Iterables.filter(master.values(),Predicates.not(REJECTED));
+        Iterable<Player> accepted = Iterables.filter(master.values(), Predicates.not(REJECTED));
         collector.collectAll(accepted);
     }
 
     public void collectMissingDatabase(PlayerCollector collector) {
-        Iterable<Player> rejected = Iterables.filter(master.values(),REJECTED);
+        Iterable<Player> rejected = Iterables.filter(master.values(), REJECTED);
         collector.collectAll(rejected);
     }
 
@@ -84,13 +84,15 @@ public class BootstrapMerge implements PlayerMerge {
 
     public static void main(String[] args) throws IOException {
 
-        Iterable<? extends Player> players = DatabaseFactory.createDatabase("master.player.json");
-        players = Iterables.filter(players,HAS_BIO);
+        Iterable<? extends Player> players = DatabaseFactory.createEmptyDatabase();
+        players = DatabaseFactory.createDatabase("master.players.json");
+
+        players = Iterables.filter(players, HAS_BIO);
 
         IdReader idReader = new BioReader();
         Map<String, Player> idMap = DatabaseFactory.createIdMap(players, idReader);
 
-        BootstrapMerge theMerge = new BootstrapMerge(idMap,idReader);
+        BootstrapMerge theMerge = new BootstrapMerge(idMap, idReader);
 
         String updates[] =
                 {

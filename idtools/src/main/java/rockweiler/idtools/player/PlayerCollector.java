@@ -10,5 +10,5 @@ package rockweiler.idtools.player;
  */
 public interface PlayerCollector {
     void collect(Player player);
-    void collectAll(Iterable<Player> allPlayers);
+    void collectAll(Iterable<? extends Player> allPlayers);
 }

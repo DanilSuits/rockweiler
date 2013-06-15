@@ -27,7 +27,7 @@ public class JsonPlayerScanner implements PlayerScanner {
     }
 
     public Player next() {
-        String rawJson = source.next();
+        String rawJson = source.nextLine();
         return factory.toPlayer(rawJson);
     }
 }

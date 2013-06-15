@@ -7,6 +7,11 @@ package rockweiler.idtools;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import org.codehaus.jackson.JsonEncoding;
+import org.codehaus.jackson.JsonFactory;
+import org.codehaus.jackson.JsonGenerator;
+import rockweiler.idtools.player.AbstractPlayerCollector;
+import rockweiler.idtools.player.PlayerCollector;
 import rockweiler.idtools.player.json.JsonPlayerFactory;
 import rockweiler.idtools.player.json.JsonPlayerScanner;
 import rockweiler.idtools.player.Player;
@@ -15,6 +20,8 @@ import rockweiler.idtools.player.json.JsonWriter;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.io.PrintStream;
 import java.util.List;
 import java.util.Map;
@@ -35,6 +42,11 @@ public class DatabaseFactory {
         JsonPlayerFactory factory = new JsonPlayerFactory();
         JsonPlayerScanner players = new JsonPlayerScanner(dbScanner,factory);
 
+        return createDatabase(players);
+    }
+
+    public static Iterable<Player> createDatabase(JsonPlayerScanner players) {
+
         List<Player> database = Lists.newArrayList();
         while(players.hasNext()) {
             database.add(players.next());
@@ -46,21 +58,29 @@ public class DatabaseFactory {
     public static Map<String,Player> createIdMap(Iterable<Player> database, IdReader idReader) {
         Map<String, Player> mergeMap = Maps.newHashMap();
         for (Player p : database) {
-            String key = idReader.getId(p);
+            String key = null;
+            try {
+                key = idReader.getId(p);
+            } catch (Exception e) {
+
+            }
             mergeMap.put(key, p);
         }
 
         return mergeMap;
     }
 
-    public static DatabaseWriter createWriter(String filename) throws FileNotFoundException {
+    public static DatabaseWriter createWriter(String filename) throws IOException {
         File destination = new File(filename);
         PrintStream out = new PrintStream(destination);
         return createWriter(out);
     }
 
-    public static DatabaseWriter createWriter(PrintStream out) {
-        JsonWriter json = new JsonWriter(out);
+    public static DatabaseWriter createWriter(final OutputStream out) throws IOException {
+        JsonGenerator generator = new JsonFactory().createJsonGenerator(out, JsonEncoding.UTF8);
+
+        final JsonWriter json = new JsonWriter(out);
+
         return new DatabaseWriter(out,json);
     }
 }

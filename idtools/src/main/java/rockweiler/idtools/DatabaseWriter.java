@@ -8,16 +8,18 @@ package rockweiler.idtools;
 import rockweiler.idtools.player.Player;
 import rockweiler.idtools.player.PlayerCollector;
 
+import java.io.IOException;
+import java.io.OutputStream;
 import java.io.PrintStream;
 
 /**
  * @author Danil Suits (danil@vast.com)
  */
 public class DatabaseWriter {
-    private final PrintStream out ;
+    private final OutputStream out ;
     private final PlayerCollector target;
 
-    public DatabaseWriter(PrintStream out, PlayerCollector target) {
+    public DatabaseWriter(OutputStream out, PlayerCollector target) {
         this.out = out;
         this.target = target;
     }
@@ -27,6 +29,10 @@ public class DatabaseWriter {
     }
 
     public void onEnd() {
-        out.close();
+        try {
+            out.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

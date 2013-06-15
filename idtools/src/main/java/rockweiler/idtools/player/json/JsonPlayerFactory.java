@@ -20,7 +20,7 @@ import java.util.Map;
  * @author Danil Suits (danil@vast.com)
  */
 public class JsonPlayerFactory {
-    JsonPlayer toPlayer(String src) {
+    public JsonPlayer toPlayer(String src) {
         Gson gson = new Gson();
 
         JsonParser parser = null;
@@ -34,7 +34,7 @@ public class JsonPlayerFactory {
             Map<String,Object> data = toMap(parser);
             return toJsonPlayer(data);
         } catch (IOException e) {
-            throw new RuntimeException("Failed to parse: + src",e);
+            throw new RuntimeException("Failed to parse: "+ src,e);
         }
 
     }

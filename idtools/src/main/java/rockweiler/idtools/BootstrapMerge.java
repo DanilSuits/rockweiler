@@ -104,6 +104,7 @@ public class BootstrapMerge implements PlayerMerge {
                         , "rotoworld.players.json"
                         , "yahoo.players.json"
                         , "baseballReference.players.json"
+                        , "biography.merged.json"
                 };
 
         for (String updateDatabase : updates) {

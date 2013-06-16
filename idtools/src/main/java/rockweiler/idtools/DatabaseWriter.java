@@ -30,6 +30,7 @@ public class DatabaseWriter {
 
     public void onEnd() {
         try {
+            out.flush();
             out.close();
         } catch (IOException e) {
             throw new RuntimeException(e);

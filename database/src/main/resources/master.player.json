@@ -1,10 +1,10 @@
 {"id":{"espn":"4153","lahman":"burneaj01","rotoworld":"2880","mlb":"150359","yahoo":"6314"},"bio":{"dob":"19770103","name":"A.J. Burnett","role":"pitcher"},"years":{"2013":{"team":"pit","depth":{"SP":"1"}}}}
 {"id":{"espn":"29258","bbref":"ellisaj01","lahman":"ellisaj01","rotoworld":"5664","mlb":"454560","yahoo":"8373"},"bio":{"dob":"19810409","name":"A.J. Ellis","role":"hitter"},"years":{"2013":{"team":"la","depth":{"C":"1"}}}}
-{"id":{"espn":"32559","bbref":"griffaj01","rotoworld":"7080","mlb":"456167","yahoo":"9220"},"bio":{"dob":"19880128","name":"A.J. Griffin","role":"pitcher"},"years":{"2013":{"team":"oak","depth":{"SP":"4"}}}}
+{"id":{"espn":"32559","bbref":"griffaj01","lahman":"griffaj01","rotoworld":"7080","mlb":"456167","yahoo":"9220"},"bio":{"dob":"19880128","name":"A.J. Griffin","role":"pitcher"},"years":{"2013":{"team":"oak","depth":{"SP":"4"}}}}
 {"id":{"espn":"31050","mlb":"543362"},"bio":{"dob":"19900501","name":"A.J. Jimenez","role":"hitter"},"years":{"2013":{"team":"tor"}}}
 {"id":{"espn":"3948","lahman":"pierzaj01","rotoworld":"2685","mlb":"150229","yahoo":"6109"},"bio":{"dob":"19761230","name":"A.J. Pierzynski","role":"hitter"},"years":{"2013":{"team":"tex","depth":{"C":"1"}}}}
-{"id":{"espn":"30699","bbref":"polloaj01","rotoworld":"5788","mlb":"572041","yahoo":"9157"},"bio":{"dob":"19871205","name":"A.J. Pollock","role":"hitter"},"years":{"2013":{"team":"ari","depth":{"OF":"3"}}}}
-{"id":{"bbref":"ramosaj01","rotoworld":"7249","mlb":"573109","yahoo":"9298"},"bio":{"dob":"19860920","name":"A.J. Ramos","role":"pitcher"},"years":{"2013":{"team":"mia","depth":{"RP":"4"}}}}
+{"id":{"espn":"30699","bbref":"polloaj01","lahman":"polloaj01","rotoworld":"5788","mlb":"572041","yahoo":"9157"},"bio":{"dob":"19871205","name":"A.J. Pollock","role":"hitter"},"years":{"2013":{"team":"ari","depth":{"OF":"3"}}}}
+{"id":{"bbref":"ramosaj01","lahman":"ramosaj01","rotoworld":"7249","mlb":"573109","yahoo":"9298"},"bio":{"dob":"19860920","name":"A.J. Ramos","role":"pitcher"},"years":{"2013":{"team":"mia","depth":{"RP":"4"}}}}
 {"id":{"espn":"30495","bbref":"crowaa01","mlb":"543070"},"bio":{"dob":"19861110","name":"Aaron Crow","role":"pitcher"},"years":{"2013":{"team":"kc","depth":{"RP":"2"}}}}
 {"id":{"lahman":"crowaa01","rotoworld":"5387","yahoo":"8662"},"bio":{"dob":"19861111","name":"Aaron Crow"},"years":{"2012":{"pos":{"P":"73"}}}}
 {"id":{"espn":"5181","bbref":"haranaa01","lahman":"haranaa01","rotoworld":"3475","mlb":"421685","yahoo":"6936"},"bio":{"dob":"19780509","name":"Aaron Harang","role":"pitcher"},"years":{"2013":{"team":"sea","depth":{"RP":"12"}}}}
@@ -48,7 +48,7 @@
 {"id":{"espn":"30770","mlb":"572910"},"bio":{"dob":"19880401","name":"Alex Hassan","role":"hitter"},"years":{"2013":{"team":"bos"}}}
 {"id":{"espn":"29493","bbref":"liddial01","lahman":"liddial01","rotoworld":"5424","mlb":"499926","yahoo":"9065"},"bio":{"dob":"19880814","name":"Alex Liddi","role":"hitter"},"years":{"2013":{"team":"sea"}}}
 {"id":{"espn":"29683","bbref":"preslal01","lahman":"preslal01","rotoworld":"6402","mlb":"502100","yahoo":"8823"},"bio":{"dob":"19850725","name":"Alex Presley","role":"hitter"},"years":{"2013":{"team":"pit"}}}
-{"id":{"espn":"5880","bbref":"riosal01","rotoworld":"3793","mlb":"425567","yahoo":"7254"},"bio":{"dob":"19810218","name":"Alex Rios","role":"hitter"},"years":{"2013":{"team":"cws","depth":{"OF":"1"}}}}
+{"id":{"espn":"5880","bbref":"riosal01","lahman":"riosal01","rotoworld":"3793","mlb":"425567","yahoo":"7254"},"bio":{"dob":"19810218","name":"Alex Rios","role":"hitter"},"years":{"2013":{"team":"cws","depth":{"OF":"1"}}}}
 {"id":{"espn":"3115","lahman":"rodrial01","rotoworld":"1981","mlb":"121347","yahoo":"5275"},"bio":{"dob":"19750727","name":"Alex Rodriguez","role":"hitter"},"years":{"2013":{"team":"nyy"}}}
 {"id":{"bbref":"sanabal01","rotoworld":"6378","mlb":"502253","yahoo":"8750"},"bio":{"dob":"19880908","name":"Alex Sanabia","role":"pitcher"},"years":{"2013":{"team":"mia"}}}
 {"id":{"espn":"31125","bbref":"torreal01","rotoworld":"6056","mlb":"456776","yahoo":"8991"},"bio":{"dob":"19871208","name":"Alex Torres","role":"pitcher"},"years":{"2013":{"team":"tb"}}}
@@ -60,7 +60,7 @@
 {"id":{"espn":"28575","bbref":"casilal01","lahman":"casilal01","rotoworld":"4532","mlb":"458210","yahoo":"7855"},"bio":{"dob":"19840720","name":"Alexi Casilla","role":"hitter"},"years":{"2013":{"team":"bal","depth":{"2B":"2"}}}}
 {"id":{"espn":"30549","bbref":"ogandal01","lahman":"ogandal01","rotoworld":"406","mlb":"468396","yahoo":"8743"},"bio":{"dob":"19831005","name":"Alexi Ogando","role":"pitcher"},"years":{"2013":{"team":"tex","depth":{"SP":"3"}}}}
 {"id":{"espn":"3993","bbref":"soriaal01","lahman":"soriaal01","rotoworld":"2727","mlb":"150093","yahoo":"6154"},"bio":{"dob":"19760107","name":"Alfonso Soriano","role":"hitter"},"years":{"2013":{"team":"chc","depth":{"OF":"1"}}}}
-{"id":{"espn":"29223","bbref":"aceveal01","lahman":"aceveal01","mlb":"469686"},"bio":{"dob":"19821208","name":"Alfredo Aceves","role":"pitcher"},"years":{"2013":{"team":"bos","depth":{"RP":"6"}}}}
+{"id":{"espn":"29223","bbref":"aceveal01","lahman":"aceveal01","yahoo":"8336","mlb":"469686"},"bio":{"dob":"19821208","name":"Alfredo Aceves","role":"pitcher"},"years":{"2013":{"team":"bos","depth":{"RP":"6"}}}}
 {"id":{"espn":"30067","bbref":"figaral01","rotoworld":"5532","mlb":"451628","yahoo":"8513"},"bio":{"dob":"19840707","name":"Alfredo Figaro","role":"pitcher"},"years":{"2013":{"team":"mil"}}}
 {"id":{"espn":"32251","bbref":"marteal01","mlb":"501245"},"bio":{"dob":"19890331","name":"Alfredo Marte","role":"hitter"},"years":{"2013":{"team":"ari"}}}
 {"id":{"rotoworld":"6804","mlb":"492728","yahoo":"9293"},"bio":{"dob":"19870506","name":"Alfredo Silverio","role":"hitter"},"years":{"2013":{"team":"mia","depth":{"OF":"4"}}}}
@@ -107,7 +107,7 @@
 {"id":{"espn":"29470","bbref":"rominau01","rotoworld":"5800","mlb":"519222","yahoo":"9082"},"bio":{"dob":"19881122","name":"Austin Romine","role":"hitter"},"years":{"2013":{"team":"nyy"}}}
 {"id":{"espn":"30729","bbref":"garciav01","lahman":"garciav01","mlb":"541645","yahoo":"9281"},"bio":{"dob":"19910612","name":"Avisail Garcia","role":"hitter"},"years":{"2013":{"team":"det"}}}
 {"id":{"espn":"32593","mlb":"543297"},"bio":{"dob":"19891201","name":"B.J. Hermsen","role":"pitcher"},"years":{"2013":{"team":"min"}}}
-{"id":{"espn":"30652","bbref":"rosenbj01","mlb":"543725"},"bio":{"dob":"19850917","name":"B.J. Rosenberg","role":"pitcher"},"years":{"2013":{"team":"phi"}}}
+{"id":{"espn":"30652","bbref":"rosenbj01","lahman":"rosenbj01","mlb":"543725"},"bio":{"dob":"19850917","name":"B.J. Rosenberg","role":"pitcher"},"years":{"2013":{"team":"phi"}}}
 {"id":{"espn":"5970","bbref":"uptonbj01","lahman":"uptonbj01","rotoworld":"3872","mlb":"425834","yahoo":"7333"},"bio":{"dob":"19840821","name":"B.J. Upton","role":"hitter"},"years":{"2013":{"team":"atl","depth":{"OF":"1"}}}}
 {"id":{"espn":"29791","bbref":"enrigba01","lahman":"enrigba01"},"bio":{"dob":"19860330","name":"Barry Enright"}}
 {"id":{"espn":"4233","bbref":"zitoba01","lahman":"zitoba01","rotoworld":"2951","mlb":"217096","yahoo":"6394"},"bio":{"dob":"19780513","name":"Barry Zito","role":"pitcher"},"years":{"2013":{"team":"sf","depth":{"SP":"5"}}}}
@@ -149,7 +149,7 @@
 {"id":{"espn":"28844","bbref":"mossbr01","lahman":"mossbr01","rotoworld":"435","mlb":"461235","yahoo":"8082"},"bio":{"dob":"19830916","name":"Brandon Moss","role":"hitter"},"years":{"2013":{"team":"oak","depth":{"1B":"1"}}}}
 {"id":{"espn":"5031","bbref":"phillbr01","lahman":"phillbr01","rotoworld":"3397","mlb":"408252","yahoo":"6857"},"bio":{"dob":"19810628","name":"Brandon Phillips","role":"hitter"},"years":{"2013":{"team":"cin","depth":{"2B":"1"}}}}
 {"id":{"espn":"31126","mlb":"545196"},"bio":{"dob":"19850713","name":"Brandon Sisk","role":"pitcher"},"years":{"2013":{"team":"ana"}}}
-{"id":{"espn":"6285","bbref":"penabr01","lahman":"penabr01","mlb":"430910","yahoo":"7551"},"bio":{"dob":"19820107","name":"Brayan Pena","role":"hitter"},"years":{"2013":{"team":"det","depth":{"C":"2"}}}}
+{"id":{"espn":"6285","bbref":"penabr01","lahman":"penabr01","rotoworld":"533","mlb":"430910","yahoo":"7551"},"bio":{"dob":"19820107","name":"Brayan Pena","role":"hitter"},"years":{"2013":{"team":"det","depth":{"C":"2"}}}}
 {"id":{"espn":"31131","bbref":"villabr02","lahman":"villabr02","mlb":"500903","yahoo":"8489"},"bio":{"dob":"19870510","name":"Brayan Villarreal","role":"pitcher"},"years":{"2013":{"team":"det","depth":{"RP":"6"}}}}
 {"id":{"espn":"6022","bbref":"harribr01","rotoworld":"3910","mlb":"430593","yahoo":"7372"},"bio":{"dob":"19800826","name":"Brendan Harris","role":"hitter"},"years":{"2013":{"team":"ana","depth":{"3B":"4"}}}}
 {"id":{"espn":"28789","bbref":"ryanbr01","lahman":"ryanbr01","rotoworld":"4128","mlb":"453895","yahoo":"8042"},"bio":{"dob":"19820326","name":"Brendan Ryan","role":"hitter"},"years":{"2013":{"team":"sea","depth":{"SS":"1"}}}}
@@ -186,7 +186,7 @@
 {"id":{"espn":"29090","bbref":"badenbu01","lahman":"badenbu01","rotoworld":"5329","mlb":"488674","yahoo":"8215"},"bio":{"dob":"19830208","name":"Burke Badenhop","role":"pitcher"},"years":{"2013":{"team":"mil","depth":{"RP":"5"}}}}
 {"id":{"espn":"30112","bbref":"poseybu01","lahman":"poseybu01","rotoworld":"5389","mlb":"457763","yahoo":"8578"},"bio":{"dob":"19870327","name":"Buster Posey","role":"hitter"},"years":{"2013":{"team":"sf","depth":{"C":"1","1B":"2"}}}}
 {"id":{"espn":"6311","bbref":"wilsocj01","lahman":"wilsocj01","rotoworld":"4217","mlb":"450351","yahoo":"7571"},"bio":{"dob":"19801118","name":"C.J. Wilson","role":"pitcher"},"years":{"2013":{"team":"ana","depth":{"SP":"2"}}}}
-{"id":{"espn":"4553","rotoworld":"3149","mlb":"282332","yahoo":"6603"},"bio":{"dob":"19800721","name":"CC Sabathia","role":"pitcher"},"years":{"2013":{"team":"nyy","depth":{"SP":"1"}}}}
+{"id":{"espn":"4553","lahman":"sabatcc01","rotoworld":"3149","mlb":"282332","yahoo":"6603"},"bio":{"dob":"19800721","name":"CC Sabathia","role":"pitcher"},"years":{"2013":{"team":"nyy","depth":{"SP":"1"}}}}
 {"id":{"espn":"30326","mlb":"518725","yahoo":"9435"},"bio":{"dob":"19880831","name":"Caleb Gindl","role":"hitter"},"years":{"2013":{"team":"mil"}}}
 {"id":{"espn":"32440","bbref":"thielca01","rotoworld":"7362","mlb":"573204","yahoo":"9402"},"bio":{"dob":"19870131","name":"Caleb Thielbar","role":"pitcher"},"years":{"2013":{"team":"min"}}}
 {"id":{"espn":"6455","bbref":"maybica01","lahman":"maybica01","rotoworld":"4032","mlb":"457727","yahoo":"7684"},"bio":{"dob":"19870404","name":"Cameron Maybin","role":"hitter"},"years":{"2013":{"team":"sd","depth":{"OF":"1"}}}}
@@ -234,7 +234,7 @@
 {"id":{"espn":"32690","mlb":"502624"},"bio":{"dob":"19871130","name":"Chase Anderson","role":"pitcher"},"years":{"2013":{"team":"ari"}}}
 {"id":{"espn":"28809","bbref":"headlch01","lahman":"headlch01","rotoworld":"4415","mlb":"452104","yahoo":"8057"},"bio":{"dob":"19840509","name":"Chase Headley","role":"hitter"},"years":{"2013":{"team":"sd","depth":{"3B":"4"}}}}
 {"id":{"espn":"5383","bbref":"utleych01","lahman":"utleych01","rotoworld":"3611","mlb":"400284","yahoo":"7072"},"bio":{"dob":"19781217","name":"Chase Utley","role":"hitter"},"years":{"2013":{"team":"phi","depth":{"2B":"1"}}}}
-{"id":{"lahman":"darnach01","mlb":"488818","yahoo":"8974"},"bio":{"dob":"19870121","name":"Chase d'Arnaud","role":"hitter"},"years":{"2013":{"team":"pit"}}}
+{"id":{"espn":"30676","lahman":"darnach01","mlb":"488818","yahoo":"8974"},"bio":{"dob":"19870121","name":"Chase d'Arnaud","role":"hitter"},"years":{"2013":{"team":"pit"}}}
 {"id":{"espn":"32052","mlb":"547348"},"bio":{"dob":"19861021","name":"Chen-Chang Lee"}}
 {"id":{"espn":"30455","mlb":"547568"},"bio":{"dob":"19860407","name":"Chia-Jen Lo","role":"pitcher"},"years":{"2013":{"team":"hou"}}}
 {"id":{"espn":"6209","bbref":"wangch01","lahman":"wangch01","rotoworld":"331","mlb":"425426","yahoo":"7502"},"bio":{"dob":"19800331","name":"Chien-Ming Wang","role":"pitcher"},"years":{"2013":{"team":"tor"}}}
@@ -318,10 +318,10 @@
 {"id":{"espn":"30362","bbref":"marticr01","lahman":"marticr01","rotoworld":"5942","mlb":"450852","yahoo":"8481"},"bio":{"dob":"19820306","name":"Cristhian Martinez","role":"pitcher"},"years":{"2013":{"team":"atl","depth":{"RP":"7"}}}}
 {"id":{"espn":"6125","bbref":"grandcu01","lahman":"grandcu01","rotoworld":"3985","mlb":"434158","yahoo":"7455"},"bio":{"dob":"19810316","name":"Curtis Granderson","role":"hitter"},"years":{"2013":{"team":"nyy","depth":{"OF":"2"}}}}
 {"id":{"espn":"32588","bbref":"partccu01","rotoworld":"7290","mlb":"489197","yahoo":"9430"},"bio":{"dob":"19870213","name":"Curtis Partch","role":"pitcher"},"years":{"2013":{"team":"cin"}}}
-{"id":{"espn":"30765","bbref":"lemahdj01","lahman":"lemahdj01","mlb":"518934","yahoo":"8949"},"bio":{"dob":"19880713","name":"DJ LeMahieu","role":"hitter"},"years":{"2013":{"team":"col"}}}
+{"id":{"espn":"30765","bbref":"lemahdj01","lahman":"lemahdj01","rotoworld":"5781","mlb":"518934","yahoo":"8949"},"bio":{"dob":"19880713","name":"DJ LeMahieu","role":"hitter"},"years":{"2013":{"team":"col"}}}
 {"id":{"espn":"29817","bbref":"thayeda01","lahman":"thayeda01","rotoworld":"4388","mlb":"445612","yahoo":"8486"},"bio":{"dob":"19801217","name":"Dale Thayer","role":"pitcher"},"years":{"2013":{"team":"sd","depth":{"RP":"3"}}}}
 {"id":{"espn":"31815","bbref":"keuchda01","lahman":"keuchda01","rotoworld":"7170","mlb":"572971","yahoo":"9217"},"bio":{"dob":"19880101","name":"Dallas Keuchel","role":"pitcher"},"years":{"2013":{"team":"hou"}}}
-{"id":{"espn":"5565","bbref":"harenda01","rotoworld":"3711","mlb":"429717","yahoo":"7172"},"bio":{"dob":"19800917","name":"Dan Haren","role":"pitcher"},"years":{"2013":{"team":"was","depth":{"SP":"4"}}}}
+{"id":{"espn":"5565","bbref":"harenda01","lahman":"harenda01","rotoworld":"3711","mlb":"429717","yahoo":"7172"},"bio":{"dob":"19800917","name":"Dan Haren","role":"pitcher"},"years":{"2013":{"team":"was","depth":{"SP":"4"}}}}
 {"id":{"bbref":"jennida01","lahman":"jennida01","rotoworld":"6418","mlb":"543359","yahoo":"9171"},"bio":{"dob":"19870417","name":"Dan Jennings","role":"pitcher"},"years":{"2013":{"team":"mia"}}}
 {"id":{"espn":"30328","bbref":"oteroda01","lahman":"oteroda01","rotoworld":"6876","mlb":"519096","yahoo":"9149"},"bio":{"dob":"19850219","name":"Dan Otero","role":"pitcher"},"years":{"2013":{"team":"oak"}}}
 {"id":{"espn":"30375","lahman":"runzlda01","mlb":"502130"},"bio":{"dob":"19850330","name":"Dan Runzler","role":"pitcher"},"years":{"2013":{"team":"sf"}}}
@@ -347,7 +347,7 @@
 {"id":{"espn":"31076","bbref":"downsda02","lahman":"downsda02","rotoworld":"6053","mlb":"445153","yahoo":"9229"},"bio":{"dob":"19841226","name":"Darin Downs","role":"pitcher"},"years":{"2013":{"team":"det","depth":{"RP":"5"}}}}
 {"id":{"espn":"30807","bbref":"mastrda01","lahman":"mastrda01","rotoworld":"6483","mlb":"518991","yahoo":"9026"},"bio":{"dob":"19850826","name":"Darin Mastroianni","role":"hitter"},"years":{"2013":{"team":"min","depth":{"OF":"2"}}}}
 {"id":{"espn":"31470","lahman":"rufda01","mlb":"573131"},"bio":{"dob":"19860728","name":"Darin Ruf","role":"hitter"},"years":{"2013":{"team":"phi"}}}
-{"id":{"bbref":"odayda01","lahman":"odayda01","rotoworld":"5167","mlb":"503285","yahoo":"8207"},"bio":{"dob":"19821022","name":"Darren O'Day","role":"pitcher"},"years":{"2013":{"team":"bal","depth":{"RP":"3"}}}}
+{"id":{"espn":"29081","bbref":"odayda01","lahman":"odayda01","rotoworld":"5167","mlb":"503285","yahoo":"8207"},"bio":{"dob":"19821022","name":"Darren O'Day","role":"pitcher"},"years":{"2013":{"team":"bal","depth":{"RP":"3"}}}}
 {"id":{"espn":"2969","bbref":"oliveda02","lahman":"oliveda02","rotoworld":"1882","mlb":"119984","yahoo":"5127"},"bio":{"dob":"19701006","name":"Darren Oliver","role":"pitcher"},"years":{"2013":{"team":"tor","depth":{"RP":"3"}}}}
 {"id":{"espn":"29567","bbref":"barneda01","lahman":"barneda01","rotoworld":"5398","mlb":"446381","yahoo":"8787"},"bio":{"dob":"19851108","name":"Darwin Barney","role":"hitter"},"years":{"2013":{"team":"chc","depth":{"SS":"2","2B":"1"}}}}
 {"id":{"espn":"30797","bbref":"sappeda01","lahman":"sappeda01","mlb":"543743","yahoo":"9013"},"bio":{"dob":"19870102","name":"Dave Sappelt","role":"hitter"},"years":{"2013":{"team":"chc","depth":{"OF":"2"}}}}
@@ -366,7 +366,7 @@
 {"id":{"espn":"31124","bbref":"phelpda01","lahman":"phelpda01","rotoworld":"6407","mlb":"475479","yahoo":"9148"},"bio":{"dob":"19861009","name":"David Phelps","role":"pitcher"},"years":{"2013":{"team":"nyy","depth":{"SP":"5"}}}}
 {"id":{"espn":"28958","bbref":"priceda01","lahman":"priceda01","rotoworld":"4799","mlb":"456034","yahoo":"8175"},"bio":{"dob":"19850826","name":"David Price","role":"pitcher"},"years":{"2013":{"team":"tb","depth":{"SP":"1"}}}}
 {"id":{"espn":"29172","bbref":"roberda08","lahman":"roberda08","rotoworld":"5595","mlb":"502085","yahoo":"8287"},"bio":{"dob":"19850409","name":"David Robertson","role":"pitcher"},"years":{"2013":{"team":"nyy","depth":{"RP":"2"}}}}
-{"id":{"espn":"5206","bbref":"rossda01","rotoworld":"3495","mlb":"424325","yahoo":"6956"},"bio":{"dob":"19770319","name":"David Ross","role":"hitter"},"years":{"2013":{"team":"bos","depth":{"C":"2"}}}}
+{"id":{"espn":"5206","bbref":"rossda01","lahman":"rossda01","rotoworld":"3495","mlb":"424325","yahoo":"6956"},"bio":{"dob":"19770319","name":"David Ross","role":"hitter"},"years":{"2013":{"team":"bos","depth":{"C":"2"}}}}
 {"id":{"espn":"6035","bbref":"wrighda03","lahman":"wrighda03","rotoworld":"3920","mlb":"431151","yahoo":"7382"},"bio":{"dob":"19821220","name":"David Wright","role":"hitter"},"years":{"2013":{"team":"nym","depth":{"3B":"1"}}}}
 {"id":{"espn":"30103","bbref":"vicieda01","lahman":"vicieda01","rotoworld":"5588","mlb":"493364","yahoo":"8398"},"bio":{"dob":"19890310","name":"Dayan Viciedo","role":"hitter"},"years":{"2013":{"team":"cws","depth":{"XX":"3","OF":"1"}}}}
 {"id":{"espn":"30726","bbref":"gordode01","lahman":"gordode01","mlb":"543829"},"bio":{"dob":"19880422","name":"Dee Gordon","role":"hitter"},"years":{"2013":{"team":"la"}}}
@@ -440,7 +440,7 @@
 {"id":{"espn":"32600","mlb":"543174"},"bio":{"dob":"19880102","name":"Eric Fornataro","role":"pitcher"},"years":{"2013":{"team":"stl"}}}
 {"id":{"espn":"4606","bbref":"hinsker01","lahman":"hinsker01","rotoworld":"3190","mlb":"400134","yahoo":"6645"},"bio":{"dob":"19770805","name":"Eric Hinske","role":"hitter"},"years":{"2013":{"team":"ari","depth":{"3B":"3","1B":"2"}}}}
 {"id":{"espn":"30993","bbref":"hosmeer01","lahman":"hosmeer01","rotoworld":"5384","mlb":"543333","yahoo":"8857"},"bio":{"dob":"19891024","name":"Eric Hosmer","role":"hitter"},"years":{"2013":{"team":"kc","depth":{"1B":"1"}}}}
-{"id":{"bbref":"oflaher01","lahman":"oflaher01","rotoworld":"4549","mlb":"447714","yahoo":"7837"},"bio":{"dob":"19850205","name":"Eric O'Flaherty","role":"pitcher"},"years":{"2013":{"team":"atl","depth":{"RP":"2"}}}}
+{"id":{"espn":"28549","bbref":"oflaher01","lahman":"oflaher01","rotoworld":"4549","mlb":"447714","yahoo":"7837"},"bio":{"dob":"19850205","name":"Eric O'Flaherty","role":"pitcher"},"years":{"2013":{"team":"atl","depth":{"RP":"2"}}}}
 {"id":{"espn":"29732","bbref":"sogarer01","lahman":"sogarer01","rotoworld":"5887","mlb":"519299","yahoo":"8828"},"bio":{"dob":"19860522","name":"Eric Sogard","role":"hitter"},"years":{"2013":{"team":"oak","depth":{"SS":"3","3B":"3","2B":"2"}}}}
 {"id":{"espn":"28591","bbref":"stulter01","lahman":"stulter01","rotoworld":"4772","mlb":"445590","yahoo":"7869"},"bio":{"dob":"19791209","name":"Eric Stults","role":"pitcher"},"years":{"2013":{"team":"sd","depth":{"SP":"3"}}}}
 {"id":{"espn":"31800","rotoworld":"6187","mlb":"474668","yahoo":"9029"},"bio":{"dob":"19870716","name":"Eric Surkamp","role":"pitcher"},"years":{"2013":{"team":"sf"}}}
@@ -539,11 +539,11 @@
 {"id":{"espn":"30965","bbref":"iwakuhi01","lahman":"iwakuhi01","rotoworld":"5817","mlb":"547874","yahoo":"9092"},"bio":{"dob":"19810412","name":"Hisashi Iwakuma","role":"pitcher"},"years":{"2013":{"team":"sea","depth":{"SP":"2"}}}}
 {"id":{"espn":"28668","bbref":"baileho02","lahman":"baileho02","rotoworld":"242","mlb":"456701","yahoo":"7944"},"bio":{"dob":"19860503","name":"Homer Bailey","role":"pitcher"},"years":{"2013":{"team":"cin","depth":{"SP":"4"}}}}
 {"id":{"bbref":"kendrho01","lahman":"kendrho01","rotoworld":"4049","mlb":"435062","yahoo":"7746"},"bio":{"dob":"19830712","name":"Howie Kendrick","role":"hitter"},"years":{"2013":{"team":"ana","depth":{"2B":"1"}}}}
-{"id":{"espn":"5794","bbref":"quinthu01","rotoworld":"3774","mlb":"279827","yahoo":"7235"},"bio":{"dob":"19790802","name":"Humberto Quintero","role":"hitter"},"years":{"2013":{"team":"phi","depth":{"C":"2"}}}}
+{"id":{"espn":"5794","bbref":"quinthu01","lahman":"quinthu01","rotoworld":"3774","mlb":"279827","yahoo":"7235"},"bio":{"dob":"19790802","name":"Humberto Quintero","role":"hitter"},"years":{"2013":{"team":"phi","depth":{"C":"2"}}}}
 {"id":{"espn":"28687","bbref":"pencehu01","lahman":"pencehu01","rotoworld":"4042","mlb":"452254","yahoo":"7963"},"bio":{"dob":"19830413","name":"Hunter Pence","role":"hitter"},"years":{"2013":{"team":"sf","depth":{"OF":"1"}}}}
 {"id":{"espn":"32589","mlb":"519326"},"bio":{"dob":"19880924","name":"Hunter Strickland","role":"pitcher"},"years":{"2013":{"team":"sf"}}}
 {"id":{"espn":"6175","bbref":"streehu01","lahman":"streehu01","rotoworld":"460","mlb":"434718","yahoo":"7468"},"bio":{"dob":"19830802","name":"Huston Street","role":"pitcher"},"years":{"2013":{"team":"sd","depth":{"RP":"1"}}}}
-{"id":{"espn":"32582","rotoworld":"7271","mlb":"547943","yahoo":"9317"},"bio":{"dob":"19870325","name":"Hyun-Jin Ryu","role":"pitcher"},"years":{"2013":{"team":"la","depth":{"SP":"2"}}}}
+{"id":{"espn":"32582","bbref":"ryuhy01","rotoworld":"7271","mlb":"547943","yahoo":"9317"},"bio":{"dob":"19870325","name":"Hyun-Jin Ryu","role":"pitcher"},"years":{"2013":{"team":"la","depth":{"SP":"2"}}}}
 {"id":{"espn":"29646","bbref":"desmoia01","lahman":"desmoia01","rotoworld":"4019","mlb":"435622","yahoo":"8589"},"bio":{"dob":"19850920","name":"Ian Desmond","role":"hitter"},"years":{"2013":{"team":"was","depth":{"SS":"1"}}}}
 {"id":{"espn":"28864","bbref":"kenneia01","lahman":"kenneia01","rotoworld":"4455","mlb":"453178","yahoo":"8099"},"bio":{"dob":"19841219","name":"Ian Kennedy","role":"pitcher"},"years":{"2013":{"team":"ari","depth":{"SP":"1"}}}}
 {"id":{"espn":"6197","bbref":"kinslia01","lahman":"kinslia01","rotoworld":"312","mlb":"435079","yahoo":"7490"},"bio":{"dob":"19820622","name":"Ian Kinsler","role":"hitter"},"years":{"2013":{"team":"tex","depth":{"2B":"1"}}}}
@@ -559,7 +559,7 @@
 {"id":{"espn":"28857","bbref":"gutieju01","rotoworld":"4778","mlb":"434641","yahoo":"8093"},"bio":{"dob":"19830714","name":"J.C. Gutierrez","role":"pitcher"},"years":{"2013":{"team":"kc","depth":{"RP":"7"}}}}
 {"id":{"espn":"31065","bbref":"martijd02","lahman":"martijd02","rotoworld":"6411","mlb":"502110","yahoo":"9002"},"bio":{"dob":"19870821","name":"J.D. Martinez","role":"hitter"},"years":{"2013":{"team":"hou"}}}
 {"id":{"espn":"5908","bbref":"hardyjj01","lahman":"hardyjj01","rotoworld":"3822","mlb":"429666","yahoo":"7283"},"bio":{"dob":"19820819","name":"J.J. Hardy","role":"hitter"},"years":{"2013":{"team":"bal","depth":{"SS":"1"}}}}
-{"id":{"espn":"32557","bbref":"hoovejj01","mlb":"543331","yahoo":"9163"},"bio":{"dob":"19870813","name":"J.J. Hoover","role":"pitcher"},"years":{"2013":{"team":"cin","depth":{"RP":"7"}}}}
+{"id":{"espn":"32557","bbref":"hoovejj01","rotoworld":"5950","mlb":"543331","yahoo":"9163"},"bio":{"dob":"19870813","name":"J.J. Hoover","role":"pitcher"},"years":{"2013":{"team":"cin","depth":{"RP":"7"}}}}
 {"id":{"espn":"5640","bbref":"putzjj01","lahman":"putzjj01","rotoworld":"3744","mlb":"407816","yahoo":"7205"},"bio":{"dob":"19770222","name":"J.J. Putz","role":"pitcher"},"years":{"2013":{"team":"ari","depth":{"RP":"1"}}}}
 {"id":{"espn":"29537","bbref":"arencjp01","lahman":"arencjp01","rotoworld":"5023","mlb":"450317","yahoo":"8655"},"bio":{"dob":"19860105","name":"J.P. Arencibia","role":"hitter"},"years":{"2013":{"team":"tor","depth":{"C":"1"}}}}
 {"id":{"espn":"6312","bbref":"howeljp01","lahman":"howeljp01","rotoworld":"347","mlb":"434442","yahoo":"7572"},"bio":{"dob":"19830425","name":"J.P. Howell","role":"pitcher"},"years":{"2013":{"team":"la","depth":{"RP":"4"}}}}
@@ -726,12 +726,12 @@
 {"id":{"espn":"30209","bbref":"zimmejo02","lahman":"zimmejo02","rotoworld":"5511","mlb":"519455","yahoo":"8400"},"bio":{"dob":"19860523","name":"Jordan Zimmermann","role":"pitcher"},"years":{"2013":{"team":"was","depth":{"SP":"3"}}}}
 {"id":{"espn":"30907","bbref":"valdejo02","lahman":"valdejo02","rotoworld":"6650","mlb":"518170","yahoo":"9161"},"bio":{"dob":"19871223","name":"Jordany Valdespin","role":"hitter"},"years":{"2013":{"team":"nym","depth":{"2B":"3","OF":"3"}}}}
 {"id":{"espn":"30687","bbref":"mercejo03","lahman":"mercejo03","rotoworld":"6781","mlb":"474568","yahoo":"9198"},"bio":{"dob":"19860827","name":"Jordy Mercer","role":"hitter"},"years":{"2013":{"team":"pit"}}}
-{"id":{"espn":"5906","bbref":"rosajo01","rotoworld":"3820","mlb":"407822","yahoo":"7281"},"bio":{"dob":"19810405","name":"Jorge De La Rosa","role":"pitcher"},"years":{"2013":{"team":"col","depth":{"SP":"2"}}}}
+{"id":{"espn":"5906","bbref":"rosajo01","lahman":"delarjo01","rotoworld":"3820","mlb":"407822","yahoo":"7281"},"bio":{"dob":"19810405","name":"Jorge De La Rosa","role":"pitcher"},"years":{"2013":{"team":"col","depth":{"SP":"2"}}}}
 {"id":{"espn":"32654","mlb":"504083"},"bio":{"dob":"19880216","name":"Jorge Rondon","role":"pitcher"},"years":{"2013":{"team":"stl"}}}
 {"id":{"espn":"32558","mlb":"624585"},"bio":{"dob":"19920225","name":"Jorge Soler","role":"hitter"},"years":{"2013":{"team":"chc"}}}
 {"id":{"espn":"31662","bbref":"altuvjo01","lahman":"altuvjo01","rotoworld":"6421","mlb":"514888","yahoo":"8996"},"bio":{"dob":"19900506","name":"Jose Altuve","role":"hitter"},"years":{"2013":{"team":"hou","depth":{"2B":"1"}}}}
 {"id":{"espn":"32099","bbref":"alvarjo02","mlb":"501625"},"bio":{"dob":"19890506","name":"Jose Alvarez","role":"pitcher"},"years":{"2013":{"team":"det"}}}
-{"id":{"espn":"29113","yahoo":"8231"},"bio":{"dob":"19840312","name":"Jose Arredondo"}}
+{"id":{"espn":"29113","lahman":"arredjo01","yahoo":"8231"},"bio":{"dob":"19840312","name":"Jose Arredondo"}}
 {"id":{"espn":"5890","bbref":"bautijo02","lahman":"bautijo02","rotoworld":"3803","mlb":"430832","yahoo":"7264"},"bio":{"dob":"19801019","name":"Jose Bautista","role":"hitter"},"years":{"2013":{"team":"tor","depth":{"OF":"1"}}}}
 {"id":{"rotoworld":"5350","mlb":"469167","yahoo":"8403"},"bio":{"dob":"19870128","name":"Jose Ceda","role":"pitcher"},"years":{"2013":{"team":"mia","depth":{"RP":"8"}}}}
 {"id":{"espn":"31673","bbref":"cisnejo01","rotoworld":"7118","mlb":"542585","yahoo":"9375"},"bio":{"dob":"19890411","name":"Jose Cisnero","role":"pitcher"},"years":{"2013":{"team":"hou"}}}
@@ -748,7 +748,7 @@
 {"id":{"espn":"32603","mlb":"542432"},"bio":{"dob":"19900121","name":"Jose Ramirez","role":"pitcher"},"years":{"2013":{"team":"nyy"}}}
 {"id":{"espn":"5411","bbref":"reyesjo01","lahman":"reyesjo01","rotoworld":"3605","mlb":"408314","yahoo":"7066"},"bio":{"dob":"19830611","name":"Jose Reyes","role":"hitter"},"years":{"2013":{"team":"tor","depth":{"SS":"1"}}}}
 {"id":{"espn":"29469","bbref":"tabatjo01","lahman":"tabatjo01","rotoworld":"4292","mlb":"467798","yahoo":"8647"},"bio":{"dob":"19880812","name":"Jose Tabata","role":"hitter"},"years":{"2013":{"team":"pit","depth":{"OF":"3"}}}}
-{"id":{"espn":"5504","bbref":"valvejo01","rotoworld":"3690","mlb":"407878","yahoo":"7151"},"bio":{"dob":"19780324","name":"Jose Valverde","role":"pitcher"},"years":{"2013":{"team":"det"}}}
+{"id":{"espn":"5504","bbref":"valvejo01","lahman":"valvejo01","rotoworld":"3690","mlb":"407878","yahoo":"7151"},"bio":{"dob":"19780324","name":"Jose Valverde","role":"pitcher"},"years":{"2013":{"team":"det"}}}
 {"id":{"espn":"28498","bbref":"verasjo01","lahman":"verasjo01","rotoworld":"622","mlb":"407842","yahoo":"7799"},"bio":{"dob":"19801020","name":"Jose Veras","role":"pitcher"},"years":{"2013":{"team":"hou","depth":{"RP":"1"}}}}
 {"id":{"espn":"4242","bbref":"beckejo02","lahman":"beckejo02","rotoworld":"2959","mlb":"277417","yahoo":"6403"},"bio":{"dob":"19800515","name":"Josh Beckett","role":"pitcher"},"years":{"2013":{"team":"la","depth":{"SP":"3"}}}}
 {"id":{"espn":"31090","bbref":"collmjo01","lahman":"collmjo01","rotoworld":"6079","mlb":"518567","yahoo":"8904"},"bio":{"dob":"19860207","name":"Josh Collmenter","role":"pitcher"},"years":{"2013":{"team":"ari","depth":{"RP":"6"}}}}
@@ -817,7 +817,7 @@
 {"id":{"espn":"6295","bbref":"johnske05","lahman":"johnske05","rotoworld":"446","mlb":"430637","yahoo":"7558"},"bio":{"dob":"19820222","name":"Kelly Johnson","role":"hitter"},"years":{"2013":{"team":"tb","depth":{"2B":"1","OF":"3"}}}}
 {"id":{"espn":"6200","bbref":"shoppke01","lahman":"shoppke01","yahoo":"7493"},"bio":{"dob":"19800429","name":"Kelly Shoppach"}}
 {"id":{"espn":"32029","bbref":"herreke01","lahman":"herreke01","rotoworld":"5826","mlb":"516969","yahoo":"9089"},"bio":{"dob":"19891231","name":"Kelvin Herrera","role":"pitcher"},"years":{"2013":{"team":"kc","depth":{"RP":"5"}}}}
-{"id":{"espn":"6188","bbref":"moralke01","rotoworld":"777","mlb":"434778","yahoo":"7481"},"bio":{"dob":"19830620","name":"Kendrys Morales","role":"hitter"},"years":{"2013":{"team":"sea","depth":{"XX":"1","1B":"2"}}}}
+{"id":{"espn":"6188","bbref":"moralke01","lahman":"moralke01","rotoworld":"777","mlb":"434778","yahoo":"7481"},"bio":{"dob":"19830620","name":"Kendrys Morales","role":"hitter"},"years":{"2013":{"team":"sea","depth":{"XX":"1","1B":"2"}}}}
 {"id":{"espn":"29630","bbref":"janseke01","lahman":"janseke01","rotoworld":"6105","mlb":"445276","yahoo":"8758"},"bio":{"dob":"19870930","name":"Kenley Jansen","role":"pitcher"},"years":{"2013":{"team":"la","depth":{"RP":"2"}}}}
 {"id":{"espn":"30755","mlb":"542979"},"bio":{"dob":"19900507","name":"Keon Broxton","role":"hitter"},"years":{"2013":{"team":"ari"}}}
 {"id":{"espn":"5580","bbref":"correke01","lahman":"correke01","rotoworld":"3717","mlb":"429781","yahoo":"7178"},"bio":{"dob":"19800824","name":"Kevin Correia","role":"pitcher"},"years":{"2013":{"team":"min","depth":{"SP":"2"}}}}
@@ -839,14 +839,14 @@
 {"id":{"espn":"4049","bbref":"farnsky01","lahman":"farnsky01","rotoworld":"2778","mlb":"150035","yahoo":"6210"},"bio":{"dob":"19760414","name":"Kyle Farnsworth","role":"pitcher"},"years":{"2013":{"team":"tb","depth":{"RP":"5"}}}}
 {"id":{"espn":"31053","mlb":"502043"},"bio":{"dob":"19871023","name":"Kyle Gibson","role":"pitcher"},"years":{"2013":{"team":"min"}}}
 {"id":{"espn":"28804","bbref":"kendrky01","lahman":"kendrky01","rotoworld":"4506","mlb":"452718","yahoo":"8053"},"bio":{"dob":"19840826","name":"Kyle Kendrick","role":"pitcher"},"years":{"2013":{"team":"phi","depth":{"SP":"4"}}}}
-{"id":{"espn":"4789","bbref":"lohseky01","rotoworld":"3293","mlb":"346798","yahoo":"6751"},"bio":{"dob":"19781004","name":"Kyle Lohse","role":"pitcher"},"years":{"2013":{"team":"mil","depth":{"SP":"2"}}}}
+{"id":{"espn":"4789","bbref":"lohseky01","lahman":"lohseky01","rotoworld":"3293","mlb":"346798","yahoo":"6751"},"bio":{"dob":"19781004","name":"Kyle Lohse","role":"pitcher"},"years":{"2013":{"team":"mil","depth":{"SP":"2"}}}}
 {"id":{"espn":"29948","mlb":"518952"},"bio":{"dob":"19891024","name":"Kyle Lotzkar","role":"pitcher"},"years":{"2013":{"team":"cin"}}}
 {"id":{"espn":"29076","bbref":"mccleky01","lahman":"mccleky01","rotoworld":"5353","mlb":"449072","yahoo":"8202"},"bio":{"dob":"19840612","name":"Kyle McClellan","role":"pitcher"},"years":{"2013":{"team":"tex"}}}
 {"id":{"espn":"31069","lahman":"mcpheky01","mlb":"519015"},"bio":{"dob":"19871111","name":"Kyle McPherson","role":"pitcher"},"years":{"2013":{"team":"pit"}}}
 {"id":{"espn":"30819","bbref":"seageky01","lahman":"seageky01","rotoworld":"6019","mlb":"572122","yahoo":"8984"},"bio":{"dob":"19871103","name":"Kyle Seager","role":"hitter"},"years":{"2013":{"team":"sea","depth":{"3B":"1","2B":"3"}}}}
 {"id":{"bbref":"skipwky01","mlb":"543788"},"bio":{"dob":"19900301","name":"Kyle Skipworth","role":"hitter"},"years":{"2013":{"team":"mia","depth":{"C":"2"}}}}
 {"id":{"espn":"32583","bbref":"fujikky01","rotoworld":"4997","mlb":"493117","yahoo":"9316"},"bio":{"dob":"19800721","name":"Kyuji Fujikawa","role":"pitcher"},"years":{"2013":{"team":"chc","depth":{"RP":"2"}}}}
-{"id":{"espn":"32090","mlb":"543321"},"bio":{"dob":"19900305","name":"L.J. Hoes","role":"hitter"},"years":{"2013":{"team":"bal"}}}
+{"id":{"espn":"32090","lahman":"hoeslj01","mlb":"543321"},"bio":{"dob":"19900305","name":"L.J. Hoes","role":"hitter"},"years":{"2013":{"team":"bal"}}}
 {"id":{"espn":"3176","bbref":"hawkila01","lahman":"hawkila01","rotoworld":"2024","mlb":"115629","yahoo":"5336"},"bio":{"dob":"19721221","name":"LaTroy Hawkins","role":"pitcher"},"years":{"2013":{"team":"nym","depth":{"RP":"8"}}}}
 {"id":{"espn":"4118","bbref":"berkmla01","lahman":"berkmla01","rotoworld":"2846","mlb":"204020","yahoo":"6279"},"bio":{"dob":"19760210","name":"Lance Berkman","role":"hitter"},"years":{"2013":{"team":"tex","depth":{"XX":"1","1B":"2"}}}}
 {"id":{"espn":"30820","bbref":"lynnla01","lahman":"lynnla01","rotoworld":"5486","mlb":"458681","yahoo":"8650"},"bio":{"dob":"19870512","name":"Lance Lynn","role":"pitcher"},"years":{"2013":{"team":"stl","depth":{"SP":"3"}}}}
@@ -919,9 +919,9 @@
 {"id":{"espn":"31015","bbref":"carpema01","lahman":"carpema01","rotoworld":"6475","mlb":"572761","yahoo":"8953"},"bio":{"dob":"19851126","name":"Matt Carpenter","role":"hitter"},"years":{"2013":{"team":"stl","depth":{"3B":"1","2B":"2","OF":"3","1B":"3"}}}}
 {"id":{"bbref":"diazma02","lahman":"diazma02","rotoworld":"3723","mlb":"429841","yahoo":"7184"},"bio":{"dob":"19780303","name":"Matt Diaz","role":"hitter"},"years":{"2013":{"team":"mia"}}}
 {"id":{"espn":"29963","bbref":"dominma01","lahman":"dominma01","rotoworld":"5046","mlb":"518625","yahoo":"8683"},"bio":{"dob":"19890828","name":"Matt Dominguez","role":"hitter"},"years":{"2013":{"team":"hou","depth":{"3B":"1"}}}}
-{"id":{"espn":"28528","bbref":"garzama01","rotoworld":"4214","mlb":"490063","yahoo":"7823"},"bio":{"dob":"19831126","name":"Matt Garza","role":"pitcher"},"years":{"2013":{"team":"chc","depth":{"SP":"6"}}}}
+{"id":{"espn":"28528","bbref":"garzama01","lahman":"garzama01","rotoworld":"4214","mlb":"490063","yahoo":"7823"},"bio":{"dob":"19831126","name":"Matt Garza","role":"pitcher"},"years":{"2013":{"team":"chc","depth":{"SP":"6"}}}}
 {"id":{"espn":"5998","bbref":"guerrma02","lahman":"guerrma02","rotoworld":"3894","mlb":"407825","yahoo":"7355"},"bio":{"dob":"19780802","name":"Matt Guerrier","role":"pitcher"},"years":{"2013":{"team":"la","depth":{"RP":"8"}}}}
-{"id":{"espn":"28965","bbref":"harrima01","rotoworld":"4595","mlb":"457448","yahoo":"8182"},"bio":{"dob":"19850916","name":"Matt Harrison","role":"pitcher"},"years":{"2013":{"team":"tex","depth":{"SP":"1"}}}}
+{"id":{"espn":"28965","bbref":"harrima01","lahman":"harrima01","rotoworld":"4595","mlb":"457448","yahoo":"8182"},"bio":{"dob":"19850916","name":"Matt Harrison","role":"pitcher"},"years":{"2013":{"team":"tex","depth":{"SP":"1"}}}}
 {"id":{"espn":"31214","bbref":"harvema01","lahman":"harvema01","rotoworld":"5047","mlb":"518774","yahoo":"9245"},"bio":{"dob":"19890327","name":"Matt Harvey","role":"pitcher"},"years":{"2013":{"team":"nym","depth":{"SP":"2"}}}}
 {"id":{"espn":"5940","bbref":"hollima01","lahman":"hollima01","rotoworld":"3850","mlb":"407812","yahoo":"7311"},"bio":{"dob":"19800115","name":"Matt Holliday","role":"hitter"},"years":{"2013":{"team":"stl","depth":{"OF":"1"}}}}
 {"id":{"espn":"29124","rotoworld":"5260","mlb":"459964","yahoo":"8239"},"bio":{"dob":"19840803","name":"Matt Joyce","role":"hitter"},"years":{"2013":{"team":"tb","depth":{"OF":"3"}}}}
@@ -1061,7 +1061,7 @@
 {"id":{"espn":"29318","bbref":"bourjpe01","lahman":"bourjpe01","rotoworld":"4969","mlb":"488721","yahoo":"8777"},"bio":{"dob":"19870331","name":"Peter Bourjos","role":"hitter"},"years":{"2013":{"team":"ana","depth":{"OF":"1"}}}}
 {"id":{"espn":"6500","bbref":"moylape01","lahman":"moylape01","rotoworld":"4481","mlb":"493247","yahoo":"7728"},"bio":{"dob":"19781202","name":"Peter Moylan","role":"pitcher"},"years":{"2013":{"team":"la"}}}
 {"id":{"espn":"29235","bbref":"cokeph01","lahman":"cokeph01","rotoworld":"5632","mlb":"457435","yahoo":"8350"},"bio":{"dob":"19820719","name":"Phil Coke","role":"pitcher"},"years":{"2013":{"team":"det","depth":{"RP":"1"}}}}
-{"id":{"espn":"28638","bbref":"hugheph01","rotoworld":"4091","mlb":"461833","yahoo":"7913"},"bio":{"dob":"19860624","name":"Phil Hughes","role":"pitcher"},"years":{"2013":{"team":"nyy","depth":{"SP":"6"}}}}
+{"id":{"espn":"28638","bbref":"hugheph01","lahman":"hugheph01","rotoworld":"4091","mlb":"461833","yahoo":"7913"},"bio":{"dob":"19860624","name":"Phil Hughes","role":"pitcher"},"years":{"2013":{"team":"nyy","depth":{"SP":"6"}}}}
 {"id":{"espn":"31807","bbref":"irwinph01","rotoworld":"7305","mlb":"572947","yahoo":"9344"},"bio":{"dob":"19870225","name":"Phil Irwin","role":"pitcher"},"years":{"2013":{"team":"pit"}}}
 {"id":{"espn":"28596","bbref":"humbeph01","lahman":"humbeph01","yahoo":"7873"},"bio":{"dob":"19821221","name":"Philip Humber"}}
 {"id":{"espn":"29501","bbref":"aumonph01","lahman":"aumonph01","mlb":"518418","yahoo":"8643"},"bio":{"dob":"19890107","name":"Phillippe Aumont","role":"pitcher"},"years":{"2013":{"team":"phi","depth":{"RP":"5"}}}}
@@ -1158,7 +1158,7 @@
 {"id":{"espn":"30076","lahman":"dedunsa01","rotoworld":"6077","mlb":"465679","yahoo":"8604"},"bio":{"dob":"19830702","name":"Samuel Deduno","role":"pitcher"},"years":{"2013":{"team":"min"}}}
 {"id":{"espn":"32101","lahman":"leonsa01","mlb":"506702"},"bio":{"dob":"19890313","name":"Sandy Leon","role":"hitter"},"years":{"2013":{"team":"was"}}}
 {"id":{"espn":"30961","bbref":"rosarsa02","lahman":"rosarsa02","rotoworld":"6479","mlb":"466459","yahoo":"8834"},"bio":{"dob":"19850822","name":"Sandy Rosario","role":"pitcher"},"years":{"2013":{"team":"sf"}}}
-{"id":{"espn":"6060","bbref":"garcija01","rotoworld":"3939","mlb":"433586","yahoo":"7401"},"bio":{"dob":"19800725","name":"Santiago Casilla","role":"pitcher"},"years":{"2013":{"team":"sf","depth":{"RP":"4"}}}}
+{"id":{"espn":"6060","bbref":"garcija01","lahman":"garcija01","rotoworld":"3939","mlb":"433586","yahoo":"7401"},"bio":{"dob":"19800725","name":"Santiago Casilla","role":"pitcher"},"years":{"2013":{"team":"sf","depth":{"RP":"4"}}}}
 {"id":{"espn":"32076","mlb":"503447"},"bio":{"dob":"19881220","name":"Santo Manzanillo","role":"pitcher"},"years":{"2013":{"team":"mil"}}}
 {"id":{"espn":"31658","mlb":"520951"},"bio":{"dob":"19880102","name":"Santos Rodriguez","role":"pitcher"},"years":{"2013":{"team":"cws"}}}
 {"id":{"espn":"31175","bbref":"gennesc01","rotoworld":"5935","mlb":"571697","yahoo":"9420"},"bio":{"dob":"19900501","name":"Scooter Gennett","role":"hitter"},"years":{"2013":{"team":"mil"}}}
@@ -1210,8 +1210,8 @@
 {"id":{"espn":"32026","bbref":"delabst01","lahman":"delabst01","rotoworld":"6817","mlb":"447755","yahoo":"9066"},"bio":{"dob":"19830717","name":"Steve Delabar","role":"pitcher"},"years":{"2013":{"team":"tor","depth":{"RP":"4"}}}}
 {"id":{"espn":"30391","bbref":"johnsst02","lahman":"johnsst02","rotoworld":"5552","mlb":"489002","yahoo":"9205"},"bio":{"dob":"19870831","name":"Steve Johnson","role":"pitcher"},"years":{"2013":{"team":"bal"}}}
 {"id":{"bbref":"lombast02","rotoworld":"6767","mlb":"543459","yahoo":"9038"},"bio":{"dob":"19880920","name":"Steve Lombardozzi","role":"hitter"},"years":{"2013":{"team":"was","depth":{"SS":"3","3B":"3","2B":"2","OF":"3"}}}}
-{"id":{"espn":"28886","bbref":"pearcst01","rotoworld":"4612","mlb":"456665","yahoo":"8117"},"bio":{"dob":"19830413","name":"Steve Pearce","role":"hitter"},"years":{"2013":{"team":"bal"}}}
-{"id":{"espn":"29575","bbref":"lerudst01","lahman":"lerudst01","rotoworld":"5862","mlb":"452722"},"bio":{"dob":"19841013","name":"Steven Lerud","role":"hitter"},"years":{"2013":{"team":"phi"}}}
+{"id":{"espn":"28886","bbref":"pearcst01","lahman":"pearcst01","rotoworld":"4612","mlb":"456665","yahoo":"8117"},"bio":{"dob":"19830413","name":"Steve Pearce","role":"hitter"},"years":{"2013":{"team":"bal"}}}
+{"id":{"espn":"29575","bbref":"lerudst01","lahman":"lerudst01","rotoworld":"5862","yahoo":"9277","mlb":"452722"},"bio":{"dob":"19841013","name":"Steven Lerud","role":"hitter"},"years":{"2013":{"team":"phi"}}}
 {"id":{"espn":"32587","bbref":"wrighst01","mlb":"453214"},"bio":{"dob":"19840830","name":"Steven Wright","role":"pitcher"},"years":{"2013":{"team":"bos"}}}
 {"id":{"espn":"31111","mlb":"516935"},"bio":{"dob":"19900201","name":"Stolmy Pimentel","role":"pitcher"},"years":{"2013":{"team":"pit"}}}
 {"id":{"espn":"32610","mlb":"543334"},"bio":{"dob":"19890929","name":"T.J. House","role":"pitcher"},"years":{"2013":{"team":"cle"}}}
@@ -1241,8 +1241,8 @@
 {"id":{"lahman":"fieldth01","mlb":"474494"},"bio":{"dob":"19870222","name":"Tommy Field","role":"hitter"},"years":{"2013":{"team":"ana"}}}
 {"id":{"espn":"30191","bbref":"hansoto01","lahman":"hansoto01","rotoworld":"5100","mlb":"462102","yahoo":"8397"},"bio":{"dob":"19860828","name":"Tommy Hanson","role":"pitcher"},"years":{"2013":{"team":"ana","depth":{"SP":"5"}}}}
 {"id":{"espn":"29198","bbref":"hunteto02","lahman":"hunteto02","rotoworld":"5535","mlb":"488984","yahoo":"8312"},"bio":{"dob":"19860703","name":"Tommy Hunter","role":"pitcher"},"years":{"2013":{"team":"bal","depth":{"RP":"6"}}}}
-{"id":{"bbref":"layneto01","lahman":"layneto01","mlb":"518927","yahoo":"9270"},"bio":{"dob":"19841102","name":"Tommy Layne","role":"pitcher"},"years":{"2013":{"team":"sd","depth":{"RP":"5"}}}}
-{"id":{"espn":"31706","bbref":"milonto01","rotoworld":"6606","mlb":"543548","yahoo":"9035"},"bio":{"dob":"19870216","name":"Tommy Milone","role":"pitcher"},"years":{"2013":{"team":"oak","depth":{"SP":"3"}}}}
+{"id":{"espn":"30588","bbref":"layneto01","lahman":"layneto01","mlb":"518927","yahoo":"9270"},"bio":{"dob":"19841102","name":"Tommy Layne","role":"pitcher"},"years":{"2013":{"team":"sd","depth":{"RP":"5"}}}}
+{"id":{"espn":"31706","bbref":"milonto01","lahman":"milonto01","rotoworld":"6606","mlb":"543548","yahoo":"9035"},"bio":{"dob":"19870216","name":"Tommy Milone","role":"pitcher"},"years":{"2013":{"team":"oak","depth":{"SP":"3"}}}}
 {"id":{"espn":"28777","bbref":"abreuto01","lahman":"abreuto01","rotoworld":"4422","mlb":"473234","yahoo":"8033"},"bio":{"dob":"19841113","name":"Tony Abreu","role":"hitter"},"years":{"2013":{"team":"sf"}}}
 {"id":{"espn":"30846","lahman":"campato01","mlb":"542999"},"bio":{"dob":"19860530","name":"Tony Campana","role":"hitter"},"years":{"2013":{"team":"ari"}}}
 {"id":{"espn":"32135","bbref":"cingrto01","lahman":"cingrto01","rotoworld":"7067","mlb":"571561","yahoo":"9296"},"bio":{"dob":"19890705","name":"Tony Cingrani","role":"pitcher"},"years":{"2013":{"team":"cin"}}}

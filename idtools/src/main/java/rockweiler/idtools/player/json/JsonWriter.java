@@ -37,6 +37,16 @@ public class JsonWriter extends AbstractPlayerCollector {
                 out.write('\n');
 
             } catch (IOException e) {
+                e.printStackTrace(System.err);
+                throw new RuntimeException(e);
+            }
+        } else {
+            try {
+                ObjectMapper writer = new ObjectMapper();
+                out.write(writer.writeValueAsString(player).getBytes("UTF-8"));
+                out.write('\n');
+            } catch (IOException e) {
+                e.printStackTrace(System.err);
                 throw new RuntimeException(e);
             }
         }

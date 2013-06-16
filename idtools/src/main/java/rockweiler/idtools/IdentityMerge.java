@@ -12,6 +12,7 @@ import rockweiler.idtools.player.BioReader;
 import rockweiler.idtools.player.IdConflictException;
 import rockweiler.idtools.player.Player;
 import rockweiler.idtools.player.PlayerCollector;
+import rockweiler.idtools.player.Predicates;
 
 import java.io.IOException;
 import java.util.List;
@@ -65,18 +66,10 @@ public class IdentityMerge implements PlayerMerge {
         return DatabaseFactory.createIdMap(database, new BioReader());
     }
 
-
-    static final Predicate<Player> HAS_BIO = new Predicate<Player>() {
-
-        public boolean apply(Player input) {
-            return null != input.getBio();
-        }
-    };
-
     public static void main(String[] args) throws IOException {
         String rootDatabase = "mlb.players.json";
         Iterable<Player> core = DatabaseFactory.createDatabase(rootDatabase);
-        core = Iterables.filter(core, HAS_BIO);
+        core = Iterables.filter(core, Predicates.HAS_BIO);
 
         IdentityMerge theMerge = new IdentityMerge(core);
 
@@ -91,7 +84,7 @@ public class IdentityMerge implements PlayerMerge {
 
         for(String updateDatabase : updates) {
             Iterable<Player> update = DatabaseFactory.createDatabase(updateDatabase);
-            update = Iterables.filter(update, HAS_BIO);
+            update = Iterables.filter(update, Predicates.HAS_BIO);
             theMerge.merge(update);
         }
 

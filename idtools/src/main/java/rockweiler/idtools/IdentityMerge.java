@@ -30,7 +30,7 @@ public class IdentityMerge implements PlayerMerge {
         this.masterDatabase = masterDatabase;
     }
 
-    public void merge(Iterable<Player> updateDatabase) {
+    public void merge(Iterable<? extends Player> updateDatabase) {
         Map<String, Player> master = getMergeMap(masterDatabase);
 
         Map<String, Player> update = getMergeMap(updateDatabase);
@@ -62,7 +62,7 @@ public class IdentityMerge implements PlayerMerge {
         collector.collectAll(conflictPlyaers);
     }
 
-    Map<String, Player> getMergeMap(Iterable<Player> database) {
+    Map<String, Player> getMergeMap(Iterable<? extends Player> database) {
         return DatabaseFactory.createIdMap(database, new BioReader());
     }
 

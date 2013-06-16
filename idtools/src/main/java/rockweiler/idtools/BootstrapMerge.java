@@ -9,14 +9,13 @@ import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import rockweiler.idtools.player.BioReader;
+import rockweiler.idtools.player.Biography;
 import rockweiler.idtools.player.IdConflictException;
 import rockweiler.idtools.player.IdReader;
 import rockweiler.idtools.player.Player;
 import rockweiler.idtools.player.PlayerCollector;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
@@ -35,25 +34,27 @@ public class BootstrapMerge implements PlayerMerge {
         this.idReader = idReader;
     }
 
-    public void merge(Iterable<Player> updateDatabase) {
-        Map<String, Player> update = DatabaseFactory.createIdMap(updateDatabase, idReader);
-
-        for (Map.Entry<String, Player> crnt : update.entrySet()) {
-            String key = crnt.getKey();
-            Player rhs = crnt.getValue();
+    public void merge(Iterable<? extends Player> updateDatabase) {
+        for (Player rhs : updateDatabase) {
+            String key = idReader.getId(rhs);
 
             if (!master.containsKey(key)) {
                 master.put(key, rhs);
             } else {
                 Player lhs = master.get(key);
-                try {
-                    lhs.getIds().merge(rhs.getIds());
-                } catch (IdConflictException e) {
-                    conflictPlayers.add(rhs);
-                }
+                merge(rhs, lhs);
             }
         }
     }
+
+    private void merge(Player rhs, Player lhs) {
+        try {
+            lhs.getIds().merge(rhs.getIds());
+        } catch (IdConflictException e) {
+            conflictPlayers.add(rhs);
+        }
+    }
+
 
     private static final Predicate<Player> REJECTED = new Predicate<Player>() {
         public boolean apply(Player player) {
@@ -75,19 +76,12 @@ public class BootstrapMerge implements PlayerMerge {
         collector.collectAll(conflictPlayers);
     }
 
-    static final Predicate<Player> HAS_BIO = new Predicate<Player>() {
-
-        public boolean apply(Player input) {
-            return null != input.getBio();
-        }
-    };
-
     public static void main(String[] args) throws IOException {
 
         Iterable<? extends Player> players = DatabaseFactory.createEmptyDatabase();
         players = DatabaseFactory.createDatabase("master.players.json");
 
-        players = Iterables.filter(players, HAS_BIO);
+        players = Iterables.filter(players, Biography.HAS_BIO_FILTER);
 
         IdReader idReader = new BioReader();
         Map<String, Player> idMap = DatabaseFactory.createIdMap(players, idReader);
@@ -109,7 +103,7 @@ public class BootstrapMerge implements PlayerMerge {
 
         for (String updateDatabase : updates) {
             Iterable<Player> update = DatabaseFactory.createDatabase(updateDatabase);
-            update = Iterables.filter(update, HAS_BIO);
+            update = Iterables.filter(update, Biography.HAS_BIO_FILTER);
             theMerge.merge(update);
         }
 

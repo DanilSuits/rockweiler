@@ -8,9 +8,9 @@ package rockweiler.idtools;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import rockweiler.idtools.player.BioReader;
+import rockweiler.idtools.player.Biography;
 import rockweiler.idtools.player.Player;
 import rockweiler.idtools.player.PlayerBuilder;
-import rockweiler.idtools.player.Predicates;
 import rockweiler.util.similarity.Similarity;
 import rockweiler.util.similarity.SimilarityCore;
 import rockweiler.util.similarity.SimilarityDatabase;
@@ -34,7 +34,7 @@ public class BiographyMerge {
     public Iterable<Player> match(Iterable<? extends Player> updateDatabase) {
         Collection<Player> out = Lists.newArrayList();
 
-        for(Player rhs : updateDatabase) {
+        for (Player rhs : updateDatabase) {
             out.add(match(rhs));
         }
 
@@ -47,11 +47,11 @@ public class BiographyMerge {
         if (1 == results.size()) {
             Player goodBio = results.get(0);
 
-            int distance = similarity.compare(goodBio,rhs);
-            if ( distance < 3 ) {
-                PlayerBuilder builder = new PlayerBuilder();
-                rhs = builder.withIds(rhs.getIds()).withBio(goodBio.getBio()).build();
-            }
+            System.out.println(rhs.getBio().getName() + ".");
+            System.out.println("\t" + goodBio.getBio().getName() + ".");
+
+            PlayerBuilder builder = new PlayerBuilder();
+            rhs = builder.withIds(rhs.getIds()).withBio(goodBio.getBio()).build();
         }
 
         return rhs;
@@ -60,15 +60,15 @@ public class BiographyMerge {
     public static void main(String[] args) throws IOException {
         String rootDatabase = "master.players.json";
         Iterable<Player> core = DatabaseFactory.createDatabase(rootDatabase);
-        core = Iterables.filter(core, Predicates.HAS_BIO);
+        core = Iterables.filter(core, Biography.HAS_BIO_FILTER);
 
         BioReader idReader = new BioReader();
         final BioSimilarity similarity = new BioSimilarity(idReader);
 
-        final SimilarityDatabase<Player> database = SimilarityCore.create(similarity,core);
+        final SimilarityDatabase<Player> database = SimilarityCore.create(similarity, core);
 
         Iterable<Player> update = DatabaseFactory.createDatabase("bootstrap.missing.json");
-        update = Iterables.filter(update, Predicates.HAS_BIO);
+        update = Iterables.filter(update, Biography.HAS_BIO_FILTER);
 
         BiographyMerge theMerge = new BiographyMerge(database, similarity);
 

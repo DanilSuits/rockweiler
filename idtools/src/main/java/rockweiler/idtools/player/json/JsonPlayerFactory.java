@@ -9,6 +9,7 @@ import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonToken;
 import com.google.common.collect.Maps;
+import rockweiler.idtools.player.Biography;
 import rockweiler.idtools.player.IdConflictException;
 import rockweiler.idtools.player.Player;
 
@@ -21,9 +22,8 @@ import java.util.Map;
 public class JsonPlayerFactory {
     public JsonPlayer toPlayer(String src) {
 
-        JsonParser parser = null;
         try {
-            parser = new JsonFactory().createJsonParser(src);
+            JsonParser parser = new JsonFactory().createJsonParser(src);
             parser.nextToken();
             if (parser.getCurrentToken() != JsonToken.START_OBJECT) {
                 throw new RuntimeException("failed to parse");
@@ -77,20 +77,8 @@ public class JsonPlayerFactory {
         return new JsonPlayer(data, ids, bio);
     }
 
-    private enum BIO implements Player.Bio {
-        MISSING;
-
-        public String getName() {
-            return "_BIO_MISSING_";
-        }
-
-        public String getDob() {
-            return "00000000";
-        }
-    }
-
     private Player.Bio parseBio(Map<String, Object> data) {
-        Player.Bio bio = BIO.MISSING;
+        Player.Bio bio = Biography.BIO.MISSING;
 
         final Map<String, Object> bioMap = (Map<String, Object>) data.get("bio");
 

@@ -7,16 +7,17 @@ package rockweiler.idtools;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-import rockweiler.idtools.player.BioReader;
-import rockweiler.idtools.player.Biography;
-import rockweiler.idtools.player.Player;
-import rockweiler.idtools.player.PlayerBuilder;
-import rockweiler.idtools.player.database.DatabaseFactory;
+import rockweiler.player.BioReader;
+import rockweiler.player.Biography;
+import rockweiler.player.Player;
+import rockweiler.player.PlayerBuilder;
+import rockweiler.player.io.FileBackedStore;
+import rockweiler.player.io.KeyStoreException;
+import rockweiler.player.io.PlayerStore;
 import rockweiler.util.similarity.Similarity;
 import rockweiler.util.similarity.SimilarityCore;
 import rockweiler.util.similarity.SimilarityDatabase;
 
-import java.io.IOException;
 import java.util.Collection;
 import java.util.List;
 
@@ -58,9 +59,13 @@ public class BiographyMerge {
         return rhs;
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws KeyStoreException {
         String rootDatabase = "master.players.json";
-        Iterable<? extends Player> core = DatabaseFactory.createDatabase(rootDatabase);
+
+        final PlayerStore playerStore = FileBackedStore.create("");
+        PlayerStore.Reader in = playerStore.createReader();
+
+        Iterable<? extends Player> core = in.readPlayers(rootDatabase);
         core = Iterables.filter(core, Biography.HAS_BIO_FILTER);
 
         BioReader idReader = new BioReader();
@@ -68,15 +73,12 @@ public class BiographyMerge {
 
         final SimilarityDatabase<Player> database = SimilarityCore.create(similarity, core);
 
-        Iterable<? extends Player> update = DatabaseFactory.createDatabase("bootstrap.missing.json");
+        Iterable<? extends Player> update = in.readPlayers("bootstrap.missing.json");
         update = Iterables.filter(update, Biography.HAS_BIO_FILTER);
 
         BiographyMerge theMerge = new BiographyMerge(database, similarity);
 
         Iterable<Player> out = theMerge.match(update);
-
-        DatabaseWriter mergedOut = DatabaseFactory.createWriter("biography.merged.json");
-        mergedOut.collector().collectAll(out);
-        mergedOut.onEnd();
+        playerStore.createWriter().writePlayers("biography.merged.json", out);
     }
 }

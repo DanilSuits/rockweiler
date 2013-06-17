@@ -5,8 +5,7 @@
  */
 package rockweiler.idtools;
 
-import rockweiler.idtools.player.Player;
-import rockweiler.idtools.player.PlayerCollector;
+import rockweiler.player.Player;
 
 /**
  * @author Danil Suits (danil@vast.com)
@@ -14,7 +13,7 @@ import rockweiler.idtools.player.PlayerCollector;
 public interface PlayerMerge {
     public void merge(Iterable<? extends Player> updateDatabase);
 
-    public void collectMasterDatabase(PlayerCollector collector);
-    public void collectMissingDatabase(PlayerCollector collector);
-    public void collectConflictDatabase(PlayerCollector collector);
+    public Iterable<? extends Player> collectMasterDatabase();
+    public Iterable<? extends Player> collectMissingDatabase();
+    public Iterable<? extends Player> collectConflictDatabase();
 }

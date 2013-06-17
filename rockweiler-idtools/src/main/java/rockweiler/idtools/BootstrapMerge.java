@@ -9,15 +9,16 @@ import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-import rockweiler.idtools.player.BioReader;
-import rockweiler.idtools.player.Biography;
-import rockweiler.idtools.player.IdConflictException;
-import rockweiler.idtools.player.IdReader;
-import rockweiler.idtools.player.Player;
-import rockweiler.idtools.player.PlayerCollector;
-import rockweiler.idtools.player.database.DatabaseFactory;
+import rockweiler.player.BioReader;
+import rockweiler.player.Biography;
+import rockweiler.player.IdConflictException;
+import rockweiler.player.IdReader;
+import rockweiler.player.Player;
+import rockweiler.player.database.DatabaseFactory;
+import rockweiler.player.io.FileBackedStore;
+import rockweiler.player.io.KeyStoreException;
+import rockweiler.player.io.PlayerStore;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -63,25 +64,25 @@ public class BootstrapMerge implements PlayerMerge {
         }
     };
 
-    public void collectMasterDatabase(PlayerCollector collector) {
-        Iterable<Player> accepted = Iterables.filter(master.values(), Predicates.not(REJECTED));
-        collector.collectAll(accepted);
+    public Iterable<? extends Player> collectMasterDatabase() {
+        return Iterables.filter(master.values(), Predicates.not(REJECTED));
     }
 
-    public void collectMissingDatabase(PlayerCollector collector) {
-        Iterable<Player> rejected = Iterables.filter(master.values(), REJECTED);
-        collector.collectAll(rejected);
+    public Iterable<? extends Player> collectMissingDatabase() {
+        return Iterables.filter(master.values(), REJECTED);
     }
 
-    public void collectConflictDatabase(PlayerCollector collector) {
-        collector.collectAll(conflictPlayers);
+    public Iterable<? extends Player> collectConflictDatabase() {
+        return conflictPlayers;
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws KeyStoreException {
+        String rootDatabase = "master.players.json";
 
-        Iterable<? extends Player> players = DatabaseFactory.createEmptyDatabase();
-        players = DatabaseFactory.createDatabase("master.players.json");
+        final PlayerStore playerStore = FileBackedStore.create("");
+        PlayerStore.Reader in = playerStore.createReader();
 
+        Iterable<? extends Player> players = in.readPlayers(rootDatabase);
         players = Iterables.filter(players, Biography.HAS_BIO_FILTER);
 
         IdReader idReader = new BioReader();
@@ -103,18 +104,14 @@ public class BootstrapMerge implements PlayerMerge {
                 };
 
         for (String updateDatabase : updates) {
-            Iterable<? extends Player> update = DatabaseFactory.createDatabase(updateDatabase);
+            Iterable<? extends Player> update = in.readPlayers(updateDatabase);
             update = Iterables.filter(update, Biography.HAS_BIO_FILTER);
             theMerge.merge(update);
         }
 
-        DatabaseWriter mergedOut = DatabaseFactory.createWriter("bootstrap.merged.json");
-        DatabaseWriter missingOut = DatabaseFactory.createWriter("bootstrap.missing.json");
-        DatabaseWriter conflictOut = DatabaseFactory.createWriter("bootstrap.conflict.json");
-
-        MergeReader reader = new MergeReader(mergedOut, missingOut, conflictOut);
-        reader.collect(theMerge);
-        reader.onEnd();
-
+        PlayerStore.Writer out = playerStore.createWriter();
+        out.writePlayers("bootstrap.merged.json", theMerge.collectMasterDatabase());
+        out.writePlayers("bootstrap.missing.json", theMerge.collectMissingDatabase());
+        out.writePlayers("bootstrap.conflict.json", theMerge.collectConflictDatabase());
     }
 }

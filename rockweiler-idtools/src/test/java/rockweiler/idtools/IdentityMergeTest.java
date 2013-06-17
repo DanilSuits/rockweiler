@@ -7,9 +7,8 @@ package rockweiler.idtools; /**
 import com.beust.jcommander.internal.Lists;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import rockweiler.idtools.player.AbstractPlayerCollector;
-import rockweiler.idtools.player.Player;
-import rockweiler.idtools.player.jackson.JsonPlayerFactory;
+import rockweiler.player.Player;
+import rockweiler.player.jackson.JsonPlayerFactory;
 
 import java.util.List;
 
@@ -51,19 +50,22 @@ public class IdentityMergeTest {
         IdentityMerge theMerge = doMerge(rhs);
 
         TrivialPlayerCollector collector = new TrivialPlayerCollector();
-
-        theMerge.collectMasterDatabase(collector);
+        for(Player crnt : theMerge.collectMissingDatabase()) {
+             collector.collect(crnt);
+         }
         return collector.found;
     }
 
     private Player getMissingPlayer(Player rhs) {
         IdentityMerge theMerge = doMerge(rhs);
         TrivialPlayerCollector collector = new TrivialPlayerCollector();
-        theMerge.collectMissingDatabase(collector);
+        for(Player crnt : theMerge.collectMissingDatabase()) {
+            collector.collect(crnt);
+        }
         return collector.found;
     }
 
-    private static class TrivialPlayerCollector extends AbstractPlayerCollector {
+    private static class TrivialPlayerCollector {
         Player found = null ;
 
         public void collect(Player player) {

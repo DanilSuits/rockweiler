@@ -7,14 +7,15 @@ package rockweiler.idtools;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-import rockweiler.idtools.player.BioReader;
-import rockweiler.idtools.player.Biography;
-import rockweiler.idtools.player.IdConflictException;
-import rockweiler.idtools.player.Player;
-import rockweiler.idtools.player.PlayerCollector;
-import rockweiler.idtools.player.database.DatabaseFactory;
+import rockweiler.player.BioReader;
+import rockweiler.player.Biography;
+import rockweiler.player.IdConflictException;
+import rockweiler.player.Player;
+import rockweiler.player.database.DatabaseFactory;
+import rockweiler.player.io.FileBackedStore;
+import rockweiler.player.io.KeyStoreException;
+import rockweiler.player.io.PlayerStore;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -50,25 +51,29 @@ public class IdentityMerge implements PlayerMerge {
         }
     }
 
-    public void collectMasterDatabase(PlayerCollector collector) {
-        collector.collectAll(masterDatabase);
+    public Iterable<? extends Player> collectMasterDatabase() {
+        return masterDatabase;
     }
 
-    public void collectMissingDatabase(PlayerCollector colllector) {
-        colllector.collectAll(missingPlayers);
+    public Iterable<? extends Player> collectMissingDatabase() {
+        return missingPlayers;
     }
 
-    public void collectConflictDatabase(PlayerCollector collector) {
-        collector.collectAll(conflictPlyaers);
+    public Iterable<? extends Player> collectConflictDatabase() {
+        return conflictPlyaers;
     }
 
     Map<String, Player> getMergeMap(Iterable<? extends Player> database) {
         return DatabaseFactory.createIdMap(database, new BioReader());
     }
 
-    public static void main(String[] args) throws IOException {
-        String rootDatabase = "mlb.players.json";
-        Iterable<? extends Player> core = DatabaseFactory.createDatabase(rootDatabase);
+    public static void main(String[] args) throws KeyStoreException {
+        String rootDatabase = "master.players.json";
+
+        final PlayerStore playerStore = FileBackedStore.create("");
+        PlayerStore.Reader in = playerStore.createReader();
+
+        Iterable<? extends Player> core = in.readPlayers(rootDatabase);
         core = Iterables.filter(core, Biography.HAS_BIO_FILTER);
 
         IdentityMerge theMerge = new IdentityMerge(core);
@@ -83,18 +88,14 @@ public class IdentityMerge implements PlayerMerge {
                 };
 
         for(String updateDatabase : updates) {
-            Iterable< ? extends Player> update = DatabaseFactory.createDatabase(updateDatabase);
+            Iterable< ? extends Player> update = in.readPlayers(updateDatabase);
             update = Iterables.filter(update, Biography.HAS_BIO_FILTER);
             theMerge.merge(update);
         }
 
-        DatabaseWriter mergedOut = DatabaseFactory.createWriter("identitymerge.merged.json");
-        DatabaseWriter missingOut = DatabaseFactory.createWriter("identitymerge.missing.json");
-        DatabaseWriter conflictOut = DatabaseFactory.createWriter("identitymerge.conflict.json");
-
-        MergeReader reader = new MergeReader(mergedOut, missingOut, conflictOut);
-        reader.collect(theMerge);
-        reader.onEnd();
-
+        PlayerStore.Writer out = playerStore.createWriter();
+        out.writePlayers("identitymerge.merged.json", theMerge.collectMasterDatabase());
+        out.writePlayers("identitymerge.missing.json", theMerge.collectMissingDatabase());
+        out.writePlayers("identitymerge.conflict.json", theMerge.collectConflictDatabase());
     }
 }

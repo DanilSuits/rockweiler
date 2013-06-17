@@ -5,12 +5,10 @@
  */
 package rockweiler.idtools;
 
-import rockweiler.idtools.player.Player;
-import rockweiler.idtools.player.PlayerCollector;
+import rockweiler.player.PlayerCollector;
 
 import java.io.IOException;
 import java.io.OutputStream;
-import java.io.PrintStream;
 
 /**
  * @author Danil Suits (danil@vast.com)

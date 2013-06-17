@@ -6,8 +6,8 @@
 package rockweiler.idtools;
 
 import org.apache.commons.lang.StringUtils;
-import rockweiler.idtools.player.BioReader;
-import rockweiler.idtools.player.Player;
+import rockweiler.player.BioReader;
+import rockweiler.player.Player;
 import rockweiler.util.similarity.Similarity;
 
 /**

@@ -7,10 +7,10 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>idtools</artifactId>
+    <artifactId>rockweiler-idtools</artifactId>
     <packaging>jar</packaging>
 
-    <name>idtools</name>
+    <name>rockweiler-idtools</name>
     <url>http://maven.apache.org</url>
 
     <properties>

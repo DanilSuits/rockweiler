@@ -50,7 +50,7 @@ public class IdentityMergeTest {
         IdentityMerge theMerge = doMerge(rhs);
 
         TrivialPlayerCollector collector = new TrivialPlayerCollector();
-        for(Player crnt : theMerge.collectMissingDatabase()) {
+        for(Player crnt : theMerge.collectMasterDatabase()) {
              collector.collect(crnt);
          }
         return collector.found;

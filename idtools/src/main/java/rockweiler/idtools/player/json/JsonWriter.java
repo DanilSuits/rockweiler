@@ -23,19 +23,6 @@ public class JsonWriter extends AbstractPlayerCollector {
     }
 
     public void collect(Player player) {
-        if (player instanceof JsonPlayer) {
-            JsonPlayer jsonPlayer = (JsonPlayer) player;
-            try {
-                ObjectMapper writer = new ObjectMapper();
-                byte[] jsonOut = writer.writeValueAsBytes(jsonPlayer.getData());
-                out.write(jsonOut);
-                out.write('\n');
-
-            } catch (IOException e) {
-                e.printStackTrace(System.err);
-                throw new RuntimeException(e);
-            }
-        } else {
             try {
                 ObjectMapper writer = new ObjectMapper();
                 out.write(writer.writeValueAsString(player).getBytes("UTF-8"));
@@ -44,6 +31,5 @@ public class JsonWriter extends AbstractPlayerCollector {
                 e.printStackTrace(System.err);
                 throw new RuntimeException(e);
             }
-        }
     }
 }

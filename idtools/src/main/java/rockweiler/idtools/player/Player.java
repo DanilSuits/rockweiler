@@ -7,7 +7,7 @@ package rockweiler.idtools.player;
 
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
-import rockweiler.idtools.player.json.IdSerializer;
+import rockweiler.idtools.player.jackson.IdSerializer;
 
 /**
  * @author Danil Suits (danil@vast.com)

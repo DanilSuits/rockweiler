@@ -3,7 +3,7 @@
  *
  * http://www.vast.com
  */
-package rockweiler.idtools.player.json;
+package rockweiler.idtools.player.jackson;
 
 import org.codehaus.jackson.JsonGenerator;
 import org.codehaus.jackson.JsonProcessingException;

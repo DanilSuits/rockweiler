@@ -31,7 +31,7 @@ public class JsonPlayerFactoryTest {
 
     @Test
     public void testMerge() throws IdConflictException {
-        rockweiler.idtools.player.json.JsonPlayerFactory factory = new rockweiler.idtools.player.json.JsonPlayerFactory();
+        JsonPlayerFactory factory = new JsonPlayerFactory();
         Player p = factory.toPlayer("{\"id\":{\"mlb\":\"111072\"},\"bio\":{\"dob\":\"19710829\",\"name\":\"Henry Blanco\"}}");
         Player q = factory.toPlayer("{\"id\":{\"xyzzy\":\"1234\"},\"bio\":{\"dob\":\"19710829\",\"name\":\"Henry Blanco\"}}");
 
@@ -42,7 +42,7 @@ public class JsonPlayerFactoryTest {
 
     @Test
     public void testConflict() {
-        rockweiler.idtools.player.json.JsonPlayerFactory factory = new rockweiler.idtools.player.json.JsonPlayerFactory();
+        JsonPlayerFactory factory = new JsonPlayerFactory();
         Player p = factory.toPlayer("{\"id\":{\"xyzzy\":\"111072\"},\"bio\":{\"dob\":\"19710829\",\"name\":\"Henry Blanco\"}}");
         Player q = factory.toPlayer("{\"id\":{\"xyzzy\":\"1234\"},\"bio\":{\"dob\":\"19710829\",\"name\":\"Henry Blanco\"}}");
 

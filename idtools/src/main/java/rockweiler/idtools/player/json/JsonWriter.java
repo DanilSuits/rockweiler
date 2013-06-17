@@ -5,17 +5,12 @@
  */
 package rockweiler.idtools.player.json;
 
-import org.codehaus.jackson.JsonGenerationException;
-import org.codehaus.jackson.JsonGenerator;
 import org.codehaus.jackson.map.ObjectMapper;
-
 import rockweiler.idtools.player.AbstractPlayerCollector;
 import rockweiler.idtools.player.Player;
 
 import java.io.IOException;
 import java.io.OutputStream;
-import java.io.PrintStream;
-import java.util.Map;
 
 /**
  * @author Danil Suits (danil@vast.com)

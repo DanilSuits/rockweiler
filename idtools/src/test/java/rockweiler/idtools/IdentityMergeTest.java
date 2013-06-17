@@ -9,7 +9,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import rockweiler.idtools.player.AbstractPlayerCollector;
 import rockweiler.idtools.player.Player;
-import rockweiler.idtools.player.json.JsonPlayerFactory;
+import rockweiler.idtools.player.jackson.JsonPlayerFactory;
 
 import java.util.List;
 

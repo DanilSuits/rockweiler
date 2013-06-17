@@ -7,17 +7,10 @@ package rockweiler.idtools;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import org.codehaus.jackson.JsonEncoding;
-import org.codehaus.jackson.JsonFactory;
-import org.codehaus.jackson.JsonGenerator;
-import rockweiler.idtools.player.AbstractPlayerCollector;
-import rockweiler.idtools.player.PlayerCollector;
+import rockweiler.idtools.player.IdReader;
+import rockweiler.idtools.player.Player;
 import rockweiler.idtools.player.SortingCollector;
 import rockweiler.idtools.player.database.DefaultDatabaseBuilder;
-import rockweiler.idtools.player.json.JsonPlayerFactory;
-import rockweiler.idtools.player.json.JsonPlayerScanner;
-import rockweiler.idtools.player.Player;
-import rockweiler.idtools.player.IdReader;
 import rockweiler.idtools.player.json.JsonWriter;
 
 import java.io.File;
@@ -29,7 +22,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
-import java.util.Scanner;
 
 /**
  * @author Danil Suits (danil@vast.com)
@@ -46,23 +38,6 @@ public class DatabaseFactory {
         DefaultDatabaseBuilder builder = new DefaultDatabaseBuilder(coreDB);
         builder.addFromFile(filename);
         return builder.build();
-    }
-
-    public static Iterable<Player> createDatabase(Scanner dbScanner) {
-        JsonPlayerFactory factory = new JsonPlayerFactory();
-        JsonPlayerScanner players = new JsonPlayerScanner(dbScanner, factory);
-
-        return createDatabase(players);
-    }
-
-    public static Iterable<Player> createDatabase(JsonPlayerScanner players) {
-
-        List<Player> database = Lists.newArrayList();
-        while (players.hasNext()) {
-            database.add(players.next());
-        }
-
-        return database;
     }
 
     public static Map<String, Player> createIdMap(Iterable<? extends Player> database, IdReader idReader) {

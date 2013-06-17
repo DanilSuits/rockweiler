@@ -84,7 +84,7 @@ public class JsonPlayerFactory {
         public void merge(Player.Ids rhs) throws IdConflictException {
             ObjectNode root = (ObjectNode) id;
             for(String key : rhs.all()) {
-                JsonNode lhs = root.with(key);
+                JsonNode lhs = root.path(key);
                 if (lhs.isMissingNode()) {
                     root.put(key,rhs.get(key));
                 } else {
@@ -99,7 +99,11 @@ public class JsonPlayerFactory {
         }
 
         public String get(String key) {
-            return id.get(key).getTextValue();
+            JsonNode target = id.path(key);
+            if (target.isMissingNode()) {
+                return null;
+            }
+            return target.getTextValue();
         }
 
         public int count() {
@@ -107,11 +111,7 @@ public class JsonPlayerFactory {
         }
 
         public Iterable<String> all() {
-            List<String> keys = Lists.newArrayList();
-            Iterator<JsonNode> scan = id.iterator();
-            while(scan.hasNext()) {
-                keys.add(scan.next().getTextValue());
-            }
+            List<String> keys = Lists.newArrayList(id.getFieldNames());
             return keys;
         }
     }

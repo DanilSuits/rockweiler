@@ -8,7 +8,7 @@ package rockweiler.idtools.player;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import rockweiler.idtools.BioSimilarity;
-import rockweiler.idtools.player.json.JsonPlayerFactory;
+import rockweiler.idtools.player.jackson.JsonPlayerFactory;
 
 /**
  * @author Danil Suits (danil@vast.com)

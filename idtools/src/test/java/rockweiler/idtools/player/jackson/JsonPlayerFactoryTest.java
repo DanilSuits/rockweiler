@@ -7,7 +7,7 @@ package rockweiler.idtools.player.jackson;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import rockweiler.idtools.DatabaseFactory;
+import rockweiler.idtools.player.database.DatabaseFactory;
 import rockweiler.idtools.DatabaseWriter;
 import rockweiler.idtools.player.IdConflictException;
 import rockweiler.idtools.player.Player;

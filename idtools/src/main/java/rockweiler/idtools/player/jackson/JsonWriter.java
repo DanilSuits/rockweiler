@@ -3,7 +3,7 @@
  *
  * http://www.vast.com
  */
-package rockweiler.idtools.player.json;
+package rockweiler.idtools.player.jackson;
 
 import org.codehaus.jackson.map.ObjectMapper;
 import rockweiler.idtools.player.AbstractPlayerCollector;

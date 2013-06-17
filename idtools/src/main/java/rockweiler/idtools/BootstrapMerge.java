@@ -15,6 +15,7 @@ import rockweiler.idtools.player.IdConflictException;
 import rockweiler.idtools.player.IdReader;
 import rockweiler.idtools.player.Player;
 import rockweiler.idtools.player.PlayerCollector;
+import rockweiler.idtools.player.database.DatabaseFactory;
 
 import java.io.IOException;
 import java.util.List;

@@ -11,6 +11,7 @@ import rockweiler.idtools.player.BioReader;
 import rockweiler.idtools.player.Biography;
 import rockweiler.idtools.player.Player;
 import rockweiler.idtools.player.PlayerBuilder;
+import rockweiler.idtools.player.database.DatabaseFactory;
 import rockweiler.util.similarity.Similarity;
 import rockweiler.util.similarity.SimilarityCore;
 import rockweiler.util.similarity.SimilarityDatabase;

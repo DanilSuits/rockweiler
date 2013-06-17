@@ -3,39 +3,35 @@
  *
  * http://www.vast.com
  */
-package rockweiler.idtools;
+package rockweiler.idtools.player.database;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import rockweiler.idtools.DatabaseWriter;
 import rockweiler.idtools.player.IdReader;
 import rockweiler.idtools.player.Player;
 import rockweiler.idtools.player.SortingCollector;
-import rockweiler.idtools.player.database.DefaultDatabaseBuilder;
-import rockweiler.idtools.player.json.JsonWriter;
+import rockweiler.idtools.player.jackson.JsonWriter;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintStream;
-import java.util.Collections;
+import java.util.Collection;
 import java.util.Comparator;
-import java.util.List;
 import java.util.Map;
 
 /**
  * @author Danil Suits (danil@vast.com)
  */
 public class DatabaseFactory {
-    public static Iterable<Player> createEmptyDatabase() {
-        return Collections.EMPTY_LIST;
+    public static Collection<Player> createEmptyDatabase() {
+        return Lists.newArrayList();
     }
 
     public static Iterable<? extends Player> createDatabase(String filename) throws FileNotFoundException {
-
-        List<Player> coreDB = Lists.newArrayList();
-
-        DefaultDatabaseBuilder builder = new DefaultDatabaseBuilder(coreDB);
+        DefaultDatabaseBuilder builder = new DefaultDatabaseBuilder(createEmptyDatabase());
         builder.addFromFile(filename);
         return builder.build();
     }

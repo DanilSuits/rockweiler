@@ -102,7 +102,7 @@ public class BootstrapMerge implements PlayerMerge {
                 };
 
         for (String updateDatabase : updates) {
-            Iterable<Player> update = DatabaseFactory.createDatabase(updateDatabase);
+            Iterable<? extends Player> update = DatabaseFactory.createDatabase(updateDatabase);
             update = Iterables.filter(update, Biography.HAS_BIO_FILTER);
             theMerge.merge(update);
         }

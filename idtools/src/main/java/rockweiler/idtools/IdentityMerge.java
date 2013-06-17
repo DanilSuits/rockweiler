@@ -5,14 +5,13 @@
  */
 package rockweiler.idtools;
 
-import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import rockweiler.idtools.player.BioReader;
+import rockweiler.idtools.player.Biography;
 import rockweiler.idtools.player.IdConflictException;
 import rockweiler.idtools.player.Player;
 import rockweiler.idtools.player.PlayerCollector;
-import rockweiler.idtools.player.Predicates;
 
 import java.io.IOException;
 import java.util.List;
@@ -22,11 +21,11 @@ import java.util.Map;
  * @author Danil Suits (danil@vast.com)
  */
 public class IdentityMerge implements PlayerMerge {
-    private final Iterable<Player> masterDatabase;
+    private final Iterable<? extends Player> masterDatabase;
     private final List<Player> missingPlayers = Lists.newArrayList();
     private final List<Player> conflictPlyaers = Lists.newArrayList();
 
-    public IdentityMerge(Iterable<Player> masterDatabase) {
+    public IdentityMerge(Iterable<? extends Player> masterDatabase) {
         this.masterDatabase = masterDatabase;
     }
 
@@ -68,8 +67,8 @@ public class IdentityMerge implements PlayerMerge {
 
     public static void main(String[] args) throws IOException {
         String rootDatabase = "mlb.players.json";
-        Iterable<Player> core = DatabaseFactory.createDatabase(rootDatabase);
-        core = Iterables.filter(core, Predicates.HAS_BIO);
+        Iterable<? extends Player> core = DatabaseFactory.createDatabase(rootDatabase);
+        core = Iterables.filter(core, Biography.HAS_BIO_FILTER);
 
         IdentityMerge theMerge = new IdentityMerge(core);
 
@@ -83,8 +82,8 @@ public class IdentityMerge implements PlayerMerge {
                 };
 
         for(String updateDatabase : updates) {
-            Iterable<Player> update = DatabaseFactory.createDatabase(updateDatabase);
-            update = Iterables.filter(update, Predicates.HAS_BIO);
+            Iterable< ? extends Player> update = DatabaseFactory.createDatabase(updateDatabase);
+            update = Iterables.filter(update, Biography.HAS_BIO_FILTER);
             theMerge.merge(update);
         }
 

@@ -13,6 +13,7 @@ import org.codehaus.jackson.JsonGenerator;
 import rockweiler.idtools.player.AbstractPlayerCollector;
 import rockweiler.idtools.player.PlayerCollector;
 import rockweiler.idtools.player.SortingCollector;
+import rockweiler.idtools.player.database.DefaultDatabaseBuilder;
 import rockweiler.idtools.player.json.JsonPlayerFactory;
 import rockweiler.idtools.player.json.JsonPlayerScanner;
 import rockweiler.idtools.player.Player;
@@ -38,11 +39,13 @@ public class DatabaseFactory {
         return Collections.EMPTY_LIST;
     }
 
-    public static Iterable<Player> createDatabase(String filename) throws FileNotFoundException {
-        File dbSource = new File(filename);
-        Scanner dbScanner = new Scanner(dbSource);
+    public static Iterable<? extends Player> createDatabase(String filename) throws FileNotFoundException {
 
-        return createDatabase(dbScanner);
+        List<Player> coreDB = Lists.newArrayList();
+
+        DefaultDatabaseBuilder builder = new DefaultDatabaseBuilder(coreDB);
+        builder.addFromFile(filename);
+        return builder.build();
     }
 
     public static Iterable<Player> createDatabase(Scanner dbScanner) {

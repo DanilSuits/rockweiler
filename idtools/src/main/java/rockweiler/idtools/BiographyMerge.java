@@ -59,7 +59,7 @@ public class BiographyMerge {
 
     public static void main(String[] args) throws IOException {
         String rootDatabase = "master.players.json";
-        Iterable<Player> core = DatabaseFactory.createDatabase(rootDatabase);
+        Iterable<? extends Player> core = DatabaseFactory.createDatabase(rootDatabase);
         core = Iterables.filter(core, Biography.HAS_BIO_FILTER);
 
         BioReader idReader = new BioReader();
@@ -67,7 +67,7 @@ public class BiographyMerge {
 
         final SimilarityDatabase<Player> database = SimilarityCore.create(similarity, core);
 
-        Iterable<Player> update = DatabaseFactory.createDatabase("bootstrap.missing.json");
+        Iterable<? extends Player> update = DatabaseFactory.createDatabase("bootstrap.missing.json");
         update = Iterables.filter(update, Biography.HAS_BIO_FILTER);
 
         BiographyMerge theMerge = new BiographyMerge(database, similarity);

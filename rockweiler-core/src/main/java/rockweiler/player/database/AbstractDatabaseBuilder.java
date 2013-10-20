@@ -31,7 +31,7 @@ public abstract class AbstractDatabaseBuilder {
 
     public AbstractDatabaseBuilder add(Scanner scanner) {
         while(scanner.hasNext()) {
-            add(scanner.next());
+            add(scanner.nextLine());
         }
         return this;
     }

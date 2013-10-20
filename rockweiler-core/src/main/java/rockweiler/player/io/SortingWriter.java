@@ -5,7 +5,9 @@
  */
 package rockweiler.player.io;
 
+import com.google.common.base.Function;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Ordering;
 import rockweiler.player.Player;
 
 import java.util.Collections;
@@ -22,11 +24,17 @@ public class SortingWriter implements PlayerStore.Writer {
         this.target = target;
     }
 
-    private static final Comparator<Player> NAME_ORDER = new Comparator<Player>() {
-        public int compare(Player lhs, Player rhs) {
-            return lhs.getBio().getName().compareTo(rhs.getBio().getName());
+    private static Function<Player, String> GET_NAME = new Function<Player, String>() {
+        public String apply(rockweiler.player.Player input) {
+            String name = null;
+            if (null != input.getBio()) {
+                name = input.getBio().getName();
+            }
+            return name;
         }
     };
+
+    private static final Ordering<Player> NAME_ORDER = Ordering.natural().nullsFirst().onResultOf(GET_NAME);
 
     public void writePlayers(String key, Iterable<? extends Player> players) throws KeyNotUpdatedException, KeyNotFoundException {
         List<? extends Player> sortedPlayers = Lists.newArrayList(players);

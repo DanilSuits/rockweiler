@@ -5,12 +5,12 @@
  */
 package rockweiler.console.apps.demo;
 
-import jline.ConsoleReader;
-import rockweiler.console.core.DumbTerminal;
 import rockweiler.console.core.Main;
 import rockweiler.console.core.MessageListener;
 import rockweiler.console.core.lifecycle.*;
-import rockweiler.console.jline.UserInput;
+import rockweiler.console.core.modules.Application;
+import rockweiler.console.core.modules.FrontEnd;
+import rockweiler.console.core.modules.Interpreter;
 import rockweiler.modules.binding.BindingFactory;
 
 import java.io.IOException;
@@ -26,7 +26,7 @@ import java.io.IOException;
  * can pass the this pointer to the factory, and get the other half of the bind returned to it.
  * Kind of screwy, it seems to be effective.
  *
- * {@link http://code.google.com/p/google-guice/wiki/AssistedInject} can detect the situation
+ * http://code.google.com/p/google-guice/wiki/AssistedInject can detect the situation
  * with the right annotations, but I wanted to do the initial exploration by hand to force
  * myself to understand it.
  *
@@ -119,48 +119,6 @@ public class ConsoleDemo {
         }
     }
 
-    static class FrontEnd {
-        static class Module {
-            static Module create() {
-                return new Module();
-            }
-
-            public Main createApp(Interpreter.Binding interpreterBinding) throws IOException {
-                // represents the state of the application - starting, running
-                // shutting down, stopped.
-                final RunningState runningState = RunningState.start();
-
-                // A simple command line terminal - read text from the user, which an
-                // interpreter can turn into commands.  Similarly, display events to
-                // the user in the view (ie: stdout)
-                ConsoleReader reader = new ConsoleReader();
-                DumbTerminal display = new DumbTerminal(System.out, System.err);
-
-                MessageListener<String> userInterpreter = interpreterBinding.bind(runningState, display);
-
-                // In each cycle, we read one command from the user, and pass it to the
-                // application via the interpreter.
-                UserInput userInput = new UserInput(reader, userInterpreter, display);
-
-                // The loop that checks for shutdown is here, if we haven't shut down, the
-                // UserInput module is allowed to run for one cycle.
-                return new Main(runningState, userInput);
-
-            }
-
-        }
-    }
-
-    static class Interpreter {
-        static interface Module {
-            Binding getBinding(Application.Binding appBinding);
-        }
-
-        static interface Binding {
-            MessageListener<String> bind(Shutdown s, MessageListener<String> responseListener);
-        }
-    }
-
     static class TrivialInterpreter {
         static class Module implements Interpreter.Module {
             static Module create() {
@@ -175,22 +133,6 @@ public class ConsoleDemo {
                     }
                 };
             }
-        }
-    }
-
-    static class Application {
-        interface Request {
-        }
-
-        interface Event {
-        }
-
-        static interface Module {
-            Binding createBinding();
-        }
-
-        static interface Binding {
-            MessageListener<Application.Request> bind(MessageListener<Application.Event> eventListener);
         }
     }
 

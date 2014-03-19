@@ -13,11 +13,11 @@ import rockweiler.console.core.lifecycle.*;
 * @author Danil Suits (danil@vast.com)
 */
 public class Interpreter {
-    static interface Module {
-        Binding getBinding(ConsoleDemo.Application.Binding appBinding);
+    public static interface Module {
+        Binding getBinding(Application.Binding appBinding);
     }
 
-    static interface Binding {
+    public static interface Binding {
         MessageListener<String> bind(Shutdown s, MessageListener<String> responseListener);
     }
 }

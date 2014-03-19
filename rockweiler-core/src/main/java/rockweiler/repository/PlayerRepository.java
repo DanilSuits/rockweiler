@@ -9,5 +9,6 @@ package rockweiler.repository;
  * @author Danil Suits (danil@vast.com)
  */
 public interface PlayerRepository<T> {
-    boolean isAvailable(T player);
+    Iterable<T> getPlayers();
+    public void add(T player);
 }

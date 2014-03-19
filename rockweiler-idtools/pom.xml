@@ -49,6 +49,10 @@
             <groupId>rockweiler</groupId>
             <artifactId>rockweiler-core</artifactId>
         </dependency>
+        <dependency>
+            <groupId>rockweiler</groupId>
+            <artifactId>rockweiler-database</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>commons-lang</groupId>

@@ -5,6 +5,8 @@
  */
 package rockweiler.repository;
 
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 import org.codehaus.jackson.map.DeserializationConfig;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.type.TypeReference;
@@ -17,12 +19,13 @@ import java.util.List;
 /**
  * @author Danil Suits (danil@vast.com)
  */
-public class JacksonPlayerRepository {
+public class JacksonPlayerRepository implements PlayerRepository<Schema.Player> {
     private static final TypeReference<List<Schema.Player>> PLAYER_LIST = new TypeReference<List<Schema.Player>>() {
     };
 
-    public JacksonPlayerRepository(List<Schema.Player> players) {
+    public JacksonPlayerRepository(List<Schema.Player> players, List<Schema.Player> provisional) {
         this.players = players;
+        this.provisional = provisional;
     }
 
     public static JacksonPlayerRepository create(String resourceName) {
@@ -37,10 +40,20 @@ public class JacksonPlayerRepository {
     public static JacksonPlayerRepository create(InputStream is) throws IOException {
         ObjectMapper om = new ObjectMapper();
         om.configure(DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES,false);
-        List<Schema.Player> players = om.readValue(is, PLAYER_LIST);
+        List<Schema.Player> knownPlayers = om.readValue(is, PLAYER_LIST);
+        List<Schema.Player> provisional = Lists.newArrayList();
 
-        return new JacksonPlayerRepository(players);
+        return new JacksonPlayerRepository(knownPlayers, provisional);
     }
 
     private final List<Schema.Player> players;
+    private final List<Schema.Player> provisional;
+
+    public Iterable<Schema.Player> getPlayers() {
+        return Iterables.concat(players,provisional);
+    }
+
+    public void add(Schema.Player player) {
+        provisional.add(player);
+    }
 }

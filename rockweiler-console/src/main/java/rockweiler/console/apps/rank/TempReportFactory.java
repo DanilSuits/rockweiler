@@ -13,7 +13,7 @@ import java.io.OutputStream;
 /**
  * @author Danil Suits (danil@vast.com)
  */
-public class TempReportFactory {
+public class TempReportFactory implements ReportFactory {
 
     public OutputStream openReport() {
         File reportRoot = new File(System.getProperty("java.io.tmpdir"));

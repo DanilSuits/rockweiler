@@ -6,7 +6,6 @@
 package rockweiler.console.core.modules;
 
 import jline.ConsoleReader;
-import rockweiler.console.apps.demo.ConsoleDemo;
 import rockweiler.console.core.DumbTerminal;
 import rockweiler.console.core.Main;
 import rockweiler.console.core.MessageListener;
@@ -19,12 +18,12 @@ import java.io.IOException;
 * @author Danil Suits (danil@vast.com)
 */
 public class FrontEnd {
-    static class Module {
-        static Module create() {
+    public static class Module {
+        public static Module create() {
             return new Module();
         }
 
-        public Main createApp(ConsoleDemo.Interpreter.Binding interpreterBinding) throws IOException {
+        public Main createApp(Interpreter.Binding interpreterBinding) throws IOException {
             // represents the state of the application - starting, running
             // shutting down, stopped.
             final RunningState runningState = RunningState.start();

@@ -5,24 +5,23 @@
  */
 package rockweiler.console.core.modules;
 
-import rockweiler.console.apps.demo.ConsoleDemo;
 import rockweiler.console.core.MessageListener;
 
 /**
 * @author Danil Suits (danil@vast.com)
 */
 public class Application {
-    interface Request {
+    public interface Request {
     }
 
-    interface Event {
+    public interface Event {
     }
 
-    static interface Module {
+    public static interface Module {
         Binding createBinding();
     }
 
-    static interface Binding {
+    public static interface Binding {
         MessageListener<Request> bind(MessageListener<Event> eventListener);
     }
 }

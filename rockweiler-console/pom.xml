@@ -10,12 +10,31 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>rockweiler-console</artifactId>
+    <packaging>jar</packaging>
 
     <dependencies>
+        <dependency>
+            <groupId>rockweiler</groupId>
+            <artifactId>rockweiler-database</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>rockweiler</groupId>
+            <artifactId>rockweiler-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>jline</groupId>
             <artifactId>jline</artifactId>
             <version>0.9.94</version>
+        </dependency>
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 </project>

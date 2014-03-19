@@ -21,9 +21,9 @@ import java.util.List;
  */
 public class JsonPlayerFactory {
     public JsonPlayer toPlayer(String src) {
-        ObjectMapper writer = new ObjectMapper();
+        ObjectMapper reader = new ObjectMapper();
         try {
-            JsonNode root = writer.readTree(src);
+            JsonNode root = reader.readTree(src);
             return toPlayer(root);
         } catch (IOException e) {
             throw new RuntimeException("Unable to parse: " + src, e);

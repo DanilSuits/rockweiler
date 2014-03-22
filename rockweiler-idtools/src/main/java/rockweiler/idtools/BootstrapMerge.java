@@ -5,6 +5,7 @@
  */
 package rockweiler.idtools;
 
+import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
@@ -18,6 +19,9 @@ import rockweiler.player.database.DatabaseFactory;
 import rockweiler.player.io.FileBackedStore;
 import rockweiler.player.io.KeyStoreException;
 import rockweiler.player.io.PlayerStore;
+import rockweiler.player.jackson.Schema;
+import rockweiler.repository.JacksonPlayerRepository;
+import rockweiler.repository.PlayerRepository;
 
 import java.util.List;
 import java.util.Map;
@@ -76,13 +80,62 @@ public class BootstrapMerge implements PlayerMerge {
         return conflictPlayers;
     }
 
+    private static final Function<Schema.Player,Player> TRANSFORM = new Function<Schema.Player, Player>() {
+        public Player apply(final rockweiler.player.jackson.Schema.Player input) {
+            final Player.Ids ids = new Player.Ids() {
+                public void add(String key, String value) {
+                    input.id.put(key,value);
+                }
+
+                public void merge(Player.Ids rhs) throws IdConflictException {
+                    for(String key : rhs.all()) {
+                        input.id.put(key, rhs.get(key));
+                    }
+                }
+
+                public String get(String key) {
+                    return input.id.get(key);
+                }
+
+                public int count() {
+                    return input.id.entrySet().size();
+                }
+
+                public Iterable<String> all() {
+                    return input.id.keySet();
+                }
+            };
+
+            final Player.Bio bio = new Player.Bio() {
+                public String getName() {
+                    return input.bio.name;
+                }
+
+                public String getDob() {
+                    return input.bio.dob;
+                }
+            };
+
+            return new Player () {
+
+                public Ids getIds() {
+                    return ids;
+                }
+
+                public Bio getBio() {
+                    return bio;
+                }
+            } ;
+        }
+    } ;
     public static void main(String[] args) throws KeyStoreException {
-        String rootDatabase = "master.players.json";
+        PlayerRepository<Schema.Player> repository = JacksonPlayerRepository.create("/master.player.json");
 
         final PlayerStore playerStore = FileBackedStore.create("");
         PlayerStore.Reader in = playerStore.createReader();
 
-        Iterable<? extends Player> players = in.readPlayers(rootDatabase);
+        Iterable<? extends Player> players = Iterables.transform(repository.getPlayers(),TRANSFORM);
+
         players = Iterables.filter(players, Biography.HAS_BIO_FILTER);
 
         IdReader idReader = new BioReader();

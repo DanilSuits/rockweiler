@@ -81,10 +81,9 @@ public class IdentityMerge implements PlayerMerge {
         String updates[] =
                 {"espn.players.json"
                         , "lahman.players.json"
-                        , "oliver.players.json"
                         , "rotoworld.players.json"
                         , "yahoo.players.json"
-                        , "merged.players.json"
+                        , "mlb.players.json"
                 };
 
         for(String updateDatabase : updates) {

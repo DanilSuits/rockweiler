@@ -44,6 +44,10 @@ public class BootstrapMerge implements PlayerMerge {
         for (Player rhs : updateDatabase) {
             String key = idReader.getId(rhs);
 
+            if (null == key) {
+                System.err.println(rhs);
+            }
+
             if (!master.containsKey(key)) {
                 master.put(key, rhs);
             } else {
@@ -80,63 +84,16 @@ public class BootstrapMerge implements PlayerMerge {
         return conflictPlayers;
     }
 
-    private static final Function<Schema.Player,Player> TRANSFORM = new Function<Schema.Player, Player>() {
-        public Player apply(final rockweiler.player.jackson.Schema.Player input) {
-            final Player.Ids ids = new Player.Ids() {
-                public void add(String key, String value) {
-                    input.id.put(key,value);
-                }
-
-                public void merge(Player.Ids rhs) throws IdConflictException {
-                    for(String key : rhs.all()) {
-                        input.id.put(key, rhs.get(key));
-                    }
-                }
-
-                public String get(String key) {
-                    return input.id.get(key);
-                }
-
-                public int count() {
-                    return input.id.entrySet().size();
-                }
-
-                public Iterable<String> all() {
-                    return input.id.keySet();
-                }
-            };
-
-            final Player.Bio bio = new Player.Bio() {
-                public String getName() {
-                    return input.bio.name;
-                }
-
-                public String getDob() {
-                    return input.bio.dob;
-                }
-            };
-
-            return new Player () {
-
-                public Ids getIds() {
-                    return ids;
-                }
-
-                public Bio getBio() {
-                    return bio;
-                }
-            } ;
-        }
-    } ;
     public static void main(String[] args) throws KeyStoreException {
         PlayerRepository<Schema.Player> repository = JacksonPlayerRepository.create("/master.player.json");
+
+        Iterable<? extends Player> players = Iterables.transform(repository.getPlayers(),Schema.TRANSFORM);
+
+        players = Iterables.filter(players, Biography.HAS_BIO_FILTER);
 
         final PlayerStore playerStore = FileBackedStore.create("");
         PlayerStore.Reader in = playerStore.createReader();
 
-        Iterable<? extends Player> players = Iterables.transform(repository.getPlayers(),TRANSFORM);
-
-        players = Iterables.filter(players, Biography.HAS_BIO_FILTER);
 
         IdReader idReader = new BioReader();
         Map<String, Player> idMap = DatabaseFactory.createIdMap(players, idReader);
@@ -155,13 +112,13 @@ public class BootstrapMerge implements PlayerMerge {
                         // , "baseballReference.players.json"
                         // , "biography.merged.json"
                 };
-
+/*
         for (String updateDatabase : updates) {
             Iterable<? extends Player> update = in.readPlayers(updateDatabase);
             update = Iterables.filter(update, Biography.HAS_BIO_FILTER);
             theMerge.merge(update);
         }
-
+*/
         PlayerStore.Writer out = playerStore.createWriter();
         out.writePlayers("bootstrap.merged.json", theMerge.collectMasterDatabase());
         out.writePlayers("bootstrap.missing.json", theMerge.collectMissingDatabase());

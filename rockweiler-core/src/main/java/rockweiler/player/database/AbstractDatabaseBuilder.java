@@ -7,6 +7,7 @@ package rockweiler.player.database;
 
 import rockweiler.player.Player;
 import rockweiler.player.jackson.JsonPlayerFactory;
+import rockweiler.player.jackson.SchemaPlayerFactory;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -16,7 +17,7 @@ import java.util.Scanner;
  * @author Danil Suits (danil@vast.com)
  */
 public abstract class AbstractDatabaseBuilder {
-    private final JsonPlayerFactory factory = new JsonPlayerFactory();
+    private final SchemaPlayerFactory factory = SchemaPlayerFactory.create();
 
     public abstract Iterable<? extends Player> build();
 

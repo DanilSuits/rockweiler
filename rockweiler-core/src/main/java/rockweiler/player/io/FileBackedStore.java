@@ -15,6 +15,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.util.Comparator;
 
 /**
  * @author Danil Suits (danil@vast.com)
@@ -45,6 +46,14 @@ public class FileBackedStore implements PlayerStore {
     }
 
     public Writer createWriter() {
+        return new SortingWriter(createRawWriter());
+    }
+
+    public Writer createWriter(Comparator<Player> ordering) {
+        return new SortingWriter(ordering, createRawWriter());
+    }
+
+    Writer createRawWriter() {
         final SimpleArchive<Player> simpleArchive = new SimpleArchive<Player>();
 
         Writer toFile = new Writer() {
@@ -67,6 +76,6 @@ public class FileBackedStore implements PlayerStore {
             }
         } ;
 
-        return new SortingWriter(toFile);
+        return toFile;
     }
 }

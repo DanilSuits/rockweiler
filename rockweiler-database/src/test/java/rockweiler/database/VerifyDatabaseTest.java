@@ -38,6 +38,9 @@ public class VerifyDatabaseTest {
                 }
 
                 if (group.containsKey(id.getValue())) {
+                    System.err.println(id.getKey() + " : " +id.getValue());
+                    System.err.println( p.bio.dob + " " + p.bio.name);
+
                     duplicates.add(p);
                     break;
                 } else {
@@ -48,9 +51,6 @@ public class VerifyDatabaseTest {
         }
 
         if (duplicates.size() > 0) {
-            for (Schema.Player p : duplicates) {
-                System.err.println( p.bio.dob + " " + p.bio.name);
-            }
             Assert.fail("Master database contains duplicates");
         }
     }

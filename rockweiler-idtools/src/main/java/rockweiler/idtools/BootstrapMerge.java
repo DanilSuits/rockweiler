@@ -44,10 +44,6 @@ public class BootstrapMerge implements PlayerMerge {
         for (Player rhs : updateDatabase) {
             String key = idReader.getId(rhs);
 
-            if (null == key) {
-                System.err.println(rhs);
-            }
-
             if (!master.containsKey(key)) {
                 master.put(key, rhs);
             } else {
@@ -112,13 +108,13 @@ public class BootstrapMerge implements PlayerMerge {
                         // , "baseballReference.players.json"
                         // , "biography.merged.json"
                 };
-/*
+
         for (String updateDatabase : updates) {
             Iterable<? extends Player> update = in.readPlayers(updateDatabase);
             update = Iterables.filter(update, Biography.HAS_BIO_FILTER);
             theMerge.merge(update);
         }
-*/
+
         PlayerStore.Writer out = playerStore.createWriter();
         out.writePlayers("bootstrap.merged.json", theMerge.collectMasterDatabase());
         out.writePlayers("bootstrap.missing.json", theMerge.collectMissingDatabase());

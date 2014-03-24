@@ -8,9 +8,12 @@ package rockweiler.player.io;
 import rockweiler.player.Player;
 import rockweiler.player.database.DatabaseFactory;
 import rockweiler.player.jackson.JsonWriter;
+import rockweiler.player.jackson.SimpleArchive;
+import sun.java2d.pipe.SpanShapeRenderer;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.PrintStream;
 
 /**
@@ -42,12 +45,15 @@ public class FileBackedStore implements PlayerStore {
     }
 
     public Writer createWriter() {
+        final SimpleArchive<Player> simpleArchive = new SimpleArchive<Player>();
+
         Writer toFile = new Writer() {
             public void writePlayers(String key, Iterable<? extends Player> players) throws KeyNotFoundException, KeyNotUpdatedException {
                 PrintStream out = createStream(key);
-                JsonWriter writer = new JsonWriter(out);
-                for(Player player : players) {
-                    writer.collect(player);
+                try {
+                    simpleArchive.archive(players, out);
+                } catch (IOException e) {
+                    throw new KeyNotUpdatedException("Unable to update " + key, e);
                 }
             }
 

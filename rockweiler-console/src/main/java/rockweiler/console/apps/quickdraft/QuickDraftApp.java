@@ -22,8 +22,7 @@ import java.util.Map;
  */
 public class QuickDraftApp implements MessageListener<Application.Request> {
     public static class Module implements Application.Module {
-        public static Module create() {
-            PlayerRepository<Schema.Player> repository = JacksonPlayerRepository.create("/master.player.json");
+        public static Module create( PlayerRepository<Schema.Player> repository) {
 
             ProvisionalFactory provisionalFactory = new ProvisionalFactory("provisional");
             return new Module(repository, provisionalFactory);
@@ -67,20 +66,31 @@ public class QuickDraftApp implements MessageListener<Application.Request> {
     }
 
     public void onMessage(Application.Request message) {
-        System.out.println(message);
-
-        if (rockweiler.console.apps.rank.Requests.QUIT.equals(message)) {
+        if (Requests.QUIT.equals(message)) {
             dispatch(Events.SHUTDOWN);
         }
 
-        if (rockweiler.console.apps.rank.Requests.AddPlayer.class.isInstance(message)) {
-            final rockweiler.console.apps.rank.Requests.AddPlayer add = rockweiler.console.apps.rank.Requests.AddPlayer.class.cast(message);
+        if (Requests.AddPlayer.class.isInstance(message)) {
+            final Requests.AddPlayer add = Requests.AddPlayer.class.cast(message);
             Schema.Player player = provisionalFactory.create(add.name);
             playerRepository.add(player);
         }
 
-        if (rockweiler.console.apps.rank.Requests.Pick.class.isInstance(message)) {
-            final rockweiler.console.apps.rank.Requests.Pick pick = rockweiler.console.apps.rank.Requests.Pick.class.cast(message);
+        if (Requests.Filter.class.isInstance(message)) {
+            final Requests.Filter filter = Requests.Filter.class.cast(message);
+
+            List<Schema.Player> availablePlayers = Lists.newArrayList();
+            for(Schema.Player p : filter.players) {
+                if (! selectedFilter.apply(p)) {
+                    availablePlayers.add(p);
+                }
+            }
+
+            dispatch(new Events.FilterResult(availablePlayers));
+        }
+
+        if (Requests.Pick.class.isInstance(message)) {
+            final Requests.Pick pick = Requests.Pick.class.cast(message);
 
             Predicate<Schema.Player> matchPlayer = new Predicate<Schema.Player>() {
                 public boolean apply(Schema.Player input) {

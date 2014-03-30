@@ -1,8 +1,12 @@
 package rockweiler.console.apps.quickdraft;
 
+import com.typesafe.config.Config;
+import com.typesafe.config.ConfigFactory;
 import jline.ConsoleReader;
-import rockweiler.console.apps.rank.RankApp;
-import rockweiler.console.apps.rank.RankInterpreter;
+import org.apache.commons.cli.*;
+import rockweiler.console.apps.quickdraft.plugins.IdStore;
+import rockweiler.console.apps.quickdraft.plugins.ListViewport;
+import rockweiler.console.apps.quickdraft.plugins.LocalListRepository;
 import rockweiler.console.apps.rank.Replay;
 import rockweiler.console.core.DumbTerminal;
 import rockweiler.console.core.Main;
@@ -12,6 +16,9 @@ import rockweiler.console.core.modules.Application;
 import rockweiler.console.core.modules.FrontEnd;
 import rockweiler.console.core.modules.Interpreter;
 import rockweiler.console.jline.UserInput;
+import rockweiler.player.jackson.Schema;
+import rockweiler.repository.JacksonPlayerRepository;
+import rockweiler.repository.PlayerRepository;
 
 import java.io.File;
 
@@ -23,13 +30,57 @@ import java.io.File;
  * To change this template use File | Settings | File Templates.
  */
 public class QuickDraft {
+
+    static final Option CLI_CONFIG = OptionBuilder
+            .isRequired(false)
+            .withDescription("typesafe.conf")
+            .hasArg().withArgName("path-to-config")
+            .create("config");
+
+
+    static CommandLine parse(String[] args) throws ParseException {
+        Options options = new Options();
+        options.addOption(CLI_CONFIG);
+
+        return new GnuParser().parse(options, args);
+    }
+
     public static void main(String[] args) throws Exception {
         // TODO: this needs to read from a configuration
-        File replayLog = new File(System.getProperty("java.io.tmpdir"), "quickdraft.replay.log");
+
+        Config config = ConfigFactory.load("quickdraft");
+
+        CommandLine commandLine = parse(args);
+        if (commandLine.hasOption(CLI_CONFIG.getOpt())) {
+            String configPath = commandLine.getOptionValue(CLI_CONFIG.getOpt());
+
+            config = ConfigFactory.parseFile(new File(configPath))
+                    .withFallback(config)
+                    .resolve();
+
+        }
+
+
+        File replayLog = new File(config.getString("quickdraft.replay.log"));
+
         Replay replay = Replay.create(replayLog);
 
-        Application.Module appModule = QuickDraftApp.Module.create();
-        Interpreter.Module interpreterModule = QuickDraftInterpreter.Module.create(replay);
+        PlayerRepository<Schema.Player> repository = JacksonPlayerRepository.create("/master.player.json");
+        IdStore idStore = IdStore.create(repository.getPlayers());
+
+        // A simple command line terminal - read text from the user, which an
+        // interpreter can turn into commands.  Similarly, display events to
+        // the user in the view (ie: stdout)
+        ConsoleReader reader = new ConsoleReader();
+        DumbTerminal display = new DumbTerminal(System.out, System.err);
+
+
+        Application.Module appModule = QuickDraftApp.Module.create(repository);
+
+        ListRepository listRepository = LocalListRepository.create(config.getConfig("quickdraft.listRepository"), idStore);
+        ListViewport listViewport = new ListViewport(display, listRepository);
+
+        Interpreter.Module interpreterModule = QuickDraftInterpreter.Module.create(replay, listRepository, listViewport);
 
         // Didn't bother with TrivialFrontEnd here, as this module, rather than an
         // injector, was going to be doing the actual work.
@@ -46,11 +97,6 @@ public class QuickDraft {
         // shutting down, stopped.
         final RunningState runningState = RunningState.start();
 
-        // A simple command line terminal - read text from the user, which an
-        // interpreter can turn into commands.  Similarly, display events to
-        // the user in the view (ie: stdout)
-        ConsoleReader reader = new ConsoleReader();
-        DumbTerminal display = new DumbTerminal(System.out, System.err);
 
         MessageListener<String> userInterpreter = interpreterBinding.bind(runningState, display);
 

@@ -29,7 +29,9 @@ public class UserInput implements Main.Body {
     public void cycle() {
         try {
             String userInput = reader.readLine();
-            listener.onMessage(userInput);
+            if (null != userInput) {
+                listener.onMessage(userInput);
+            }
         } catch (IOException e) {
             error.onException(e);
         }

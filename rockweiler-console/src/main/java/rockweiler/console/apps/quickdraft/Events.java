@@ -6,6 +6,7 @@
 package rockweiler.console.apps.quickdraft;
 
 import rockweiler.console.core.modules.Application;
+import rockweiler.player.jackson.Schema;
 
 import java.util.List;
 
@@ -47,6 +48,14 @@ public class Events {
 
         AlreadyTaken(String query) {
             this.query = query;
+        }
+    }
+
+    public static final class FilterResult implements Application.Event {
+        public final List<Schema.Player> players;
+
+        FilterResult(List<Schema.Player> players) {
+            this.players = players;
         }
     }
 }

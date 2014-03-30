@@ -1,13 +1,9 @@
-/**
- * Copyright Vast 2014. All Rights Reserved.
- *
- * http://www.vast.com
- */
-package rockweiler.console.apps.rank;
+package rockweiler.console.apps.quickdraft;
 
+import rockweiler.console.apps.rank.*;
 import rockweiler.console.core.MessageListener;
 import rockweiler.console.core.SharedMessageListener;
-import rockweiler.console.core.lifecycle.Shutdown;
+import rockweiler.console.core.lifecycle.*;
 import rockweiler.console.core.modules.Application;
 import rockweiler.console.core.modules.Interpreter;
 import rockweiler.player.jackson.Schema;
@@ -16,9 +12,13 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * @author Danil Suits (danil@vast.com)
+ * Created with IntelliJ IDEA.
+ * User: Danil
+ * Date: 3/29/14
+ * Time: 9:14 PM
+ * To change this template use File | Settings | File Templates.
  */
-public class RankInterpreter {
+public class QuickDraftInterpreter {
     public static class Module implements Interpreter.Module {
         public static Module create(Replay replay) {
             TempReportFactory reportFactory = new TempReportFactory();
@@ -113,6 +113,8 @@ public class RankInterpreter {
     static final Pattern PARSE_DRAFT_REQUEST = Pattern.compile("draft (.*)");
     static final Pattern PARSE_ADD_REQUEST = Pattern.compile("add (.*)");
 
+    static final Pattern PARSE_LIST_SHOW = Pattern.compile("list (.*)");
+
     static class UserInterpreter implements MessageListener<String> {
         private final MessageListener<Application.Request> requestMessageListener;
 
@@ -147,7 +149,13 @@ public class RankInterpreter {
                 crnt = new Requests.AddPlayer(add.group(1));
             }
 
+            Matcher listShow = PARSE_LIST_SHOW.matcher(message);
+            if(listShow.find()) {
+                // TODO
+            }
+
             requestMessageListener.onMessage(crnt);
         }
     }
+
 }

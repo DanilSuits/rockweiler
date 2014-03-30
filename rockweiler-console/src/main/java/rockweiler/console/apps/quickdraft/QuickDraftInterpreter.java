@@ -130,6 +130,7 @@ public class QuickDraftInterpreter {
     static final Pattern PARSE_ADD_REQUEST = Pattern.compile("add (.*)");
 
     static final Pattern PARSE_LIST_SHOW = Pattern.compile("list (.*)");
+    static final Pattern PARSE_LIST_SIZE = Pattern.compile("list.size ([0-9]+)");
 
     static class UserInterpreter implements MessageListener<String> {
         private final MessageListener<Application.Request> requestMessageListener;
@@ -172,6 +173,11 @@ public class QuickDraftInterpreter {
             if(listShow.find()) {
                 crnt = listViewport.show(listShow.group(1));
 
+            }
+
+            Matcher listSize = PARSE_LIST_SIZE.matcher(message);
+            if(listSize.find()) {
+                listViewport.setLimit(Integer.parseInt(listSize.group(1)));
             }
 
             requestMessageListener.onMessage(crnt);

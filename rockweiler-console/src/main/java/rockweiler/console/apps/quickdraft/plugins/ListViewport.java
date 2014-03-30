@@ -41,10 +41,13 @@ public class ListViewport implements MessageListener<Application.Event> {
 
         int viewportLimit = maxItems;
 
-        for (int index=0; index < originalList.size(); ++index) {
-            Schema.Player p = originalList.get(index);
+        int listPosition = 0;
+
+        for (Schema.Player p : originalList) {
+            listPosition++;
+
             if (availablePlayers.contains(p)) {
-                display.onMessage("Available [" + index + "] " + format(p));
+                display.onMessage("Available [" + listPosition + "] " + format(p));
                 viewportLimit--;
                 if (0 == viewportLimit) {
                     break;

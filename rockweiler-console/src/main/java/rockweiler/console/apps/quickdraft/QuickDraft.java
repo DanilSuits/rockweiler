@@ -15,6 +15,7 @@ import rockweiler.console.core.lifecycle.RunningState;
 import rockweiler.console.core.modules.Application;
 import rockweiler.console.core.modules.FrontEnd;
 import rockweiler.console.core.modules.Interpreter;
+import rockweiler.console.core.modules.Startup;
 import rockweiler.console.jline.UserInput;
 import rockweiler.player.jackson.Schema;
 import rockweiler.repository.JacksonPlayerRepository;
@@ -46,19 +47,11 @@ public class QuickDraft {
     }
 
     public static void main(String[] args) throws Exception {
-        // TODO: this needs to read from a configuration
 
         Config config = ConfigFactory.load("quickdraft");
+        Startup startup = new Startup(config);
 
-        CommandLine commandLine = parse(args);
-        if (commandLine.hasOption(CLI_CONFIG.getOpt())) {
-            String configPath = commandLine.getOptionValue(CLI_CONFIG.getOpt());
-
-            config = ConfigFactory.parseFile(new File(configPath))
-                    .withFallback(config)
-                    .resolve();
-
-        }
+        config = startup.readConfiguration(args);
 
 
         File replayLog = new File(config.getString("quickdraft.replay.log"));

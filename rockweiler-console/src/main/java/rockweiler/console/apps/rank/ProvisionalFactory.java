@@ -24,7 +24,7 @@ public class ProvisionalFactory {
 
         Schema.Player player = new Schema.Player();
         player.bio = bio;
-        player.id = Maps.newHashMap();
+        player.id = Maps.newTreeMap();
         player.id.put(key, String.valueOf(bio.hashCode()));
 
         return player;

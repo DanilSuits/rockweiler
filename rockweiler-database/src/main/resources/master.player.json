@@ -48,7 +48,7 @@
 {"id":{"espn":"30410","bbref":"burneal01","lahman":"burneal01"},"bio":{"name":"Alex Burnett","dob":"19870726"}},
 {"id":{"espn":"31372","bbref":"casteal01","lahman":"casteal01","rotoworld":"6797","mlb":"543008","yahoo":"9203"},"bio":{"name":"Alex Castellanos","dob":"19860804"}},
 {"id":{"espn":"31086","bbref":"cobbal01","lahman":"cobbal01","rotoworld":"5568","mlb":"502171","yahoo":"8918"},"bio":{"name":"Alex Cobb","dob":"19871007"}},
-{"id":{"espn":"31255","bbref":"colomal01","mlb":"517008","lahman":"colomal01"},"bio":{"name":"Alex Colome","dob":"19881231"}},
+{"id":{"espn":"31255","bbref":"colomal01","mlb":"517008","lahman":"colomal01","yahoo":"9413"},"bio":{"name":"Alex Colome","dob":"19881231"}},
 {"id":{"espn":"3916","bbref":"gonzaal02","lahman":"gonzaal02","yahoo":"6077"},"bio":{"name":"Alex Gonzalez","dob":"19770215"}},
 {"id":{"espn":"28636","bbref":"gordoal01","lahman":"gordoal01","rotoworld":"4023","mlb":"460086","yahoo":"7907"},"bio":{"name":"Alex Gordon","dob":"19840210"}},
 {"id":{"mlb":"648717","espn":"33096"},"bio":{"name":"Alex Guerrero","dob":"19861120"}},
@@ -434,7 +434,7 @@
 {"id":{"espn":"30103","bbref":"vicieda01","lahman":"vicieda01","rotoworld":"5588","mlb":"493364","yahoo":"8398"},"bio":{"name":"Dayan Viciedo","dob":"19890310"}},
 {"id":{"mlb":"542883","espn":"30851"},"bio":{"name":"Dean Anna","dob":"19861124"}},
 {"id":{"mlb":"592547","espn":"31958","rotoworld":"6222"},"bio":{"name":"Deck McGuire","dob":"19890623"}},
-{"id":{"espn":"30726","bbref":"gordode01","lahman":"gordode01","mlb":"543829","rotoworld":"5808","yahoo":"8864"},"bio":{"name":"Dee Gordon","dob":"19880422"}},
+{"id":{"espn":"30726","bbref":"gordode01","lahman":"gordode01","mlb":"543829","rotoworld":"5808","yahoo":"8863"},"bio":{"name":"Dee Gordon","dob":"19880422"}},
 {"id":{"espn":"31122","mlb":"476454","rotoworld":"4792","lahman":"betande01","yahoo":"9063"},"bio":{"name":"Dellin Betances","dob":"19880323"}},
 {"id":{"espn":"6138","bbref":"youngde03","lahman":"youngde03","rotoworld":"868","mlb":"430321","yahoo":"7467"},"bio":{"name":"Delmon Young","dob":"19850914"}},
 {"id":{"espn":"29087","bbref":"spande01","lahman":"spande01","rotoworld":"653","mlb":"452655","yahoo":"8213"},"bio":{"name":"Denard Span","dob":"19840227"}},
@@ -638,7 +638,7 @@
 {"id":{"espn":"28864","bbref":"kenneia01","lahman":"kenneia01","rotoworld":"4455","mlb":"453178","yahoo":"8099"},"bio":{"name":"Ian Kennedy","dob":"19841219"}},
 {"id":{"espn":"6197","bbref":"kinslia01","lahman":"kinslia01","rotoworld":"312","mlb":"435079","yahoo":"7490"},"bio":{"name":"Ian Kinsler","dob":"19820622"}},
 {"id":{"espn":"31883","bbref":"krolia01","rotoworld":"6634","mlb":"571871","yahoo":"9423","lahman":"krolia01"},"bio":{"name":"Ian Krol","dob":"19910509"}},
-{"id":{"espn":"28722","lahman":"stewaia01","yahoo":"7993","mlb":"456655"},"bio":{"name":"Ian Stewart","dob":"19850405"}},
+{"id":{"espn":"28722","lahman":"stewaia01","rotoworld":"1324","yahoo":"7993","mlb":"456655"},"bio":{"name":"Ian Stewart","dob":"19850405"}},
 {"id":{"espn":"4570","bbref":"suzukic01","lahman":"suzukic01","rotoworld":"3161","mlb":"400085","yahoo":"6615"},"bio":{"name":"Ichiro Suzuki","dob":"19731022"}},
 {"id":{"espn":"30532","bbref":"davisik02","lahman":"davisik02","mlb":"477195","yahoo":"8666","rotoworld":"4162"},"bio":{"name":"Ike Davis","dob":"19870322"}},
 {"id":{"espn":"30390","lahman":"faluir01","mlb":"458252","rotoworld":"7114"},"bio":{"name":"Irving Falu","dob":"19830606"}},
@@ -837,9 +837,9 @@
 {"id":{"espn":"5906","bbref":"rosajo01","lahman":"delarjo01","rotoworld":"3820","mlb":"407822","yahoo":"7281"},"bio":{"name":"Jorge De La Rosa","dob":"19810405"}},
 {"id":{"lahman":"deleojo02","rotoworld":"6982"},"bio":{"name":"Jorge De Leon","dob":"19870815"}},
 {"id":{"mlb":"593871","espn":"32525"},"bio":{"name":"Jorge Polanco","dob":"19930705"}},
-{"id":{"espn":"32654","mlb":"504083"},"bio":{"name":"Jorge Rondon","dob":"19880216"}},
+{"id":{"espn":"32654","mlb":"504083","rotoworld":"7273"},"bio":{"name":"Jorge Rondon","dob":"19880216"}},
 {"id":{"espn":"32558","mlb":"624585"},"bio":{"name":"Jorge Soler","dob":"19920225"}},
-{"id":{"mlb":"547989","espn":"33095","rotoworld":"7546"},"bio":{"name":"Jose Abreu","dob":"19870129"}},
+{"id":{"mlb":"547989","espn":"33095","rotoworld":"7546","yahoo":"9540"},"bio":{"name":"Jose Abreu","dob":"19870129"}},
 {"id":{"espn":"31662","bbref":"altuvjo01","lahman":"altuvjo01","rotoworld":"6421","mlb":"514888","yahoo":"8996"},"bio":{"name":"Jose Altuve","dob":"19900506"}},
 {"id":{"espn":"32099","bbref":"alvarjo02","mlb":"501625","rotoworld":"6085","lahman":"alvarjo02"},"bio":{"name":"Jose Alvarez","dob":"19890506"}},
 {"id":{"espn":"29113","lahman":"arredjo01","yahoo":"8231"},"bio":{"name":"Jose Arredondo","dob":"19840312"}},
@@ -851,7 +851,7 @@
 {"id":{"bbref":"contrjo01","lahman":"contrjo01"},"bio":{"name":"Jose Contreras","dob":"19711206"}},
 {"id":{"espn":"31663","bbref":"delatjo01","mlb":"473265","lahman":"delatjo01"},"bio":{"name":"Jose De La Torre","dob":"19851017"}},
 {"id":{"mlb":"517059","espn":"31783"},"bio":{"name":"Jose De Paula","dob":"19880304"}},
-{"id":{"mlb":"523848","espn":"33088","lahman":"dominjo01","rotoworld":"5194","yahoo":"9429"},"bio":{"name":"Jose Dominguez","dob":"19900807"}},
+{"id":{"mlb":"523848","espn":"33088","lahman":"dominjo01","rotoworld":"5194","yahoo":"9448"},"bio":{"name":"Jose Dominguez","dob":"19900807"}},
 {"id":{"bbref":"fernajo02","rotoworld":"6744","mlb":"605228","yahoo":"9323","lahman":"fernajo02"},"bio":{"name":"Jose Fernandez","dob":"19920731"}},
 {"id":{"espn":"30382","bbref":"iglesjo01","lahman":"iglesjo01","rotoworld":"6080","mlb":"578428","yahoo":"8848"},"bio":{"name":"Jose Iglesias","dob":"19900105"}},
 {"id":{"espn":"29710","bbref":"lobatjo01","lahman":"lobatjo01","rotoworld":"6013","mlb":"446653","yahoo":"8521"},"bio":{"name":"Jose Lobaton","dob":"19841021"}},
@@ -893,7 +893,7 @@
 {"id":{"espn":"32039","bbref":"walljo02","lahman":"walljo02","mlb":"476205","yahoo":"9239"},"bio":{"name":"Josh Wall","dob":"19870121"}},
 {"id":{"espn":"6024","bbref":"willijo03","lahman":"willijo03","rotoworld":"3911","mlb":"425545","yahoo":"7373"},"bio":{"name":"Josh Willingham","dob":"19790217"}},
 {"id":{"espn":"6429","bbref":"wilsojo03","rotoworld":"294","mlb":"425543","yahoo":"7663","lahman":"wilsojo03"},"bio":{"name":"Josh Wilson","dob":"19810326"}},
-{"id":{"mlb":"473646","espn":"31767","lahman":"zeidjo01","yahoo":"9475"},"bio":{"name":"Josh Zeid","dob":"19870324"}},
+{"id":{"mlb":"473646","rotoworld":"6791","espn":"31767","lahman":"zeidjo01","yahoo":"9475"},"bio":{"name":"Josh Zeid","dob":"19870324"}},
 {"id":{"espn":"31851","mlb":"500887","rotoworld":"7555","lahman":"pintojo01","yahoo":"9505"},"bio":{"name":"Josmil Pinto","dob":"19890331"}},
 {"id":{"espn":"6272","rotoworld":"444","mlb":"434663","yahoo":"7541"},"bio":{"name":"Juan Carlos Oviedo","dob":"19820315"}},
 {"id":{"mlb":"518542","espn":"31443","lahman":"centeju01","rotoworld":"7563","yahoo":"9529"},"bio":{"name":"Juan Centeno","dob":"19891116"}},
@@ -1559,7 +1559,7 @@
 {"id":{"mlb":"595025","espn":"31199","lahman":"walteza01","rotoworld":"6793","yahoo":"9525"},"bio":{"name":"Zach Walters","dob":"19890905"}},
 {"id":{"espn":"30466","bbref":"cozarza01","lahman":"cozarza01","rotoworld":"5625","mlb":"446359","yahoo":"8628"},"bio":{"name":"Zack Cozart","dob":"19850812"}},
 {"id":{"espn":"5883","bbref":"greinza01","lahman":"greinza01","rotoworld":"3796","mlb":"425844","yahoo":"7257"},"bio":{"name":"Zack Greinke","dob":"19831021"}},
-{"id":{"espn":"31267","mlb":"554430","rotoworld":"5784","yahoo":"9124"},"bio":{"name":"Zack Wheeler","dob":"19900530"}},
+{"id":{"espn":"31267","mlb":"554430","lahman":"wheelza01","rotoworld":"5784","yahoo":"9124"},"bio":{"name":"Zack Wheeler","dob":"19900530"}},
 {"id":{"espn":"31633","mlb":"543809","lahman":"spruize01"},"bio":{"name":"Zeke Spruill","dob":"19890911"}},
 {"id":{"espn":"31469","mlb":"501660","rotoworld":"6859","lahman":"almonzo01","yahoo":"9436"},"bio":{"name":"Zoilo Almonte","dob":"19890610"}}
 ,{"id":{"mlb":"519306"},"bio":{"dob":"19890424","name":"Steven Souza"}}
@@ -1926,5 +1926,7 @@
     ,{"id":{"mlb":"650391"},"bio":{"dob":"19961127","name":"Eloy Jimenez"}}
     ,{"id":{"mlb":"650402"},"bio":{"dob":"19961213","name":"Gleyber Torres"}}
     ,{"id":{"mlb":"650520"},"bio":{"dob":"19960911","name":"Micker Adolfo"}}
+    ,{"id":{"rotoworld":"126","mlb":"430588"},"bio":{"dob":"19820715","name":"Fernando Nieve"}}
+    ,{"id":{"rotoworld":"3525","mlb":"408210"},"bio":{"dob":"19780122","name":"Chone Figgins"}}
     ]
 

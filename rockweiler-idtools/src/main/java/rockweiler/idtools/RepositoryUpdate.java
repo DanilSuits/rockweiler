@@ -5,6 +5,7 @@
  */
 package rockweiler.idtools;
 
+import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -17,10 +18,11 @@ import rockweiler.player.io.KeyNotFoundException;
 import rockweiler.player.io.KeyNotUpdatedException;
 import rockweiler.player.io.PlayerStore;
 import rockweiler.player.jackson.Schema;
+import rockweiler.player.jackson.SimpleArchive;
 import rockweiler.repository.JacksonPlayerRepository;
 import rockweiler.repository.PlayerRepository;
 
-import java.io.File;
+import java.io.*;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
@@ -40,26 +42,27 @@ public class RepositoryUpdate {
         }
     };
 
-    Map<String, Map<String,Player>> index = Maps.newHashMap();
+    Map<String, Map<String, Schema.Player>> index = Maps.newHashMap();
 
-    List<Player> conflicts = Lists.newArrayList();
-    List<Player> missing = Lists.newArrayList();
+    List<Schema.Player> conflicts = Lists.newArrayList();
+    List<Schema.Player> missing = Lists.newArrayList();
 
-    public void merge(Iterable<? extends Player> updateDatabase) {
-        for (Player rhs : updateDatabase) {
+    public void merge(Iterable<Schema.Player> updateDatabase) {
+        for (Schema.Player rhs : updateDatabase) {
             boolean matched = false;
             boolean conflict = false;
 
-            for(String key : rhs.getIds().all()) {
-                String id = rhs.getIds().get(key);
+            for (Map.Entry<String, String> entry : rhs.id.entrySet()) {
+                String key = entry.getKey();
+                String id = entry.getValue();
 
-                Map<String,Player> repo = index.get(key);
+                Map<String, Schema.Player> repo = index.get(key);
                 if (null != repo) {
-                    Player original = repo.get(id);
+                    Schema.Player original = repo.get(id);
                     if (null != original) {
                         matched = true;
 
-                        if (! match(rhs,original)) {
+                        if (!match(rhs, original)) {
                             conflict = true;
                         }
                     }
@@ -69,37 +72,40 @@ public class RepositoryUpdate {
             if (conflict) {
                 conflicts.add(rhs);
             } else if (matched) {
-               // No-Op
+                // No-Op
             } else {
                 missing.add(rhs);
             }
         }
     }
 
-    boolean match(Player rhs, Player original) {
+    boolean match(Schema.Player rhs, Schema.Player original) {
         return bioReader.getId(rhs).equals(bioReader.getId(original));
     }
 
-    public static void main(String[] args) throws KeyNotUpdatedException, KeyNotFoundException {
+    static final Predicate<Schema.Player> HAS_BIO = new Predicate<Schema.Player>() {
+        public boolean apply(rockweiler.player.jackson.Schema.Player player) {
+            return null != player.bio;
+        }
+    };
+
+    public static void main(String[] args) throws Exception {
 
         RepositoryUpdate theMerge = new RepositoryUpdate();
 
         PlayerRepository<Schema.Player> repository = JacksonPlayerRepository.create("/master.player.json");
 
-        for(Schema.Player p : repository.getPlayers()) {
-            for (Map.Entry<String,String> id : p.id.entrySet()) {
-                Map<String,Player> repo = theMerge.index.get(id.getKey());
+        for (Schema.Player p : repository.getPlayers()) {
+            for (Map.Entry<String, String> id : p.id.entrySet()) {
+                Map<String, Schema.Player> repo = theMerge.index.get(id.getKey());
                 if (null == repo) {
                     repo = Maps.newHashMap();
-                    theMerge.index.put(id.getKey(),repo);
+                    theMerge.index.put(id.getKey(), repo);
                 }
 
-                repo.put(id.getValue(),Schema.TRANSFORM.apply(p));
+                repo.put(id.getValue(), p);
             }
         }
-
-        final FileBackedStore playerStore = new FileBackedStore(new File(""));
-        PlayerStore.Reader in = playerStore.createReader();
 
         String updates[] =
                 {
@@ -112,15 +118,43 @@ public class RepositoryUpdate {
 
 
         for (String updateDatabase : updates) {
-            Iterable<? extends Player> update = in.readPlayers(updateDatabase);
-            update = Iterables.filter(update, Biography.HAS_BIO_FILTER);
+            File source = new File(updateDatabase);
+            FileInputStream in = new FileInputStream(source);
+
+            Iterable<Schema.Player> update = JacksonPlayerRepository.create(in).getPlayers();
+            update = Iterables.filter(update, HAS_BIO);
             theMerge.merge(update);
         }
 
 
-        PlayerStore.Writer out = playerStore.createWriter(SORT);
-        out.writePlayers("update.missing.json", theMerge.missing);
-        out.writePlayers("update.conflict.json", theMerge.conflicts);
+        SimpleArchive<Schema.Player> archive = new SimpleArchive<Schema.Player>();
+        ReportGenerator reportGenerator = new ReportGenerator(archive);
 
+        reportGenerator.write("update.missing.json", theMerge.missing);
+        reportGenerator.write("update.conflict.json", theMerge.conflicts);
+
+    }
+
+    static class ReportGenerator {
+        private final SimpleArchive<Schema.Player> archive;
+
+        ReportGenerator(SimpleArchive<Schema.Player> archive) {
+            this.archive = archive;
+        }
+
+        public void write(String reportName, List<? extends Schema.Player> players) throws IOException {
+            FileOutputStream report = create(reportName);
+            try {
+                archive.archive(players, report);
+            } finally {
+                report.flush();
+                report.close();
+            }
+        }
+
+        FileOutputStream create(String reportName) throws FileNotFoundException {
+            File target = new File(reportName);
+            return new FileOutputStream(target);
+        }
     }
 }

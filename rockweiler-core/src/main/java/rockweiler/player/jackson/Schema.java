@@ -9,13 +9,14 @@ import com.google.common.base.Function;
 import rockweiler.player.IdConflictException;
 
 import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * @author Danil Suits (danil@vast.com)
  */
 public class Schema {
     public static class Player {
-        public Map<String, String> id;
+        public TreeMap<String, String> id;
         public Bio bio;
     }
 

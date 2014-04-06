@@ -23,14 +23,14 @@ import java.util.Map;
  * To change this template use File | Settings | File Templates.
  */
 public class LocalListRepository implements ListRepository {
-    static class Builder {
+    public static class Builder {
         private final IdStore store;
 
-        Builder(IdStore store) {
+        public Builder(IdStore store) {
             this.store = store;
         }
 
-        List<Schema.Player> createList(String path) throws IOException {
+        public List<Schema.Player> createList(String path) throws IOException {
             return createList(new File(path));
         }
 
@@ -41,6 +41,9 @@ public class LocalListRepository implements ListRepository {
 
             JacksonPlayerRepository repo = JacksonPlayerRepository.create(is);
             for (Schema.Player p : repo.getPlayers()) {
+                if (null == p) {
+                    System.err.println(p);
+                }
                 Schema.Player known = store.match(p);
                 if (IdStore.PLAYER_NOT_FOUND != known) {
                     normalizedList.add(known);

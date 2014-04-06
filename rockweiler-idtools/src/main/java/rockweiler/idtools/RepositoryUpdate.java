@@ -135,10 +135,10 @@ public class RepositoryUpdate {
 
     }
 
-    static class ReportGenerator {
+    public static class ReportGenerator {
         private final SimpleArchive<Schema.Player> archive;
 
-        ReportGenerator(SimpleArchive<Schema.Player> archive) {
+        public ReportGenerator(SimpleArchive<Schema.Player> archive) {
             this.archive = archive;
         }
 

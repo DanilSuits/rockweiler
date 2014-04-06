@@ -32,26 +32,11 @@ import java.io.File;
  */
 public class QuickDraft {
 
-    static final Option CLI_CONFIG = OptionBuilder
-            .isRequired(false)
-            .withDescription("typesafe.conf")
-            .hasArg().withArgName("path-to-config")
-            .create("config");
-
-
-    static CommandLine parse(String[] args) throws ParseException {
-        Options options = new Options();
-        options.addOption(CLI_CONFIG);
-
-        return new GnuParser().parse(options, args);
-    }
-
     public static void main(String[] args) throws Exception {
 
-        Config config = ConfigFactory.load("quickdraft");
-        Startup startup = new Startup(config);
+        Startup startup = Startup.create("quickdraft");
 
-        config = startup.readConfiguration(args);
+        Config config = startup.readConfiguration(args);
 
 
         File replayLog = new File(config.getString("quickdraft.replay.log"));

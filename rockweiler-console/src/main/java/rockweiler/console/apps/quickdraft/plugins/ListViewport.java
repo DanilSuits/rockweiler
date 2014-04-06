@@ -1,5 +1,6 @@
 package rockweiler.console.apps.quickdraft.plugins;
 
+import com.google.common.collect.Lists;
 import rockweiler.console.apps.quickdraft.Events;
 import rockweiler.console.apps.quickdraft.ListRepository;
 import rockweiler.console.apps.quickdraft.Requests;
@@ -18,6 +19,7 @@ import java.util.List;
  */
 public class ListViewport implements MessageListener<Application.Event> {
     private final MessageListener<String> display;
+    private final List<Schema.Player> hiddenPlayers = Lists.newArrayList();
     private final ListRepository listRepository;
 
     private String crntList = "";
@@ -32,6 +34,14 @@ public class ListViewport implements MessageListener<Application.Event> {
         if (Events.FilterResult.class.isInstance(message)) {
             onMessage(Events.FilterResult.class.cast(message));
         }
+
+        if (Events.HidePlayer.class.isInstance(message)) {
+            onMessage(Events.HidePlayer.class.cast(message));
+        }
+    }
+
+    public void onMessage(Events.HidePlayer hidePlayer) {
+        hiddenPlayers.add(hidePlayer.player);
     }
 
     public void onMessage(Events.FilterResult filter) {
@@ -45,6 +55,10 @@ public class ListViewport implements MessageListener<Application.Event> {
 
         for (Schema.Player p : originalList) {
             listPosition++;
+
+            if (hiddenPlayers.contains(p)) {
+                continue;
+            }
 
             if (availablePlayers.contains(p)) {
                 display.onMessage("Available [" + listPosition + "] " + format(p));

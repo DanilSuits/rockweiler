@@ -13,7 +13,7 @@ import java.util.Map;
  * To change this template use File | Settings | File Templates.
  */
 public class IdStore {
-    static final Schema.Player PLAYER_NOT_FOUND = null;
+    public static final Schema.Player PLAYER_NOT_FOUND = null;
 
     public static IdStore create(Iterable<Schema.Player> players) {
         Map<String,Map<String,Schema.Player>> store = Maps.newHashMap();
@@ -45,6 +45,10 @@ public class IdStore {
     }
 
     public Schema.Player match(Schema.Player source) {
+        if (null == source.id) {
+            return PLAYER_NOT_FOUND;
+        }
+
         for ( Map.Entry<String, String> id : source.id.entrySet()) {
             Schema.Player p = find(id.getKey(), id.getValue());
             if (null != p) {

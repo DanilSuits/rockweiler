@@ -28,7 +28,13 @@
             <dependency>
                 <groupId>rockweiler</groupId>
                 <artifactId>rockweiler-database</artifactId>
-                <version>0.1.0-SNAPSHOT</version>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>rockweiler</groupId>
+                <artifactId>rockweiler-idtools</artifactId>
+                <version>${project.version}</version>
             </dependency>
 
             <dependency>

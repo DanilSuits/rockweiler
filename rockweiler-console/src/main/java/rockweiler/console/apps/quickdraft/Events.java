@@ -51,6 +51,14 @@ public class Events {
         }
     }
 
+    public static final class HidePlayer implements Application.Event {
+        public final Schema.Player player;
+
+        HidePlayer(Schema.Player player) {
+            this.player = player;
+        }
+    }
+
     public static final class FilterResult implements Application.Event {
         public final List<Schema.Player> players;
 

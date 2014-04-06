@@ -76,6 +76,26 @@ public class QuickDraftApp implements MessageListener<Application.Request> {
             playerRepository.add(player);
         }
 
+        if (Requests.HidePlayer.class.isInstance(message)) {
+            final Requests.HidePlayer hide = Requests.HidePlayer.class.cast(message);
+
+            MatchPlayer match = new MatchPlayer(hide.query);
+
+            Iterable<Schema.Player> resultSet = Iterables.filter(playerRepository.getPlayers(), match);
+            List<Schema.Player> players = Lists.newArrayList(resultSet);
+
+            if (players.isEmpty()) {
+                dispatch(new Events.NoMatch(hide.query));
+            } else {
+                if (1 == players.size()) {
+                    Schema.Player player = players.get(0);
+                    dispatch(new Events.HidePlayer(player));
+                } else {
+                    dispatch(new Events.AmbiguousPlayer(hide.query,players));
+                }
+            }
+        }
+
         if (Requests.Filter.class.isInstance(message)) {
             final Requests.Filter filter = Requests.Filter.class.cast(message);
 
@@ -136,6 +156,28 @@ public class QuickDraftApp implements MessageListener<Application.Request> {
 
     private void dispatch(Application.Event event) {
         eventListener.onMessage(event);
+    }
+
+    static class MatchPlayer implements Predicate<Schema.Player> {
+        final String query;
+
+        MatchPlayer(String query) {
+            this.query = query;
+        }
+
+        public boolean apply(rockweiler.player.jackson.Schema.Player input) {
+            if (input.bio.name.contains(this.query)) {
+                return true;
+            }
+
+            for(Map.Entry<String,String> id : input.id.entrySet()) {
+                if (id.getValue().contains(this.query)) {
+                    return true;
+                }
+            }
+
+            return false;
+        }
     }
 
 }

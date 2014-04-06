@@ -100,6 +100,10 @@ public class QuickDraftInterpreter {
                 listViewport.onMessage(message);
             }
 
+            if (Events.HidePlayer.class.isInstance(message)) {
+                listViewport.onMessage(message);
+            }
+
             if (Events.DraftUpdate.class.isInstance(message) ) {
                 Events.DraftUpdate<Schema.Player> update = Events.DraftUpdate.class.cast(message);
                 archive.save(update.slots);
@@ -131,6 +135,7 @@ public class QuickDraftInterpreter {
 
     static final Pattern PARSE_LIST_SHOW = Pattern.compile("list (.*)");
     static final Pattern PARSE_LIST_SIZE = Pattern.compile("list.size ([0-9]+)");
+    static final Pattern PARSE_HIDE_REQUEST = Pattern.compile("list.hide (.*)");
 
     static class UserInterpreter implements MessageListener<String> {
         private final MessageListener<Application.Request> requestMessageListener;
@@ -173,6 +178,11 @@ public class QuickDraftInterpreter {
             if(listShow.find()) {
                 crnt = listViewport.show(listShow.group(1));
 
+            }
+
+            Matcher listHide = PARSE_HIDE_REQUEST.matcher(message);
+            if (listHide.find()) {
+                crnt = new Requests.HidePlayer(listHide.group(1));
             }
 
             Matcher listSize = PARSE_LIST_SIZE.matcher(message);

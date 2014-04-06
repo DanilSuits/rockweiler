@@ -41,6 +41,14 @@ public class Requests {
         }
     }
 
+    public static class HidePlayer implements Application.Request {
+        public final String query;
+
+        public HidePlayer(String query) {
+            this.query = query;
+        }
+    }
+
     public static class Filter implements Application.Request {
         public final List<Schema.Player> players;
 

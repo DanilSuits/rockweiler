@@ -5,6 +5,7 @@ import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.google.common.collect.Ordering;
 import rockweiler.player.*;
 import rockweiler.player.database.DatabaseFactory;
 import rockweiler.player.io.FileBackedStore;
@@ -18,6 +19,8 @@ import rockweiler.repository.PlayerRepository;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -89,8 +92,17 @@ public class RepositoryMerge {
         }
     };
 
+    Ordering<Schema.Player> SORT = new Ordering<Schema.Player>() {
+        @Override
+        public int compare(rockweiler.player.jackson.Schema.Player left, rockweiler.player.jackson.Schema.Player right) {
+            return String.CASE_INSENSITIVE_ORDER.compare(left.bio.name, right.bio.name);
+        }
+    };
+
     public List<? extends Schema.Player> collectMasterDatabase() {
-        return Lists.newArrayList(master.values());
+        List<Schema.Player> mergedPlayers = Lists.newArrayList(master.values());
+        Collections.sort(mergedPlayers, SORT);
+        return mergedPlayers;
     }
 
     public List<? extends Schema.Player> collectInsertDatabase() {

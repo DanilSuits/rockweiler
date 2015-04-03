@@ -24,7 +24,7 @@ class CreateDraft
       t = { :id => id(:teams), :owner => owner, :players => []}
       @keepers[owner].each do |p|
         player = { :id => id(:players), :name => p}
-        t[:players] << p
+        t[:players] << player
       end
 
       draft[:league][:teams] << t

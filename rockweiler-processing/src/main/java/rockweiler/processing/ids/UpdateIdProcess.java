@@ -1,6 +1,6 @@
 /**
  * Copyright Vast 2015. All Rights Reserved.
- *
+ * <p/>
  * http://www.vast.com
  */
 package rockweiler.processing.ids;
@@ -10,7 +10,6 @@ import com.google.common.base.Functions;
 import com.google.common.base.Predicate;
 import com.google.common.base.Supplier;
 import com.google.common.base.Suppliers;
-import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.sun.jersey.api.uri.UriTemplate;
 import rockweiler.processing.api.Bio;
@@ -74,8 +73,8 @@ public class UpdateIdProcess {
             this.valuePlayer = player;
             this.keyPlayerRemotes =
                     null == player
-                    ? null
-                    : valuePlayer + "/remotes";
+                            ? null
+                            : valuePlayer + "/remotes";
         }
     }
 
@@ -204,7 +203,7 @@ public class UpdateIdProcess {
 
     static final Function<Bio, String> CONVERT_BIO_TO_PROVISIONAL_CHANGE = new BioToUriFunction(bio2ProvisionalTemplate);
 
-    static final Function<String,String> ENCODER = new Function<String, String>() {
+    static final Function<String, String> ENCODER = new Function<String, String>() {
         public String apply(String input) {
             try {
                 input = URLEncoder.encode(input, "UTF-8");
@@ -216,7 +215,7 @@ public class UpdateIdProcess {
         }
     };
 
-    static class BioToUriFunction implements Function<Bio,String> {
+    static class BioToUriFunction implements Function<Bio, String> {
         private final UriTemplate conversionTemplate;
 
         BioToUriFunction(UriTemplate conversionTemplate) {
@@ -228,6 +227,7 @@ public class UpdateIdProcess {
             return conversionTemplate.createURI(input.dob, ENCODER.apply(input.name));
         }
     }
+
     static final Function<Instance, Bio> GET_UPDATE_BIO = new Function<Instance, Bio>() {
         public Bio apply(Instance instance) {
             return instance.updateBio;
@@ -295,11 +295,11 @@ public class UpdateIdProcess {
         public Trigger apply(Instance input) {
             Collection<String> ids = locateIdsForBio.apply(input);
 
-            if ( null == ids || ids.isEmpty()) {
+            if (null == ids || ids.isEmpty()) {
                 return Trigger.VERIFIED_PLAYER_MISSING;
             }
 
-            if ( ids.size() > 1) {
+            if (ids.size() > 1) {
                 return Trigger.VERIFIED_PLAYER_AMBIGUOUS;
             }
 
@@ -446,18 +446,34 @@ public class UpdateIdProcess {
 
     static class V1Builder {
         private final UpdateRepository repository;
+        final Function<Instance, UpdateRepository> getCurrentUpdates = new Function<Instance, UpdateRepository>() {
+            public UpdateRepository apply(Instance input) {
+                if (null == input.updates) {
+                    input.updates = UpdateRepositories.createClientRepository(repository);
+
+                }
+                return input.updates;
+            }
+        };
+
+        Supplier<String> playerIdFactory = Mocks.createPlayerIdFactory();
 
         V1Builder(UpdateRepository repository) {
             this.repository = repository;
         }
 
+        V1Builder idsStartFrom(long baseId) {
+            playerIdFactory = Mocks.createPlayerIdFactory(baseId);
+            return this;
+        }
+
 
         private Function<Instance, Collection<String>> lookupVerifiedPlayers(Function<Instance, String> lookupRef) {
-            return Functions.compose( new Function<String, Collection<String>> () {
+            return Functions.compose(new Function<String, Collection<String>>() {
                 public Collection<String> apply(String input) {
                     return repository.idStore().get(input);
                 }
-            } , lookupRef ) ;
+            }, lookupRef);
         }
 
         private Function<Instance, String> getVerifiedPlayerReader(Function<Instance, String> lookupRef) {
@@ -467,7 +483,6 @@ public class UpdateIdProcess {
                 }
             }, lookupRef);
         }
-
 
 
         public Supplier<TaskRunner<Instance>> build() {
@@ -491,25 +506,30 @@ public class UpdateIdProcess {
 
         }
 
-        void applyChanges(StateMachineRunner.Builder<State,Trigger,Instance> builder) {
+        void applyChanges(StateMachineRunner.Builder<State, Trigger, Instance> builder) {
             builder.configure(State.UPDATE_STORES, new UpdateStores(repository))
                     .permit(Trigger.STORES_UPDATED, State.END);
         }
 
         void promoteProvisional(StateMachineRunner.Builder<State, Trigger, Instance> builder) {
-            builder.configure(State.PROMOTE_PROVISIONAL_CHANGE, new PromoteProvisionalChange(Mocks.PLAYER_ID_FACTORY, Mocks.GET_CURRENT_UPDATES))
+            builder.configure(State.PROMOTE_PROVISIONAL_CHANGE, new PromoteProvisionalChange(playerIdFactory, getCurrentUpdates))
                     .permit(Trigger.UPDATE_PREPARED, State.ACCEPT_UPDATE);
         }
 
         void findProvisionalUpdate(StateMachineRunner.Builder<State, Trigger, Instance> builder) {
             Function<Instance, String> locateProvisionalReference = Functions.compose(CONVERT_BIO_TO_PROVISIONAL_CHANGE, GET_UPDATE_BIO);
-            Function<Instance, ProvisionalBio> lookupProvisionalChange = Mocks.LOOKUP_PROVISIONAL_CHANGE;
+            Function<Instance, ProvisionalBio> lookupProvisionalChange = new Function<Instance, ProvisionalBio>() {
+                public ProvisionalBio apply(Instance input) {
+                    UpdateRepository updates = getCurrentUpdates.apply(input);
+                    return updates.provisionalStore().get(input.provisionalLocation);
+                }
+            };
             builder.configure(State.FIND_PROVISIONAL_BIO, new FindProvisionalUpdate(locateProvisionalReference, lookupProvisionalChange))
-                .permit(Trigger.PROVISIONAL_CHANGE_FOUND, State.PROMOTE_PROVISIONAL_CHANGE)
-                .permit(Trigger.PROVISIONAL_CHANGE_MISSING, State.ADD_PROVISIONAL_CHANGE)
-                .permit(Trigger.PROVISIONAL_CHANGE_WAITING, Mocks.IGNORE_REDUNDANT_UPDATE);
+                    .permit(Trigger.PROVISIONAL_CHANGE_FOUND, State.PROMOTE_PROVISIONAL_CHANGE)
+                    .permit(Trigger.PROVISIONAL_CHANGE_MISSING, State.ADD_PROVISIONAL_CHANGE)
+                    .permit(Trigger.PROVISIONAL_CHANGE_WAITING, Mocks.IGNORE_REDUNDANT_UPDATE);
 
-            builder.configure(State.ADD_PROVISIONAL_CHANGE, new AddProvisionalChange(CREATE_PROVISIONAL_CHANGE, Mocks.GET_CURRENT_UPDATES))
+            builder.configure(State.ADD_PROVISIONAL_CHANGE, new AddProvisionalChange(CREATE_PROVISIONAL_CHANGE, getCurrentUpdates))
                     .permit(Trigger.CHANGES_COMPLETED, State.UPDATE_STORES);
 
         }
@@ -526,7 +546,7 @@ public class UpdateIdProcess {
                     .permit(Trigger.VERIFIED_PLAYER_MISSING, State.FIND_PROVISIONAL_BIO)
                     .permit(Trigger.VERIFIED_PLAYER_AMBIGUOUS, Mocks.IGNORE_AMBIGUOUS_UPDATE);
 
-            builder.configure(State.PREPARE_UPDATE, new PrepareUpdate(lookupVerifiedPlayers(READ_VERIFIED_PLAYER_REMOTES), Mocks.GET_CURRENT_UPDATES))
+            builder.configure(State.PREPARE_UPDATE, new PrepareUpdate(lookupVerifiedPlayers(READ_VERIFIED_PLAYER_REMOTES), getCurrentUpdates))
                     .permit(Trigger.UPDATE_PREPARED, State.ACCEPT_UPDATE);
 
             builder.configure(State.ACCEPT_UPDATE, new AcceptUpdate())
@@ -558,28 +578,24 @@ public class UpdateIdProcess {
     }
 
     static class Mocks {
-        static final Function<Instance, ProvisionalBio> LOOKUP_PROVISIONAL_CHANGE = new Function<Instance, ProvisionalBio>() {
-            public ProvisionalBio apply(Instance input) {
-                UpdateRepository updates = GET_CURRENT_UPDATES.apply(input);
-                return updates.provisionalStore().get(input.provisionalLocation);
-            }
-        };
+        static Supplier<String> createPlayerIdFactory() {
+            final long startingFrom = 100000L;
 
-        static Supplier<String> PLAYER_ID_FACTORY = new Supplier<String>() {
-            long currentId = 100000L;
-            public String get() {
-                return String.format("%08d", currentId++);
-            }
-        };
+            return createPlayerIdFactory(startingFrom);
+        }
 
+        private static Supplier<String> createPlayerIdFactory(final long startingFrom) {
+            return
 
-        static Function<Instance, UpdateRepository> GET_CURRENT_UPDATES = new Function<Instance, UpdateRepository>() {
-            private final UpdateRepository updates = new MapBackedRepository();
+                    new Supplier<String>() {
+                        long currentId = startingFrom;
 
-            public UpdateRepository apply(Instance input) {
-                return updates;
-            }
-        };
+                        public String get() {
+                            return String.format("%08d", currentId++);
+                        }
+                    };
+        }
+
 
         static final Predicate<State> TRIVIAL_END_CHECK = new Predicate<State>() {
             public boolean apply(rockweiler.processing.ids.UpdateIdProcess.State input) {

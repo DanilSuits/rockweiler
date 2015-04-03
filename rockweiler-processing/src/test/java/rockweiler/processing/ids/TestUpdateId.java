@@ -18,6 +18,7 @@ import rockweiler.processing.api.Bio;
 import rockweiler.processing.api.Id;
 import rockweiler.processing.api.ProvisionalBio;
 import rockweiler.processing.core.TaskRunner;
+import rockweiler.processing.store.Store;
 import rockweiler.processing.store.Stores;
 
 import java.io.File;
@@ -36,10 +37,13 @@ import java.util.TreeMap;
  */
 public class TestUpdateId {
 
+
     @Test
     public void testLegacyIdMatching() {
         UpdateRepository repository = new MapBackedRepository();
-        final Supplier<TaskRunner<UpdateIdProcess.Instance>> taskRunnerFactory = UpdateIdProcess.V1Builder.builder(repository).build();
+        final Supplier<TaskRunner<UpdateIdProcess.Instance>> taskRunnerFactory = UpdateIdProcess.V1Builder.builder(repository)
+                .idsStartFrom(999L)
+                .build();
         UpdateIdProcess process = new UpdateIdProcess(taskRunnerFactory);
         Bio testBio = new Bio("Aaron Northcraft", "19900528");
 
@@ -53,7 +57,8 @@ public class TestUpdateId {
 
         process.onUpdate(unknown, testBio);
 
-        Assert.assertEquals(repository.idStore().get("/rockweiler/players/00100000/remotes").size(), 3);
+        Collection<String> remotes = repository.idStore().get("/rockweiler/players/00000999/remotes");
+        Assert.assertEquals(remotes.size(), 3);
     }
 
     @Test

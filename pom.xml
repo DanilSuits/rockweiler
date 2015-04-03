@@ -16,6 +16,7 @@
         <module>rockweiler-idtools</module>
         <module>rockweiler-sample</module>
         <module>rockweiler-console</module>
+        <module>rockweiler-processing</module>
     </modules>
 
     <dependencyManagement>
@@ -50,7 +51,7 @@
             <dependency>
                 <groupId>com.google.guava</groupId>
                 <artifactId>guava</artifactId>
-                <version>14.0.1</version>
+                <version>18.0</version>
             </dependency>
 
             <dependency>
@@ -59,7 +60,7 @@
                 <version>6.8</version>
                 <scope>test</scope>
             </dependency>
-
         </dependencies>
+
     </dependencyManagement>
 </project>

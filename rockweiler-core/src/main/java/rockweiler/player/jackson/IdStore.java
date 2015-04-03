@@ -12,7 +12,7 @@ import java.util.Map;
  * To change this template use File | Settings | File Templates.
  */
 public class IdStore {
-    static final Schema.Player PLAYER_NOT_FOUND = null;
+    public static final Schema.Player PLAYER_NOT_FOUND = null;
 
     public static IdStore create(Iterable<Schema.Player> players) {
         Map<String,Map<String,Schema.Player>> store = Maps.newHashMap();

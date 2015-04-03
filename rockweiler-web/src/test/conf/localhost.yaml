@@ -1,0 +1,9 @@
+requestQueue:
+  size: 8192
+  remoteClients:
+     -  name: rotoworld
+        uri: http://www.rotoworld.com/
+        waitTime: 1
+     -  name: bbref
+        uri: http://www.baseball-reference.com/
+        waitTime: 1

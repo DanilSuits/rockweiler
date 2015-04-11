@@ -74,4 +74,17 @@ public class Events {
             this.players = players;
         }
     }
+
+    public static final class StatusUpdate implements Application.Event {
+        public final List<PlayerStatus> update;
+
+        StatusUpdate(List<PlayerStatus> update) {
+            this.update = update;
+        }
+    }
+
+    public static class PlayerStatus {
+        public boolean available;
+        public Schema.Player player;
+    }
 }

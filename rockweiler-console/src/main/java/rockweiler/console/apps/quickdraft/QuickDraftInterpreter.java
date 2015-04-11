@@ -101,6 +101,21 @@ public class QuickDraftInterpreter {
                 }
             }
 
+            if (Events.StatusUpdate.class.isInstance(message)) {
+                Events.StatusUpdate update = Events.StatusUpdate.class.cast(message);
+                for(Events.PlayerStatus status : update.update) {
+                    StringBuilder builder = new StringBuilder();
+                    if (status.available) {
+                        builder.append("Available: ");
+                    } else {
+                        builder.append("Taken    : ");
+                    }
+
+                    builder.append(describePlayer(status.player));
+                    display.onMessage(builder.toString());
+                }
+            }
+
             if (Events.FilterResult.class.isInstance(message)) {
                 listViewport.onMessage(message);
             }

@@ -119,9 +119,18 @@ public class QuickDraftApp implements MessageListener<Application.Request> {
             final Requests.View view = Requests.View.class.cast(message);
             MatchPlayer match = new MatchPlayer(view.query);
             Iterable<Schema.Player> resultSet = Iterables.filter(playerRepository.getPlayers(), match);
-            List<Schema.Player> players = Lists.newArrayList(resultSet);
 
-            dispatch(new Events.AmbiguousPlayer(view.query, players));
+            List<Events.PlayerStatus> updates = Lists.newArrayList();
+            for(Schema.Player player : resultSet) {
+                Events.PlayerStatus update = new Events.PlayerStatus();
+                update.available = ! selectedFilter.apply(player);
+                update.player = player;
+                updates.add(update);
+
+
+            }
+
+            dispatch(new Events.StatusUpdate(updates));
         }
 
         if (Requests.Filter.class.isInstance(message)) {

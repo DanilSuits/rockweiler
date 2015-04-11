@@ -5,7 +5,11 @@
  */
 package rockweiler.processing.ids;
 
+import com.fasterxml.jackson.core.JsonGenerationException;
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.core.PrettyPrinter;
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.core.util.MinimalPrettyPrinter;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.base.Supplier;
@@ -18,14 +22,15 @@ import rockweiler.processing.api.Bio;
 import rockweiler.processing.api.Id;
 import rockweiler.processing.api.ProvisionalBio;
 import rockweiler.processing.core.TaskRunner;
-import rockweiler.processing.store.Store;
 import rockweiler.processing.store.Stores;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.nio.charset.Charset;
 import java.util.Collection;
 import java.util.List;
@@ -77,7 +82,7 @@ public class TestUpdateId {
 
         is.close();
 
-        String database[] =
+        String databases[] =
                 {"corrections.players.json"
                         , "espn.players.json"
                         , "lahman.players.json"
@@ -88,7 +93,7 @@ public class TestUpdateId {
                         , "yahoo.players.json"};
 
         File root = new File("/Users/Danil/Dropbox/OOOL/data/2015/database");
-        for (String db : database) {
+        for (String db : databases) {
             is = new FileInputStream(new File(root, db));
             InputStreamReader stream = new InputStreamReader(is, Charset.forName("UTF-8"));
 
@@ -101,6 +106,12 @@ public class TestUpdateId {
             }
         }
 
+        List<LegacyPlayer> playersOut = Lists.newArrayList();
+        generateLegacyRepository(repository, playersOut);
+        FileOutputStream out = new FileOutputStream(new File(root, "2015.master.players.json"));
+        archive(playersOut, out);
+        out.close();
+
         // TODO:
         // merge("/rockweiler/bio/dob/19910326/name/Michael+Taylor","/rockweiler/bio/dob/19910326/name/Michael+A.+Taylor");
         // merge("/rockweiler/bio/dob/19860724/name/Suk-Min+Yoon","/rockweiler/bio/dob/19860724/name/Suk-min+Yoon");
@@ -112,9 +123,6 @@ public class TestUpdateId {
         // merge("/rockweiler/bio/dob/19920816/name/Delino+DeShields+Jr.","/rockweiler/bio/dob/19920816/name/Delino+DeShields");
         // merge("/rockweiler/bio/dob/19921019/name/Samuel+Tuivailala","/rockweiler/bio/dob/19921019/name/Sam+Tuivailala");
         // merge("/rockweiler/bio/dob/19920131/name/Alexander+Claudio","/rockweiler/bio/dob/19920131/name/Alex+Claudio");
-
-        final Supplier<TaskRunner<CorrectionProcess.Instance>> correctionTaskFactory = CorrectionProcess.V1Builder.builder(repository).build();
-        CorrectionProcess correction = new CorrectionProcess(correctionTaskFactory);
 
         // correction("/rockweiler/bio/dob/19870709/name/Rusney+Castillo","/rockweiler/bio/dob/19870907/name/Rusney+Castillo")
         // correction("/rockweiler/bio/dob/19861220/name/Alex+Guerrero",/rockweiler/bio/dob/19861120/name/Alex+Guerrero);
@@ -201,6 +209,54 @@ public class TestUpdateId {
         System.out.println(lostSheep);
     }
 
+    private void generateLegacyRepository(UpdateRepository source, Collection<LegacyPlayer> legacyRepo) {
+        final Map<String, Collection<String>> knownIds = Maps.newHashMap();
+        source.idStore().writeTo(Stores.newMapBackedStore(knownIds));
+
+        final Map<String, String> references = Maps.newHashMap();
+        source.referenceStore().writeTo(Stores.newMapBackedStore(references));
+
+        final Map<String, Bio> knownBios = Maps.newHashMap();
+        source.bioStore().writeTo(Stores.newMapBackedStore(knownBios));
+
+        UriTemplate playerId = new UriTemplate("/rockweiler/players/{id}/remotes");
+        UriTemplate remoteId = new UriTemplate("/rockweiler/remotes/{source}/{id}");
+        UriTemplate playerBio = new UriTemplate("/rockweiler/players/{id}/bio");
+
+        Map<String, String> idData = Maps.newHashMap();
+        Map<String, String> remoteData = Maps.newHashMap();
+
+        for(Map.Entry<String, Collection<String>> entry : knownIds.entrySet()) {
+            idData.clear();
+            if (playerId.match(entry.getKey(), idData)) {
+                LegacyPlayer player = new LegacyPlayer();
+
+                player.id = Maps.newTreeMap();
+                player.id.put("rockweiler", idData.get("id"));
+
+                for(String remote : entry.getValue() ) {
+                    remoteData.clear();
+                    if (remoteId.match(remote, remoteData)) {
+                        player.id.put(remoteData.get("source"), remoteData.get("id"));
+                    }
+                }
+
+                String bioKey = playerBio.createURI(idData.get("id"));
+                String bioRef = references.get(bioKey);
+                Bio bio = knownBios.get(bioRef);
+                if (null != bio) {
+                    player.bio = new LegacyPlayer.Bio();
+                    player.bio.name = bio.name;
+                    player.bio.dob = bio.dob;
+                }
+
+                legacyRepo.add(player);
+
+            }
+        }
+
+    }
+
     private void readPlayers(List<LegacyPlayer> players, UpdateIdProcess process) {
         for (LegacyPlayer player : players) {
             Bio crntBio = new Bio(player.bio.name, player.bio.dob);
@@ -225,17 +281,23 @@ public class TestUpdateId {
     public static final TypeReference<List<LegacyPlayer>> SCHEMA_PLAYER_REPO = new TypeReference<List<LegacyPlayer>>() {
     };
 
-
-    public static class SearchResult {
-        public String name;
-        public String url;
+    public <T> void archive(List<T> repo, OutputStream out) throws IOException {
+        new ObjectMapper().writer(PRETTY_PRINTER).writeValue(out, repo);
     }
 
-    public static final TypeReference<List<SearchResult>> SCHEMA_SEARCH_RESULTS = new TypeReference<List<SearchResult>>() {
+
+    static final PrettyPrinter PRETTY_PRINTER = new MinimalPrettyPrinter() {
+        @Override
+        public void writeArrayValueSeparator(JsonGenerator jg) throws IOException, JsonGenerationException {
+            super.writeArrayValueSeparator(jg);
+            jg.writeRaw('\n');
+        }
+
+        @Override
+        public void writeEndArray(JsonGenerator jg, int nrOfValues) throws IOException, JsonGenerationException {
+            super.writeEndArray(jg, nrOfValues);
+            jg.writeRaw('\n');
+        }
     };
 
-    static class SearchMapping {
-        public List<ProvisionalBio> triggeredBy = Lists.newArrayList();
-        public SearchResult searchResult;
-    }
 }

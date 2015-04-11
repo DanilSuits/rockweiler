@@ -5,6 +5,7 @@
  */
 package rockweiler.console.apps.rank;
 
+import com.typesafe.config.Config;
 import jline.ConsoleReader;
 import rockweiler.console.core.DumbTerminal;
 import rockweiler.console.core.Main;
@@ -13,21 +14,48 @@ import rockweiler.console.core.lifecycle.RunningState;
 import rockweiler.console.core.modules.Application;
 import rockweiler.console.core.modules.FrontEnd;
 import rockweiler.console.core.modules.Interpreter;
+import rockweiler.console.core.modules.Startup;
 import rockweiler.console.jline.UserInput;
+import rockweiler.player.jackson.Schema;
+import rockweiler.repository.JacksonPlayerRepository;
+import rockweiler.repository.PlayerRepository;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 
 /**
  * @author Danil Suits (danil@vast.com)
  */
 public class Rank {
-    public static void main(String[] args) throws IOException {
-        File replayLog = new File(System.getProperty("java.io.tmpdir"), "rank.replay.log");
+    public static void main(String[] args) throws Exception {
+        Startup startup = Startup.create("quickdraft");
+
+        Config config = startup.readConfiguration(args);
+
+        File replayLog = new File(config.getString("quickdraft.replay.log"));
         Replay replay = Replay.create(replayLog);
 
-        Application.Module appModule = RankApp.Module.create();
-        Interpreter.Module interpreterModule = RankInterpreter.Module.create(replay);
+        final File rankOutput = new File(args[0]);
+        ReportFactory reportFactory = new ReportFactory() {
+            public OutputStream openReport() {
+                try {
+                    return new FileOutputStream(rankOutput);
+                } catch (FileNotFoundException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        };
+
+        FileInputStream masterRepo = new FileInputStream(config.getString("quickdraft.player.database"));
+        PlayerRepository<Schema.Player> repository = JacksonPlayerRepository.create(masterRepo);
+        masterRepo.close();
+
+        Application.Module appModule = RankApp.Module.create(repository);
+        Interpreter.Module interpreterModule = RankInterpreter.Module.create(reportFactory, replay);
 
         // Didn't bother with TrivialFrontEnd here, as this module, rather than an
         // injector, was going to be doing the actual work.

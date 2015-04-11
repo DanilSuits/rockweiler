@@ -21,13 +21,15 @@ public class ListViewport implements MessageListener<Application.Event> {
     private final MessageListener<String> display;
     private final List<Schema.Player> hiddenPlayers = Lists.newArrayList();
     private final ListRepository listRepository;
+    private final LocalWatchRepository watchRepository;
 
     private String crntList = "";
     private int maxItems = 10;
 
-    public ListViewport(MessageListener<String> display, ListRepository listRepository) {
+    public ListViewport(MessageListener<String> display, ListRepository listRepository, LocalWatchRepository watchRepository) {
         this.display = display;
         this.listRepository = listRepository;
+        this.watchRepository = watchRepository;
     }
 
     public void onMessage(Application.Event message) {
@@ -38,10 +40,18 @@ public class ListViewport implements MessageListener<Application.Event> {
         if (Events.HidePlayer.class.isInstance(message)) {
             onMessage(Events.HidePlayer.class.cast(message));
         }
+
+        if (Events.WatchPlayer.class.isInstance(message)) {
+            onMessage(Events.WatchPlayer.class.cast(message));
+        }
     }
 
     public void onMessage(Events.HidePlayer hidePlayer) {
         hiddenPlayers.add(hidePlayer.player);
+    }
+
+    public void onMessage(Events.WatchPlayer watchPlayer) {
+        watchRepository.add(watchPlayer.player);
     }
 
     public void onMessage(Events.FilterResult filter) {

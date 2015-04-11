@@ -25,9 +25,21 @@ import java.util.Map;
 public class LocalListRepository implements ListRepository {
     public static class Builder {
         private final IdStore store;
+        private Shard watch = EMPTY_SHARD;
+        private Config config = null;
 
         public Builder(IdStore store) {
             this.store = store;
+        }
+
+        public Builder withWatchList(List<Schema.Player> watchList) {
+            this.watch = new LeafShard(watchList);
+            return this;
+        }
+
+        public Builder withConfig(Config config) {
+            this.config = config;
+            return this;
         }
 
         public List<Schema.Player> createList(String path) throws IOException {
@@ -53,6 +65,11 @@ public class LocalListRepository implements ListRepository {
         }
 
         Shard build(Config config) throws IOException {
+            withConfig(config);
+            return build();
+        }
+
+        NestedShard createShard(Config config) throws IOException {
             NestedShard root = new NestedShard();
 
             for (Map.Entry<String, ConfigValue> entry : config.root().entrySet()) {
@@ -66,24 +83,40 @@ public class LocalListRepository implements ListRepository {
                 }
 
                 if (ConfigValueType.OBJECT.equals(entry.getValue().valueType())) {
-                    shard = this.build( config.getConfig(key));
+                    shard = this.createShard(config.getConfig(key));
                 }
 
                 root.add(key,shard);
             }
 
             return root;
+
+        }
+
+        Shard build() throws IOException {
+            NestedShard root = createShard(this.config);
+            root.add("watch", watch);
+
+            return root;
         }
 
     }
 
-    public static LocalListRepository create(Config config, IdStore store) throws IOException {
-        Map<String, List<Schema.Player>> repo = Maps.newHashMap();
-        Builder builder = new Builder(store);
-
-        Shard root = builder.build(config);
-
+    public static LocalListRepository create(Builder builder) throws IOException {
+        Shard root = builder.build();
         return new LocalListRepository(root);
+    }
+
+    public static LocalListRepository create(Config config, IdStore store) throws IOException {
+        Builder builder = builder(config, store);
+
+        return create(builder);
+    }
+
+    public static Builder builder(Config config, IdStore store) {
+        Builder builder = new Builder(store);
+        builder.withConfig(config);
+        return builder;
     }
 
     private final Shard rootShard;

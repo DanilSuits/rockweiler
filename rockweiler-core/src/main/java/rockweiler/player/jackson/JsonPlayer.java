@@ -5,12 +5,12 @@
  */
 package rockweiler.player.jackson;
 
-import org.codehaus.jackson.JsonGenerator;
-import org.codehaus.jackson.JsonNode;
-import org.codehaus.jackson.JsonProcessingException;
-import org.codehaus.jackson.map.JsonSerializableWithType;
-import org.codehaus.jackson.map.SerializerProvider;
-import org.codehaus.jackson.map.TypeSerializer;
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.JsonSerializable;
+import com.fasterxml.jackson.databind.SerializerProvider;
+import com.fasterxml.jackson.databind.jsontype.TypeSerializer;
 import rockweiler.player.Player;
 
 import java.io.IOException;
@@ -18,7 +18,7 @@ import java.io.IOException;
 /**
  * @author Danil Suits (danil@vast.com)
  */
-public class JsonPlayer implements Player,JsonSerializableWithType {
+public class JsonPlayer implements Player,JsonSerializable {
     private final JsonNode root;
     private final Player.Ids ids;
     private final Player.Bio bio;

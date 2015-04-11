@@ -5,6 +5,9 @@
  */
 package rockweiler.reports;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
@@ -13,9 +16,6 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Ordering;
 import com.typesafe.config.Config;
 import com.typesafe.config.ConfigValue;
-import org.codehaus.jackson.map.DeserializationConfig;
-import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.type.TypeReference;
 import rockweiler.console.apps.quickdraft.plugins.IdStore;
 import rockweiler.console.apps.quickdraft.plugins.LocalListRepository;
 import rockweiler.console.core.modules.Startup;
@@ -82,7 +82,7 @@ public class OrderingReport {
 
         File keepers = new File(config.getString("orderingreport.keeper"));
         ObjectMapper om = new ObjectMapper();
-        om.configure(DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        om.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
         final TypeReference<List<LahmanReport.KeeperRecord>> KEEPER_RECORD_REPO = new TypeReference<List<LahmanReport.KeeperRecord>>() {
         };

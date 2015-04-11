@@ -5,9 +5,9 @@
  */
 package rockweiler.player.csv;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.google.common.base.Predicate;
-import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.node.ObjectNode;
 import rockweiler.player.Player;
 import rockweiler.player.jackson.JsonPlayer;
 import rockweiler.player.jackson.JsonPlayerFactory;

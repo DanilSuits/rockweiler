@@ -59,6 +59,14 @@ public class Events {
         }
     }
 
+    public static final class WatchPlayer implements Application.Event {
+        public final Schema.Player player;
+
+        public WatchPlayer(Schema.Player player) {
+            this.player = player;
+        }
+    }
+
     public static final class FilterResult implements Application.Event {
         public final List<Schema.Player> players;
 

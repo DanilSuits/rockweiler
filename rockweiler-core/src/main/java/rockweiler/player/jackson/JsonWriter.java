@@ -5,7 +5,7 @@
  */
 package rockweiler.player.jackson;
 
-import org.codehaus.jackson.map.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import rockweiler.player.Player;
 
 import java.io.IOException;
@@ -14,7 +14,8 @@ import java.io.OutputStream;
 /**
  * @author Danil Suits (danil@vast.com)
  */
-public class JsonWriter {
+public class
+        JsonWriter {
     private final OutputStream out;
 
     public JsonWriter(OutputStream out) {

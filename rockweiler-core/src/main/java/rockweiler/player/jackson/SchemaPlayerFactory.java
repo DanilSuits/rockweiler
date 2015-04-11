@@ -5,11 +5,10 @@
  */
 package rockweiler.player.jackson;
 
-import org.codehaus.jackson.map.DeserializationConfig;
-import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.type.TypeReference;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import rockweiler.player.Player;
-import rockweiler.repository.JacksonPlayerRepository;
 
 import java.io.IOException;
 
@@ -19,7 +18,7 @@ import java.io.IOException;
 public class SchemaPlayerFactory {
     public static SchemaPlayerFactory create () {
         ObjectMapper om = new ObjectMapper();
-        om.configure(DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES,false);
+        om.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,false);
 
         return new SchemaPlayerFactory(om);
     }

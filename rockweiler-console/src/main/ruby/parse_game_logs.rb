@@ -119,7 +119,13 @@ class ParseGameLogs
       outs = game[:hints][:totalIP].split(".")
       game[:stats][:outs] = 3 * outs[0].to_i + outs[1].to_i
 
-      game[:score][:type] = game[:hints][:innings].start_with?("GS") ? "S" : "R"
+      game[:score][:type] = "R"
+      ["GS", "CG", "SHO"].each do |h|
+        if game[:hints][:innings].start_with?(h)
+          game[:score][:type] = "S"
+        end
+      end
+
       points = game[:stats][:outs]
 
       points -= 2 * (game[:stats][:H] + game[:stats][:R] + game[:stats][:ER])

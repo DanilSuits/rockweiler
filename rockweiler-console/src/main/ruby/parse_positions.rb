@@ -49,7 +49,6 @@ class ParsePositions
           fielding[pos] << id
         end
       end
-      break
     end
     fielding
   end

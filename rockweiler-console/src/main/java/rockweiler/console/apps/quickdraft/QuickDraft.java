@@ -1,12 +1,12 @@
 package rockweiler.console.apps.quickdraft;
 
+import com.google.common.collect.Lists;
 import com.typesafe.config.Config;
-import com.typesafe.config.ConfigFactory;
 import jline.ConsoleReader;
-import org.apache.commons.cli.*;
 import rockweiler.console.apps.quickdraft.plugins.IdStore;
 import rockweiler.console.apps.quickdraft.plugins.ListViewport;
 import rockweiler.console.apps.quickdraft.plugins.LocalListRepository;
+import rockweiler.console.apps.quickdraft.plugins.LocalWatchRepository;
 import rockweiler.console.apps.rank.Replay;
 import rockweiler.console.core.DumbTerminal;
 import rockweiler.console.core.Main;
@@ -22,6 +22,8 @@ import rockweiler.repository.JacksonPlayerRepository;
 import rockweiler.repository.PlayerRepository;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -43,7 +45,10 @@ public class QuickDraft {
 
         Replay replay = Replay.create(replayLog);
 
-        PlayerRepository<Schema.Player> repository = JacksonPlayerRepository.create("/master.player.json");
+        FileInputStream masterRepo = new FileInputStream(config.getString("quickdraft.player.database"));
+        PlayerRepository<Schema.Player> repository = JacksonPlayerRepository.create(masterRepo);
+        masterRepo.close();
+
         IdStore idStore = IdStore.create(repository.getPlayers());
 
         // A simple command line terminal - read text from the user, which an
@@ -55,8 +60,16 @@ public class QuickDraft {
 
         Application.Module appModule = QuickDraftApp.Module.create(repository);
 
-        ListRepository listRepository = LocalListRepository.create(config.getConfig("quickdraft.listRepository"), idStore);
-        ListViewport listViewport = new ListViewport(display, listRepository);
+        List<Schema.Player> watchList = Lists.newArrayList();
+        LocalWatchRepository watchRepository = new LocalWatchRepository(watchList);
+
+        final LocalListRepository.Builder builder = LocalListRepository.builder(config.getConfig("quickdraft.listRepository"), idStore);
+        builder.withWatchList(watchList);
+
+        ListRepository listRepository = LocalListRepository.create(builder);
+
+
+        ListViewport listViewport = new ListViewport(display, listRepository, watchRepository);
 
         Interpreter.Module interpreterModule = QuickDraftInterpreter.Module.create(replay, listRepository, listViewport);
 

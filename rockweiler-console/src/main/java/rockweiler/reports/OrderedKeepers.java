@@ -5,13 +5,13 @@
  */
 package rockweiler.reports;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Ordering;
 import com.typesafe.config.Config;
-import org.codehaus.jackson.map.DeserializationConfig;
-import org.codehaus.jackson.map.ObjectMapper;
 import rockweiler.console.apps.quickdraft.plugins.IdStore;
 import rockweiler.console.apps.quickdraft.plugins.LocalListRepository;
 import rockweiler.console.core.modules.Startup;
@@ -77,7 +77,7 @@ public class OrderedKeepers {
 
         File keeperSource = new File("/Users/Danil/Dropbox/OOOL/data/2014/draft/2013.keepers.oool.json");
         ObjectMapper om = new ObjectMapper();
-        om.configure(DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES,false);
+        om.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,false);
         List<Schema.Player> players = om.readValue(keeperSource, JacksonPlayerRepository.SCHEMA_PLAYER_REPO);
         List<Schema.Player> ordered = Lists.transform(players,transform);
         ordered = Lists.newArrayList(ordered);

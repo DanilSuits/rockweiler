@@ -3,6 +3,7 @@ package rockweiler.console.apps.quickdraft;
 import rockweiler.console.apps.quickdraft.plugins.ListViewport;
 import rockweiler.console.apps.rank.Archive;
 import rockweiler.console.apps.rank.Replay;
+import rockweiler.console.apps.rank.ReportFactory;
 import rockweiler.console.apps.rank.TempReportFactory;
 import rockweiler.console.core.MessageListener;
 import rockweiler.console.core.SharedMessageListener;
@@ -25,6 +26,10 @@ public class QuickDraftInterpreter {
     public static class Module implements Interpreter.Module {
         public static Module create(Replay replay, ListRepository listRepository, ListViewport listViewport) {
             TempReportFactory reportFactory = new TempReportFactory();
+            return create(reportFactory, replay, listRepository, listViewport);
+        }
+
+        public static Module create(ReportFactory reportFactory, Replay replay, ListRepository listRepository, ListViewport listViewport) {
             Archive archive = new Archive(reportFactory);
 
             return new Module(archive, replay, listRepository, listViewport);
@@ -104,6 +109,10 @@ public class QuickDraftInterpreter {
                 listViewport.onMessage(message);
             }
 
+            if (Events.WatchPlayer.class.isInstance(message)) {
+                listViewport.onMessage(message);
+            }
+
             if (Events.DraftUpdate.class.isInstance(message) ) {
                 Events.DraftUpdate<Schema.Player> update = Events.DraftUpdate.class.cast(message);
                 archive.save(update.slots);
@@ -128,6 +137,8 @@ public class QuickDraftInterpreter {
         }
     }
 
+    static final Pattern PARSE_VIEW_REQUEST = Pattern.compile("^v(iew)? (.*)");
+    static final Pattern PARSE_WATCH_REQUEST = Pattern.compile("^w(atch)? (.*)");
     static final Pattern PARSE_KEEP_REQUEST = Pattern.compile("^k(eep)? (.*)");
     static final Pattern PARSE_PICK_REQUEST = Pattern.compile("^p(ick)? (.*)");
     static final Pattern PARSE_DRAFT_REQUEST = Pattern.compile("draft (.*)");
@@ -152,6 +163,16 @@ public class QuickDraftInterpreter {
 
             if ("quit".equals(message)) {
                 crnt = Requests.QUIT;
+            }
+
+            Matcher view = PARSE_VIEW_REQUEST.matcher(message);
+            if (view.find()) {
+                crnt = new Requests.View(view.group(2));
+            }
+
+            Matcher watch = PARSE_WATCH_REQUEST.matcher(message);
+            if (watch.find()) {
+                crnt = new Requests.Watch(watch.group(2));
             }
 
             Matcher pick = PARSE_PICK_REQUEST.matcher(message);

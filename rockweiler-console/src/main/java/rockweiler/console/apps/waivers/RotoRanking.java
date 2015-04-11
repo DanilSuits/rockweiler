@@ -5,17 +5,15 @@
  */
 package rockweiler.console.apps.waivers;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
-import org.codehaus.jackson.JsonNode;
-import org.codehaus.jackson.map.ObjectMapper;
 import rockweiler.console.core.MessageListener;
 import rockweiler.player.jackson.Schema;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Iterator;
@@ -31,15 +29,15 @@ public class RotoRanking {
         Schema.Player player = new Schema.Player();
         player.id = Maps.newTreeMap();
         JsonNode id = root.get("id");
-        Iterator<String> keys = id.getFieldNames();
+        Iterator<String> keys = id.fieldNames();
         while (keys.hasNext()) {
             String key = keys.next();
-            player.id.put(key, id.get(key).getTextValue());
+            player.id.put(key, id.get(key).asText());
         }
 
         player.bio = new Schema.Bio();
-        player.bio.name = root.get("bio").get("name").getTextValue();
-        player.bio.dob = root.get("bio").get("dob").getTextValue();
+        player.bio.name = root.get("bio").get("name").asText();
+        player.bio.dob = root.get("bio").get("dob").asText();
 
         return player;
 
@@ -56,7 +54,7 @@ public class RotoRanking {
             public void onMessage(String message) {
                 try {
                     JsonNode rootNode = om.readTree(message);
-                    Iterator<String> verbs = rootNode.getFieldNames();
+                    Iterator<String> verbs = rootNode.fieldNames();
                     while (verbs.hasNext()) {
                         String verb = verbs.next();
                         if ("addPlayer".equals(verb)) {
@@ -70,10 +68,10 @@ public class RotoRanking {
                         // TODO: standardize verb spellings
                         if ("pickPlayer".equals(verb)) {
                             JsonNode child = rootNode.get(verb);
-                            Iterator<String> idKeys = child.get("id").getFieldNames();
+                            Iterator<String> idKeys = child.get("id").fieldNames();
                             while(idKeys.hasNext()) {
                                 String key = idKeys.next();
-                                String id = child.get("id").get(key).getTextValue();
+                                String id = child.get("id").get(key).asText();
                                 Schema.Player player = repository.get(key,id);
                                 if (null != player) {
                                     claimed.add(player);
@@ -84,10 +82,10 @@ public class RotoRanking {
 
                         if ("waivePlayer".equals(verb)) {
                             JsonNode child = rootNode.get(verb);
-                            Iterator<String> idKeys = child.get("id").getFieldNames();
+                            Iterator<String> idKeys = child.get("id").fieldNames();
                             while(idKeys.hasNext()) {
                                 String key = idKeys.next();
-                                String id = child.get("id").get(key).getTextValue();
+                                String id = child.get("id").get(key).asText();
                                 Schema.Player player = repository.get(key,id);
                                 claimed.remove(player);
                             }

@@ -22,6 +22,10 @@ public class RankInterpreter {
     public static class Module implements Interpreter.Module {
         public static Module create(Replay replay) {
             TempReportFactory reportFactory = new TempReportFactory();
+            return create(reportFactory, replay);
+        }
+
+        public static Module create(ReportFactory reportFactory, Replay replay) {
             Archive archive = new Archive(reportFactory);
 
             return new Module(archive, replay);

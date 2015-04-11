@@ -5,8 +5,8 @@
  */
 package rockweiler.console.apps.waivers;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.Lists;
-import org.codehaus.jackson.map.ObjectMapper;
 import rockweiler.console.core.MessageListener;
 import rockweiler.console.core.modules.Application;
 import rockweiler.player.jackson.Schema;

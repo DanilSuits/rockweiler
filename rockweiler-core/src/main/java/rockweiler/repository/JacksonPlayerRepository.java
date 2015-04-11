@@ -5,11 +5,11 @@
  */
 package rockweiler.repository;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-import org.codehaus.jackson.map.DeserializationConfig;
-import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.type.TypeReference;
 import rockweiler.player.jackson.Schema;
 
 import java.io.IOException;
@@ -31,6 +31,7 @@ public class JacksonPlayerRepository implements PlayerRepository<Schema.Player> 
     public static JacksonPlayerRepository create(String resourceName) {
         try {
             InputStream is = JacksonPlayerRepository.class.getResourceAsStream(resourceName);
+            // TODO: this stream should be closed.
             return create(is);
         } catch (IOException e) {
             throw new RuntimeException("Unable to initialize database " + resourceName,e);
@@ -39,7 +40,7 @@ public class JacksonPlayerRepository implements PlayerRepository<Schema.Player> 
 
     public static JacksonPlayerRepository create(InputStream is) throws IOException {
         ObjectMapper om = new ObjectMapper();
-        om.configure(DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES,false);
+        om.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,false);
         List<Schema.Player> players = om.readValue(is, SCHEMA_PLAYER_REPO);
         List<Schema.Player> provisional = Lists.newArrayList();
 

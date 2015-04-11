@@ -25,6 +25,10 @@ public class RankApp implements MessageListener<Application.Request> {
         public static Module create() {
             PlayerRepository<Schema.Player> repository = JacksonPlayerRepository.create("/master.player.json");
 
+            return create(repository);
+        }
+
+        public static Module create(PlayerRepository<Schema.Player> repository) {
             ProvisionalFactory provisionalFactory = new ProvisionalFactory("provisional");
             return new Module(repository, provisionalFactory);
         }

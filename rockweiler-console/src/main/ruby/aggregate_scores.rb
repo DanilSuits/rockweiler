@@ -57,7 +57,8 @@ source = File.expand_path("gamelogs.json", AggregateScores::ROOT)
 json = File.read(source)
 db = JSON.parse(json)
 
-report = {"H" => {}, "S" => {}, "R" => {}}
+report = {}
+season = {}
 
 scorers = Hash.new { |hash, key| hash[key] = MockScorer.new}
 scorers["R"] = ReliefScorer.new
@@ -67,6 +68,7 @@ scorers["S"] = StartScorer.new
 db.each do |player|
 
   lahman = player["id"]["lahman"]
+  season[lahman] ||= {}
 
   scores = { "H" => {}, "S" => {}, "R" => {} }
 
@@ -91,15 +93,10 @@ db.each do |player|
       total += scorers[k].score score_list
     end
     if count > 0
-      report[k][lahman] = total
+      season[lahman][k] = total
     end
   end
 end
 
-report.each do |type, players|
-  rank = 0
-  players.sort_by {|id, total| total}.reverse.each do |id, total|
-    rank +=1
-    puts "%s, %d, %s, %d" % [type, rank, id, total]
-  end
-end
+puts JSON.pretty_generate(season)
+

@@ -5,12 +5,8 @@
  */
 package rockweiler.console.apps.rank;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.Lists;
-import org.codehaus.jackson.JsonGenerationException;
-import org.codehaus.jackson.JsonGenerator;
-import org.codehaus.jackson.PrettyPrinter;
-import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.util.MinimalPrettyPrinter;
 import rockweiler.player.jackson.SimpleArchive;
 
 import java.io.FileNotFoundException;
@@ -23,12 +19,12 @@ import java.util.List;
  */
 public class Archive<T> {
 
-    private final TempReportFactory reportFactory;
+    private final ReportFactory reportFactory;
     private final SimpleArchive<T> simpleArchive = new SimpleArchive<T> ();
 
     ObjectMapper om = new ObjectMapper();
 
-    public Archive(TempReportFactory reportFactory) {
+    public Archive(ReportFactory reportFactory) {
         this.reportFactory = reportFactory;
    }
 

@@ -96,6 +96,34 @@ public class QuickDraftApp implements MessageListener<Application.Request> {
             }
         }
 
+        if (Requests.Watch.class.isInstance(message)) {
+            final Requests.Watch watch = Requests.Watch.class.cast(message);
+            MatchPlayer match = new MatchPlayer(watch.query);
+
+            Iterable<Schema.Player> resultSet = Iterables.filter(playerRepository.getPlayers(), match);
+            List<Schema.Player> players = Lists.newArrayList(resultSet);
+            if (players.isEmpty()) {
+                dispatch(new Events.NoMatch(watch.query));
+            } else {
+                if (1 == players.size()) {
+                    Schema.Player player = players.get(0);
+                    dispatch(new Events.WatchPlayer(player));
+                } else {
+                    dispatch(new Events.AmbiguousPlayer(watch.query,players));
+                }
+            }
+
+        }
+
+        if (Requests.View.class.isInstance(message)) {
+            final Requests.View view = Requests.View.class.cast(message);
+            MatchPlayer match = new MatchPlayer(view.query);
+            Iterable<Schema.Player> resultSet = Iterables.filter(playerRepository.getPlayers(), match);
+            List<Schema.Player> players = Lists.newArrayList(resultSet);
+
+            dispatch(new Events.AmbiguousPlayer(view.query, players));
+        }
+
         if (Requests.Filter.class.isInstance(message)) {
             final Requests.Filter filter = Requests.Filter.class.cast(message);
 

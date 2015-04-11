@@ -5,12 +5,12 @@
  */
 package rockweiler.player.jackson;
 
+import com.fasterxml.jackson.core.JsonGenerationException;
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.core.PrettyPrinter;
+import com.fasterxml.jackson.core.util.MinimalPrettyPrinter;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.Lists;
-import org.codehaus.jackson.JsonGenerationException;
-import org.codehaus.jackson.JsonGenerator;
-import org.codehaus.jackson.PrettyPrinter;
-import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.util.MinimalPrettyPrinter;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -41,7 +41,7 @@ public class SimpleArchive<T> {
     }
 
     public void archive(List<T> repo, OutputStream out) throws IOException {
-        om.prettyPrintingWriter(PRETTY_PRINTER).writeValue(out,repo);
+        om.writer(PRETTY_PRINTER).writeValue(out,repo);
     }
 
 }

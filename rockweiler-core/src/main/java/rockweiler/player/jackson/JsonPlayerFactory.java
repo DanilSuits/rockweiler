@@ -5,10 +5,10 @@
  */
 package rockweiler.player.jackson;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.google.common.collect.Lists;
-import org.codehaus.jackson.JsonNode;
-import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.node.ObjectNode;
 import rockweiler.player.Biography;
 import rockweiler.player.IdConflictException;
 import rockweiler.player.Player;
@@ -60,11 +60,11 @@ public class JsonPlayerFactory {
         }
 
         public String getName() {
-            return bio.path("name").getTextValue();
+            return bio.path("name").asText();
         }
 
         public String getDob() {
-            return bio.path("dob").getTextValue();
+            return bio.path("dob").asText();
         }
     }
 
@@ -87,7 +87,7 @@ public class JsonPlayerFactory {
                 if (lhs.isMissingNode()) {
                     root.put(key, rhs.get(key));
                 } else {
-                    String leftId = lhs.getTextValue();
+                    String leftId = lhs.asText();
                     String rightId = rhs.get(key);
 
                     if ( ! leftId.equals(rightId)) {
@@ -102,7 +102,7 @@ public class JsonPlayerFactory {
             if (target.isMissingNode()) {
                 return null;
             }
-            return target.getTextValue();
+            return target.asText();
         }
 
         public int count() {
@@ -110,7 +110,7 @@ public class JsonPlayerFactory {
         }
 
         public Iterable<String> all() {
-            List<String> keys = Lists.newArrayList(id.getFieldNames());
+            List<String> keys = Lists.newArrayList(id.fieldNames());
             return keys;
         }
     }

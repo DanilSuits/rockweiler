@@ -2,7 +2,8 @@ require 'mechanize'
 require 'logger'
 
 class ParseGameLogs
-  ROOT = '/Users/Danil/Dropbox/OOOL/data/2014/bbref'
+  YEAR = ARGV[0]
+  ROOT = "/Users/Danil/Dropbox/OOOL/data/#{YEAR}/bbref"
 
   def initialize(mechanize)
     @mechanize = mechanize
@@ -11,21 +12,18 @@ class ParseGameLogs
   end
 
   def pitchers
-    Dir.glob("#{ROOT}/pitcher.gamelog.*.html").each do |file|
-      /pitcher.gamelog.([^\\.]+).html/.match(file) do |m|
+    Dir.glob("#{ROOT}/pitching.gamelog.*.html").each do |file|
+      /pitching.gamelog.([^\\.]+).html/.match(file) do |m|
         yield m[1], m[0]
       end
-
     end
-
   end
 
   def hitters
-    Dir.glob("#{ROOT}/hitter.gamelog.*.html").each do |file|
-      /hitter.gamelog.([^\\.]+).html/.match(file) do |m|
+    Dir.glob("#{ROOT}/batting.gamelog.*.html").each do |file|
+      /batting.gamelog.([^\\.]+).html/.match(file) do |m|
         yield m[1], m[0]
       end
-
     end
   end
 
@@ -148,6 +146,22 @@ class ParseGameLogs
 
   end
 
+  def parse_bio(file)
+    html = File.expand_path(file, ROOT)
+
+    if not File.exists?(html)
+      raise "Where is the file #{html}"
+    end
+
+    uri = "file://#{html}"
+    page = @mechanize.get(uri)
+
+    bio = {}
+    bio["name"] = page.search("span[@id=player_name]").text
+    bio["dob"] = page.search("span[@id=necro-birth]").attribute("data-birth").to_s.gsub("-", "")
+    bio
+  end
+
 end
 
 mechanize = Mechanize.new
@@ -156,16 +170,17 @@ db = []
 
 gamelogs = ParseGameLogs.new(mechanize)
 gamelogs.pitchers do |id, html|
-  player = {:id => {:lahman => id}}
+  player = {:id => {:bbref => id}}
+  player[:bio] = gamelogs.parse_bio(html)
   player.merge! gamelogs.parse_pitching(html)
   db << player
 end
 
 gamelogs.hitters do |id, html|
-  player = {:id => {:lahman => id}}
+  player = {:id => {:bbref => id}}
+  player[:bio] = gamelogs.parse_bio(html)
   player.merge! gamelogs.parse_hitting(html)
   db << player
 end
-
 
 puts JSON.pretty_generate(db)

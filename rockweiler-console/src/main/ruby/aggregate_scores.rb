@@ -2,7 +2,7 @@ require 'json'
 require 'date'
 
 class AggregateScores
-  ROOT = '/Users/Danil/Dropbox/OOOL/data/2014/season'
+  ROOT = "/Users/Danil/Dropbox/OOOL/data/#{ARGV[0]}/season"
 
 
 end
@@ -63,14 +63,16 @@ season = {}
 scorers = Hash.new { |hash, key| hash[key] = MockScorer.new}
 scorers["R"] = ReliefScorer.new
 scorers["S"] = StartScorer.new
+scorers["H"] = HittingScorer.new
 
 
 db.each do |player|
 
-  lahman = player["id"]["lahman"]
-  season[lahman] ||= {}
+  lahman = player["id"]["bbref"]
 
-  scores = { "H" => {}, "S" => {}, "R" => {} }
+  season[lahman] ||= { :scores => {"H" => {}, "S" => {}, "R" => {}}, :totals => {}, :id => { :bbref => lahman}, :bio => player["bio"]}
+
+  scores = season[lahman][:scores]
 
   games = player["games"]
   games.each do |game|
@@ -93,7 +95,7 @@ db.each do |player|
       total += scorers[k].score score_list
     end
     if count > 0
-      season[lahman][k] = total
+      season[lahman][:totals][k] = total
     end
   end
 end

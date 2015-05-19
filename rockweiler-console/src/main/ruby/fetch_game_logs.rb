@@ -11,6 +11,12 @@ class FetchGameLogs
 
   def update_repository(database, position, gamelog_type)
 
+    gamelog_root = "../data/%s/bbref/" % [@year_id]
+    unless File.exists?(gamelog_root)
+      puts "Creating directory #{gamelog_root}"
+      Dir.mkdir gamelog_root
+    end
+
     csv = File.expand_path(database, @root)
 
     CSV.read(csv).each do |row|
@@ -21,7 +27,7 @@ class FetchGameLogs
         player_id = row[0]
 
         uri = "http://www.baseball-reference.com/players/gl.cgi?id=%s&t=%s&year=%s" % [player_id, gamelog_type, @year_id]
-        local_file = File.expand_path("%s.gamelog.%s.html" % [position, player_id], "../data/%s/bbref/" % [@year_id])
+        local_file = File.expand_path("%s.gamelog.%s.html" % [position, player_id], gamelog_root)
 
         if !File.exists?(local_file)
           puts local_file
@@ -39,6 +45,6 @@ class FetchGameLogs
 
 end
 
-client = FetchGameLogs.new("2014")
+client = FetchGameLogs.new("1990")
 client.update_repository('Pitching.csv', 'pitcher', 'p')
 client.update_repository('Batting.csv', 'hitter', 'b')

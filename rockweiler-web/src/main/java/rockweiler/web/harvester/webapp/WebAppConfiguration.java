@@ -5,6 +5,7 @@
  */
 package rockweiler.web.harvester.webapp;
 
+import com.codahale.metrics.Counter;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.collect.Lists;
 import com.lmax.disruptor.BatchEventProcessor;
@@ -55,9 +56,13 @@ public class WebAppConfiguration extends Configuration {
                 final URI remoteHost = URI.create(remote.uri);
                 final UpdateProcessor remoteClient = new UpdateProcessor(remoteHost, TimeUnit.SECONDS.toMillis(remote.waitTime));
 
+                String key = "requestsProcessed." + remote.name;
+                final Counter requestsProcessed = environment.metrics().counter(key);
+
                 final EventHandler<UpdateRequest> requestHandler = new EventHandler<UpdateRequest>() {
                     public void onEvent(UpdateRequest event, long sequence, boolean endOfBatch) throws Exception {
                         remoteClient.process(event);
+                        requestsProcessed.inc();
                     }
                 };
 

@@ -1,0 +1,2 @@
+class ParseDraft
+end

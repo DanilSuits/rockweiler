@@ -3,10 +3,10 @@
  * <p/>
  * http://www.vast.com
  */
-package rockweiler.domain.league;
+package rockweiler.domain.link;
 
 /**
  * @author Danil Suits (danil@vast.com)
  */
-public class RosterDeadlineEvent {
+public class Link {
 }

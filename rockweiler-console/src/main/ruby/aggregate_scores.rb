@@ -2,7 +2,8 @@ require 'json'
 require 'date'
 
 class AggregateScores
-  ROOT = "/Users/Danil/Dropbox/OOOL/data/#{ARGV[0]}/season"
+  YEAR = "#{ARGV[0]}"
+  ROOT = "/Users/Danil/Dropbox/OOOL/data/#{YEAR}/season"
 
 
 end
@@ -53,7 +54,7 @@ class HittingScorer
   end
 end
 
-source = File.expand_path("gamelogs.json", AggregateScores::ROOT)
+source = File.expand_path('gamelogs.json', AggregateScores::ROOT)
 json = File.read(source)
 db = JSON.parse(json)
 
@@ -61,30 +62,34 @@ report = {}
 season = {}
 
 scorers = Hash.new { |hash, key| hash[key] = MockScorer.new}
-scorers["R"] = ReliefScorer.new
-scorers["S"] = StartScorer.new
-scorers["H"] = HittingScorer.new
+scorers['R'] = ReliefScorer.new
+scorers['S'] = StartScorer.new
+scorers['H'] = HittingScorer.new
 
 
 db.each do |player|
 
-  lahman = player["id"]["bbref"]
+  lahman = player['id']['bbref']
 
-  season[lahman] ||= { :scores => {"H" => {}, "S" => {}, "R" => {}}, :totals => {}, :id => { :bbref => lahman}, :bio => player["bio"]}
+  season[lahman] ||= { :scores => {'H' => {}, 'S' => {}, 'R' => {}}, :totals => {}, :id => { :bbref => lahman}, :bio => player['bio']}
 
   scores = season[lahman][:scores]
 
-  games = player["games"]
+  games = player['games']
   games.each do |game|
-    id = game["gameId"]
-    week = DateTime.parse(id.split(".")[0]).strftime("%V")
+    id = game['gameId']
+    week = DateTime.parse(id.split('.')[0]).strftime('%Y-W%V-1')
 
-    type = game["score"]["type"]
-    points = game["score"]["points"]
+    # Convert the week key to a more human readable form
+    # specifically, the date of the monday that starts the week
+    gameWeek = DateTime.parse(week).strftime('%Y-%m-%d')
 
-    scores[type][week] ||= []
+    type = game['score']['type']
+    points = game['score']['points']
 
-    scores[type][week] << points
+    scores[type][gameWeek] ||= []
+
+    scores[type][gameWeek] << points
   end
 
   scores.each do |k , v|

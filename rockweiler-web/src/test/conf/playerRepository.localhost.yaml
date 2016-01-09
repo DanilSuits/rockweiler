@@ -1,0 +1,9 @@
+testMessage: ${env.USER}
+
+server:
+  applicationConnectors:
+    - type: http
+      port: ${env.PLAYER_REPOSITORY_REST_PORT!8999}
+  adminConnectors:
+    - type: http
+      port: ${env.PLAYER_REPOSITORY_ADMIN_PORT!8998}

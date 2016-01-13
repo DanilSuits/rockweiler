@@ -6,29 +6,21 @@
 package rockweiler.domain.webapp.resources;
 
 import io.dropwizard.views.View;
-import rockweiler.domain.api.Link;
-import rockweiler.domain.api.ScratchRanking;
 
-import java.util.List;
+import java.util.Map;
 
 /**
  * @author Danil Suits (danil@vast.com)
  */
 public class Scratchpadview extends View {
-    public ScratchRanking ranking;
-    public List<Link> links;
+    public Object links;
 
-    public Scratchpadview(ScratchRanking ranking, List<Link> links) {
+    public Scratchpadview(Map<String,String> links) {
         super("scratchpad.ftl");
-        this.ranking = ranking;
         this.links = links;
     }
 
-    public ScratchRanking getRanking() {
-        return ranking;
-    }
-
-    public List<Link> getLinks() {
+    public Object getLinks() {
         return links;
     }
 }

@@ -25,11 +25,11 @@ import java.util.UUID;
 public class Dashboard {
     @GET
     public List<Link> dashboard() {
-        Link self = new Link("self", UriBuilder.fromResource(Dashboard.class).build().getPath());
+        Link self = new Link("self", toHome().build().getPath());
 
-        String id = UUID.randomUUID().toString();
-        Link create = new Link("create", UriBuilder.fromResource(Scratchpad.class).build(id).getPath());
-
+        Link create = new Link("scratchpad", Scratchpad.toForm()
+                .build()
+                .getPath());
 
         return Lists.newArrayList(self, create);
     }
@@ -38,5 +38,9 @@ public class Dashboard {
     @Produces(MediaType.TEXT_HTML)
     public DashboardView view () {
         return new DashboardView(dashboard());
+    }
+
+    public static UriBuilder toHome() {
+        return UriBuilder.fromResource(Dashboard.class);
     }
 }

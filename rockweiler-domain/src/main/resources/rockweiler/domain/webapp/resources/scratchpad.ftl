@@ -2,16 +2,24 @@
 <html>
 <body>
 
-<#list links?keys as link>
-<li><a rel="${link}" href="${links[link]}">${link}</a>
+<#list dto["links"]?keys as link>
+<li><a rel="${link}" href="${dto["links"][link]}">${link}</a>
 </#list>
 
-<form method="POST" action="${links['create']}">
+<form method="POST">
     <label for="name">Name: </label>
-    <input  type="text" name="name" maxlength="50" size="30">
+    <input  type="text" name="name" maxlength="50" size="30" autofocus>
     <input type="submit" value="Submit">
 </form>
 
+<ol>
+<#list dto["rankedPlayers"] as player>
+<li>${player?counter} ${player.name}
+</#list>
+</ol>
+
+
+<#include "debug.ftl">
 
 </body>
 </html>

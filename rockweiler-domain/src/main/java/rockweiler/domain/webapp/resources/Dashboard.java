@@ -5,7 +5,10 @@
  */
 package rockweiler.domain.webapp.resources;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.Lists;
+import org.slf4j.LoggerFactory;
 import rockweiler.domain.api.Link;
 
 import javax.ws.rs.GET;
@@ -37,7 +40,15 @@ public class Dashboard {
     @GET
     @Produces(MediaType.TEXT_HTML)
     public DashboardView view () {
-        return new DashboardView(dashboard());
+
+        // return new DashboardView(dashboard());
+        ObjectMapper om = new ObjectMapper();
+        try {
+            String json = om.writeValueAsString(dashboard());
+            return new DashboardView(json);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public static UriBuilder toHome() {

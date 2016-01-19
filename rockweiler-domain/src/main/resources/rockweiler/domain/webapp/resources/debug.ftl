@@ -1,0 +1,12 @@
+<#if dto["debug"]??>
+<h1>Debug</h1>
+<table>
+    <tr><th>name</th><th>value</th></tr>
+    <#list dto["debug"]["query"]?keys as param>
+    <tr><th>${param}</th>
+        <#list dto["debug"]["query"][param] as v>
+            <td>${v}</td></tr>
+        </#list>
+    </#list>
+</table>
+</#if>

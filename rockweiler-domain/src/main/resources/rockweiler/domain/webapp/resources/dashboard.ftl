@@ -1,9 +1,9 @@
-<#-- @ftlvariable name="" type="rockweiler.domain.webapp.resources.DashboardView" -->
+<#assign m = json?eval>
 <html>
 <body>
-<h1>${title}</h1>
+<h1>Json</h1>
 
-<#list links as link>
+<#list m as link>
     <li><a rel="${link.rel}" href="${link.uri}">${link.rel}</a>
 </#list>
 

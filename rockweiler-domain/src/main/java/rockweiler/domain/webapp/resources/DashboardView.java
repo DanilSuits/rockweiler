@@ -14,18 +14,14 @@ import java.util.List;
  * @author Danil Suits (danil@vast.com)
  */
 public class DashboardView extends View {
-    public final List<Link> links;
+    public final String json;
 
-    public String getTitle () {
-        return "Dashboard";
+    public String getJson () {
+        return json;
     }
 
-    public List<Link> getLinks() {
-        return links;
-    }
-
-    public DashboardView(List<Link> links) {
+    public DashboardView(String json) {
         super("dashboard.ftl");
-        this.links = links;
+        this.json = json;
     }
 }

@@ -13,14 +13,14 @@ import java.util.Map;
  * @author Danil Suits (danil@vast.com)
  */
 public class Scratchpadview extends View {
-    public Object links;
+    public Object dto;
 
-    public Scratchpadview(Map<String,String> links) {
+    public Scratchpadview(Map<String,Object> dto) {
         super("scratchpad.ftl");
-        this.links = links;
+        this.dto = dto;
     }
 
-    public Object getLinks() {
-        return links;
+    public Object getDto() {
+        return dto;
     }
 }

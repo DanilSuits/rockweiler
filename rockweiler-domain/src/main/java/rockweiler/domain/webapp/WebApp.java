@@ -5,6 +5,11 @@
  */
 package rockweiler.domain.webapp;
 
+import com.google.common.collect.Maps;
+import com.google.common.util.concurrent.MoreExecutors;
+import com.vocumsineratio.eventstore.EventStoreConnection;
+import com.vocumsineratio.eventstore.persistence.memory.ConnectionBuilder;
+import com.vocumsineratio.eventstore.persistence.memory.MemoryStore;
 import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
@@ -24,7 +29,11 @@ public class WebApp extends Application<WebAppConfiguration> {
     @Override
     public void run(WebAppConfiguration webAppConfiguration, Environment environment) throws Exception {
         environment.jersey().register(new Dashboard());
-        environment.jersey().register(new Scratchpad());
+        final EventStoreConnection connection = ConnectionBuilder.create()
+                .with(MoreExecutors.newDirectExecutorService())
+                .connect();
+
+        environment.jersey().register(new Scratchpad(connection));
     }
 
     @Override

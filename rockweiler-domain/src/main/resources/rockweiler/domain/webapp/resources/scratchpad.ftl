@@ -6,18 +6,19 @@
 <li><a rel="${link}" href="${dto["links"][link]}">${link}</a>
 </#list>
 
-<form method="POST">
-    <label for="name">Name: </label>
-    <input  type="text" name="name" maxlength="50" size="30" autofocus>
+<form method="POST" action="${dto["links"]["events"]}">
+    <input name="eventName" type="hidden" value="playerAdded">
+    <input name="eventId" type="hidden" value="${dto["event"]["eventId"]}">
+    <input name="rankingId" type="hidden" value="${dto["event"]["rankingId"]}">
+    <label for="rank">Rank: </label><br>
+    <input name="rank" type="hidden" value="${dto["event"]["rank"]}">
+    <label for="playerName">Name: </label>
+    <input name="playerName" type="text" maxlength="50" size="30" autofocus><br>
     <input type="submit" value="Submit">
 </form>
 
-<ol>
-<#list dto["rankedPlayers"] as player>
-<li>${player?counter} ${player.name}
-</#list>
-</ol>
 
+<#include "rankedPlayers.ftl">
 
 <#include "debug.ftl">
 

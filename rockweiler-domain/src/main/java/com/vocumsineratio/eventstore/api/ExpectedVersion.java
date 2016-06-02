@@ -11,13 +11,13 @@ import com.vocumsineratio.domain.Value;
  * @author Danil Suits (danil@vast.com)
  */
 public class ExpectedVersion implements Value<ExpectedVersion> {
-    public final long version;
+    public final int version;
 
-    private ExpectedVersion(long version) {
+    private ExpectedVersion(int version) {
         this.version = version;
     }
 
-    public ExpectedVersion next(long size) {
+    public ExpectedVersion next(int size) {
         if (Any == this) {
             throw new IllegalStateException("ExpectedVersion.Any.next()");
         }
@@ -29,9 +29,9 @@ public class ExpectedVersion implements Value<ExpectedVersion> {
         return new ExpectedVersion(version + size);
     }
 
-    public static final ExpectedVersion of (long version) {
+    public static final ExpectedVersion of (int version) {
         if (version < 0) {
-            throw new IllegalArgumentException("Invalid expected version");
+            throw new IllegalArgumentException("Invalid expected expected");
         }
         return new ExpectedVersion(version);
     }

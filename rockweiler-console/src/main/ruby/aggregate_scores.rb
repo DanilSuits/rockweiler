@@ -71,7 +71,7 @@ db.each do |player|
 
   lahman = player['id']['bbref']
 
-  season[lahman] ||= { :scores => {'H' => {}, 'S' => {}, 'R' => {}}, :totals => {}, :id => { :bbref => lahman}, :bio => player['bio']}
+  season[lahman] ||= { :scores => {'H' => {}, 'S' => {}, 'R' => {}}, :totals => {:season => {}, :weekly => {}}, :id => { :bbref => lahman}, :bio => player['bio']}
 
   scores = season[lahman][:scores]
 
@@ -93,14 +93,21 @@ db.each do |player|
   end
 
   scores.each do |k , v|
-    total = 0
     count = 0
+
+    weekly = {}
+
     v.each do |week, score_list|
       count += score_list.length
-      total += scorers[k].score score_list
+      weekly[week] = scorers[k].score score_list
     end
     if count > 0
-      season[lahman][:totals][k] = total
+      total = 0
+      weekly.each do |w , s|
+        total += s
+      end
+      season[lahman][:totals][:season][k] = total
+      season[lahman][:totals][:weekly][k] = weekly
     end
   end
 end

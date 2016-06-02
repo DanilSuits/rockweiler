@@ -24,26 +24,45 @@ class SeasonReport
   json = File.read(source)
   db = JSON.parse(json)
 
+  labels = {"S" => "SP", "R" => "RP", "H" => "XX"}
+  sheets = {}
+
+  labels.each do |category, label|
+    sheets[category] = {}
+  end
+
+  db.each do |id, report|
+    totals = report["totals"]
+    totals["season"].each do |category, score|
+      sheets[category][id] = report
+    end
+  end
+
+
+
   Axlsx::Package.new do |p|
     p.workbook do |wb|
-      wb.add_worksheet do |sheet|
-        sheet.add_row ["id:bbref", "Name", "Owner", "SP", "RP", "XX"]
+      sheets.each do |category, reports|
 
-        db.each do |id, report|
-          owner = to_owner[id]
-          name = report["bio"]["name"]
-          sp = report["totals"]["S"]
-          rp = report["totals"]["R"]
-          h = report["totals"]["H"]
+        label = labels[category]
 
-          sheet.add_row [id, name, owner, sp, rp, h]
+        wb.add_worksheet do |view|
+          view.name = label
+          view.add_row ["id:bbref", "Name", "Owner", labels[category]]
+
+          reports.sort_by { |id, report| report["totals"]["season"][category]}.reverse.each do |id, report|
+
+            owner = to_owner[id]
+            name = report["bio"]["name"]
+            score = report["totals"]["season"][category]
+            view.add_row [id, name, owner, score]
+
+          end
         end
-
       end
-
     end
 
-    p.serialize File.expand_path("season.xlsx", SeasonReport::ROOT)
+    p.serialize File.expand_path("old.season.xlsx", SeasonReport::ROOT)
 
   end
 end

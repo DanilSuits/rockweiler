@@ -90,11 +90,11 @@ public class ListViewport implements MessageListener<Application.Event> {
     }
 
     String format(Schema.Player p) {
-        String id = "unknown";
-        if (p.id.containsKey("mlb")) {
-            id = p.id.get("mlb");
+        String id = "00000000-0000-0000-0000-000000000000";
+        if (p.id.containsKey("uuid")) {
+            id = p.id.get("uuid");
         }
-        return p.bio.name + " " + id;
+        return id + " " + p.bio.name;
     }
 
 }

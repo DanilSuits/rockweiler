@@ -83,6 +83,36 @@ public class RankApp implements MessageListener<Application.Request> {
             playerRepository.add(player);
         }
 
+        if (Requests.Query.class.isInstance(message)) {
+            final Requests.Query find = Requests.Query.class.cast(message);
+
+            Predicate<Schema.Player> matchPlayer = new Predicate<Schema.Player>() {
+                public boolean apply(Schema.Player input) {
+                    if (input.bio.name.contains(find.query)) {
+                        return true;
+                    }
+
+                    for(Map.Entry<String,String> id : input.id.entrySet()) {
+                        if (id.getValue().contains(find.query)) {
+                            return true;
+                        }
+                    }
+
+                    return false;
+                }
+            } ;
+
+            Iterable<Schema.Player> match = Iterables.filter(playerRepository.getPlayers(), matchPlayer);
+            List<Schema.Player> players = Lists.newArrayList(match);
+
+            if (players.isEmpty()) {
+                dispatch(new Events.NoMatch(find.query));
+            } else {
+                dispatch(new Events.AmbiguousPlayer(find.query,players));
+            }
+
+        }
+
         if (Requests.Pick.class.isInstance(message)) {
             final Requests.Pick pick = Requests.Pick.class.cast(message);
 

@@ -45,11 +45,7 @@ class UpdateBbrefGamelogs
         local_file = File.expand_path('%s.gamelog.%s.html' % [pos, id], "../data/#{@year}/bbref/")
 
         update = {:remoteUri => uri, :localDestination => local_file}
-
-        req = Net::HTTP::Post.new('/updates', initheader = {'Content-Type' => 'application/json'})
-        req.body = update.to_json
-
-        response = Net::HTTP.new('localhost', 8080).start { |http| http.request(req) }
+        puts JSON.generate(update)
       end
     end
 

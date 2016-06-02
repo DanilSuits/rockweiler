@@ -5,6 +5,7 @@
  */
 package com.vocumsineratio.eventstore.api;
 
+import com.vocumsineratio.domain.ComparisonChain;
 import com.vocumsineratio.domain.Id;
 import com.vocumsineratio.domain.Value;
 
@@ -23,27 +24,22 @@ public class StreamId implements Value<StreamId> {
         return streamId.equals(other.streamId);
     }
 
-    public static final StreamId of(Id id) {
-        return new StreamId(id.uuid.toString());
-    }
-
-    public static final StreamId All = new StreamId("$all");
-
     @Override
     public boolean equals(Object rhs) {
-        if (this == rhs) {
-            return true;
-        }
-
-        if (!(rhs instanceof StreamId)) {
-            return false;
-        }
-
-        return isSameValue((StreamId) rhs);
+        return EQUALS.compare(this,rhs)
+                .end();
     }
 
     @Override
     public int hashCode() {
         return streamId.hashCode();
     }
+
+    public static final StreamId of(Id id) {
+        return new StreamId(id.uuid.toString());
+    }
+
+    public static final StreamId All = new StreamId("$all");
+
+    private static final ComparisonChain.Equals<StreamId> EQUALS = new ComparisonChain.Equals<>(StreamId.class);
 }

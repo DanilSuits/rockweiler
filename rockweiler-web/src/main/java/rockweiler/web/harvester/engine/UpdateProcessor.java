@@ -9,7 +9,6 @@ import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.HttpClients;
 import rockweiler.web.harvester.core.UpdateRequest;
 
 import java.io.ByteArrayOutputStream;
@@ -22,12 +21,13 @@ import java.net.URI;
  */
 public class UpdateProcessor {
 
-    private final HttpClient client = HttpClients.createDefault();
+    private final HttpClient client;
 
     private final URI destination;
     private final long sleepInterval;
 
-    public UpdateProcessor(URI destination, long sleepInterval) {
+    public UpdateProcessor(HttpClient client, URI destination, long sleepInterval) {
+        this.client = client;
         this.destination = destination;
         this.sleepInterval = sleepInterval;
     }

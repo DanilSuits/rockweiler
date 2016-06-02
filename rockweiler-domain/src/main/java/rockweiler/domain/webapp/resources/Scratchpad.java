@@ -123,6 +123,11 @@ public class Scratchpad {
         Rank rank = Rank.parse(formData.getFirst("rank"));
         Hint playerName = new Hint(formData.getFirst("playerName"));
 
+        if (playerName.hint.isEmpty()) {
+            // TODO: putting blank entries in list not supported?
+            return Response.seeOther(toItem().build(rankingId, eventId)).build();
+        }
+
         PlayerRanked event = new PlayerRanked(rankingId, rank, playerName);
 
         EventStore eventStore = connection.get();

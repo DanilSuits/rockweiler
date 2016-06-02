@@ -88,11 +88,11 @@ public class RankInterpreter {
                 display.onMessage("AmbiguousPlayer: ");
                 for(Schema.Player crnt : error.players) {
 
-                    String id = "unknown";
-                    if (crnt.id.containsKey("mlb")) {
-                        id = crnt.id.get("mlb");
+                    String id = "00000000-0000-0000-0000-000000000000";
+                    if (crnt.id.containsKey("uuid")) {
+                        id = crnt.id.get("uuid");
                     }
-                    display.onMessage(" " + crnt.bio.name + " " + id );
+                    display.onMessage(id + " " + crnt.bio.name );
                 }
             }
 
@@ -114,6 +114,7 @@ public class RankInterpreter {
 
     static final Pattern PARSE_KEEP_REQUEST = Pattern.compile("^k(eep)? (.*)");
     static final Pattern PARSE_PICK_REQUEST = Pattern.compile("^p(ick)? (.*)");
+    static final Pattern PARSE_FIND_REQUEST = Pattern.compile("^f(ind)? (.*)");
     static final Pattern PARSE_DRAFT_REQUEST = Pattern.compile("draft (.*)");
     static final Pattern PARSE_ADD_REQUEST = Pattern.compile("add (.*)");
 
@@ -134,6 +135,11 @@ public class RankInterpreter {
             Matcher pick = PARSE_PICK_REQUEST.matcher(message);
             if (pick.find()) {
                 crnt = new Requests.Pick(pick.group(2));
+            }
+
+            Matcher query = PARSE_FIND_REQUEST.matcher(message);
+            if (query.find()) {
+                crnt = new Requests.Query(query.group(2));
             }
 
             Matcher draft = PARSE_DRAFT_REQUEST.matcher(message);

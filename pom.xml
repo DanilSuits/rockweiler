@@ -17,6 +17,7 @@
         <module>rockweiler-sample</module>
         <module>rockweiler-console</module>
         <module>rockweiler-processing</module>
+        <module>rockweiler-web</module>
     </modules>
 
     <dependencyManagement>

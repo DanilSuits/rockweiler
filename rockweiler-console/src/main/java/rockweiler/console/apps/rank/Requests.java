@@ -33,6 +33,14 @@ public class Requests {
         }
     }
 
+    public static class Query implements Application.Request {
+        public final String query;
+
+        public Query(String query) {
+            this.query = query;
+        }
+    }
+
     public static class AddPlayer implements Application.Request {
         public final String name;
 

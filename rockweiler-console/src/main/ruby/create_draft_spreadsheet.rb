@@ -12,7 +12,7 @@ class CreateDraft
   end
 
   def create()
-    draft_order = [8,9,10,11,12,13,14,15,16,7,6,5,4,3,2,1].map { |x| x-1 }
+    draft_order = [8,9,10,11,12,13,14,15,7,6,5,4,3,2,1].map { |x| x-1 }
 
     pick_owner = @finish.values_at *draft_order
 
@@ -93,234 +93,209 @@ end
 
 builder = League.new
 
-#2014
-#2014
-#2015
-#2014
-#2014
-#2014
-#2014
-#2014
-#2014
-#2014
-#2014
-
-#2014
-
-#2015
+#2016
 builder.
-    owner("Corey").inactive
-
-# player("Bryce Harper")
-# player("Xander Bogaerts").
-# player("Carlos Martinez").
-# player("Oscar Taveras").
-# player("Ian Kinsler").
-# player("Jacoby Ellsbury").
-# player("Jonathon Singleton").
-# player("Austin Hedges")
+    owner("Tim").inactive()
 
 builder.
     owner("Chris").
-    player("Tulowitzki_Troy/COL").
     player("Posey_Buster/SFN").
-    player("Cespedes_Yoenis/DET").
-    player("Roark_Tanner/WAS").
-    player("Wood_Alex/ATL").
-    player("Gomes_Yan/CLE").
-    player("Norris_Daniel/TOR")
+    player("Arrieta_Jake/CHN").
+    player("Cespedes_Yoenis/NYN").
+    player("Nola_Aaron/PHI").
+    player("Norris_Daniel/DET").
+    player("Velasquez_Vincent/PHI").
+    player("Conforto_Michael/NYN").
+    player("Winker_Jesse/CIN").
+    player("Berrios_Jose/MIN").
+    player("Blair_Aaron/ATL")
 
 builder.
     owner("Duncan").
-    player("Gomez_Carlos/MIL").
     player("Encarnacion_Edwin/TOR").
-    player("Zimmermann_Jordan/WAS").
+    player("Wong_Kolten/SLN").
+    player("Gray_Sonny/OAK").
     player("Teheran_Julio/ATL")
 
 builder.
     owner("Daniel").
-    player("Ross_Tyson/SDN").
     player("Dozier_Brian/MIN").
-    player("Perez_Salvador/KCA").
+    player("Harper_Bruce/WAS").
     player("Puig_Yasiel/LAN").
-    player("Gray_Sonny/OAK").
-    player("Wacha_Michael/SLN").
-    player("Archer_Chris/TBA").
-    player("Alcantara_Arismendy/CHN").
-    player("Byrant_Kris/CHN").
     player("Gallo_Joey/TEX").
     player("Correa_Carlos/HOU").
-    player("Bundy_Dylan/BAL")
+    player("Bryant_Kris/CHN").
+    player("Wacha_Michael/SLN").
+    player("Archer_Chris/TBA").
+    player("Franco_Maikel/PHI").
+    player("Frazier_Todd/CIN").
+    player("Richards_Garrett/LAA").
+    player("Realmuto_Jacob/MIA").
+    player("Duvall_Adam/CIN")
 
 builder.
     owner("Danil").
     player("Kershaw_Clayton/LAN").
     player("Sale_Chris/CHA").
-    player("Pineda_Michael/NYA").
-    player("Adams_Matt/SLN").
-    player("Wong_Kolten/SLN").
+    player("Pollock_AJ/ARI").
     player("Ventura_Yordano/KCA").
     player("Walker_Taijuan/SEA").
+    player("McCullers_Lance/HOU").
     player("Soler_Jorge/CHN").
-    player("Castillo_Rusney/BOS").
-    player("Glasnow_Tyler/PIT")
+    player("Glasnow_Tyler/PIT").
+    player("Turner_Trea/WAS")
+
 
 builder.
     owner("Michael").
-    player("Harvey_Matt/NYN").
-    player("Hahn_Jesse/OAK").
-    player("House_TJ/CLE").
-    player("Votto_Joey/CIN").
-    player("Donaldson_Josh/TOR").
-    player("Semien_Marcus/OAK").
     player("Betts_Mookie/BOS").
-    player("Lamb_Jake/ARI").
-    player("Pompey_Dalton/TOR").
-    player("Taylor_Michael/WAS").
     player("Lindor_Francisco/CLE").
+    player("Donaldson_Josh/TOR").
+    player("Harvey_Matt/NYN").
+    player("Matz_Steven/NYN").
     player("Urias_Julio/LAN").
-    player("Devers_Rafael/BOS")
+    player("Devers_Rafael/BOS").
+    player("Drury_Brandon/ARI").
+    player("Marte_Ketel/SEA").
+    player("Iglesias_Raisel/CIN").
+    player("Conley_Adam/MIA").
+    player("Kang_JungHo/PIT").
+    player("Hahn_Jesse/OAK")
 
 builder.
     owner("Phil").
-    player("Price_David/DET").
-    player("Carter_Chris/HOU").
-    player("Smyly_Drew/TBA").
-    player("Arenado_Nolan/COL").
-    player("Fernandez_Jose/MIA").
-    player("Rendon_Anthony/WAS").
     player("Abreu_Jose/CHA").
+    player("Rendon_Anthony/WAS").
+    player("Arenado_Nolan/COL").
+    player("Seager_Corey/LAN").
     player("Tanaka_Masahiro/NYA").
-    player("Dahl_David/COL").
+    player("Fernandez_Jose/MIA").
+    player("Price_David/BOS").
     player("Gray_Jonathan/COL").
-    player("Seager_Corey/LAN")
+    player("Dahl_David/COL").
+    player("Mazara_Nomar/TEX").
+    player("Judge_Aaron/NYA")
+
 
 builder.
     owner("Greenwell").
-    player("Buxton_Byron/MIN").
-    player("Rodon_Carlos/CHA").
-    player("Calhoun_Kole/LAA").
+    player("Vogt_Stephen/OAK").
+    player("Bogaerts_Xander/BOS").
+    player("OBrien_Peter/ARI").
+    player("Solarte_Yangervis/SDN").
     player("Springer_George/HOU").
-    player("Owings_Chris/ARI").
-    player("Santana_Carlos/CLE").
-    player("Santana_Danny/CLE").
     player("DeGrom_Jacob/NYN").
-    player("Cueto_Johnny/CIN").
-    player("Paxton_James/SEA").
-    player("Tropeano_Nick/HOU")
+    player("Rodon_Carlos/CHA").
+    player("Rodgers_Brandan/COL").
+    player("Buxton_Byron/MIN").
+    player("Ross_Joe/WAS").
+    player("Tomas_Yasmany/ARI")
 
 builder.
     owner("Subrata").
+    player("Belt_Brandon/SFN").
     player("Altuve_Jose/HOU").
-    player("Moore_Matt/TBA").
-    player("Chen_Wei-Yin/BAL").
-    player("Iwakuma_Hisashi/SEA").
     player("Quintana_Jose/CHA").
+    player("Carpenter_Matt/SLN").
     player("Bauer_Trevor/CLE").
-    player("Holt_Brock/BOS").
     player("Odorizzi_Jake/TBA").
-    player("Bradley_Archie/ARI").
-    player("Almora_Albert/CHN").
-    player("Barnes_Matt/BOS")
+    player("Crawford_JP/PHI").
+    player("Bradley_Archie/ARI")
 
 builder.
     owner("Tom").
-    player("Cabrera_Miguel/DET").
+    player("Pederson_Joc/LAN").
+    player("Schwarber_Kyle/CHN").
     player("Stanton_Giancarlo/FLA").
-    player("Dickerson_Corey/COL").
-    player("Ozuna_Marcell/FLA").
-    player("Yelich_Christian/FLA").
+    player("Odor_Rougned/TEX").
+    player("Rodriguez_Eduardo/BOS").
+    player("Salazar_Danny/CLE").
     player("d'Arnaud_Travis/NYN").
-    player("Pederson_Joc/LAN")
+    player("Moncada_Yoan/BOS").
+    player("Ray_Robbie/ARI").
+    player("Piscotty_Stephen/SLN").
+    player("Maeda_Kenta/LAN")
 
 builder.
     owner("Eric").
-    player("Lucroy_Jonathan/MIL").
+    player("Cabrera_Miguel/DET").
     player("Trout_Mike/LAA").
-    player("Garcia_Avisail/CHA").
-    player("Rua_Ryan/TEX").
+    player("Herrera_Odubel/PHI").
+    player("Keuchel_Dallas/HOU").
     player("McHugh_Collin/HOU").
-    player("Shoemaker_Matt/LAA").
-    player("Scherzer_Max/DET").
-    player("Keuchel_Dallas/HOU")
-
-builder.
-    owner("Tim").
-    player("Hosmer_Eric/KCA").
-    player("Strasburg_Stephen/WSH").
-    player("Cole_Gerrit/PIT").
-    player("McCutchen_Andrew/PIT").
-    player("Baez_Javier/CHN").
-    player("Sano_Miguel/MIN").
-    player("Russell_Addison/CHN").
-    player("Polanco_Gregory/PIT").
-    player("Myers_Wil/TBA").
-    player("Stephenson_Robert/CIN")
+    player("McCann_James/DET")
 
 #2014
 builder.
     owner("John").
-    player("Cano_Robinson/SEA").
-    player("Freeman_Freddie/ATL").
+    player("Miller_Shelby/ARI").
+    player("Jungmann_Taylor/MIL").
+    player("Eickhoff_Jared/PHI").
+    player("Nicolina_Justin/MIA").
+    player("Karns_Nate/SEA").
+    player("Sanchez_Aaron/TOR").
     player("Martinez_JD/DET").
-    player("Flores_Wilmer/NYN").
-    player("Ryu_HJ/LAN").
-    player("Greene_Shane/DET").
-    player("Anderson_Chase/ARI")
+    player("Grichuk_Randall/SLN").
+    player("Canha_Mark/OAK").
+    player("Freeman_Freddie/ATL")
 
-#2014
 builder.
     owner("Hagen").
-    player("Desmond_Ian/WAS").
-    player("Bumgarner_Madison/SFN").
+    player("Swihart_Blake/BOS").
     player("Goldschmidt_Paul/ARI").
     player("Machado_Manny/BAL").
+    player("Olivera_Hector/ATL").
     player("Kluber_Corey/CLE").
-    player("Gattis_Evan/HOU").
+    player("Corbin_Patrick/ARI").
+    player("Martinez_Carlos/SLN").
+    player("Stroman_Marcus/TOR").
+    player("Heaney_Andrew/LAA").
     player("Giolito_Lucas/WAS")
 
 builder.
     owner("Jacob/Don").
     player("Rizzo_Anthony/CHN").
-    player("Castellanos_Nick/DET").
-    player("Marte_Starling/PIT").
     player("Hernandez_Felix/SEA").
-    player("Cobb_Alex/TBA").
+    player("Marte_Starling/PIT").
     player("Wheeler_Zack/NYN").
-    player("Syndergaard_Noah/NYN")
+    player("Syndergaard_Noah/NYN").
+    player("Severino_Luis/NYA")
 
 builder.
     owner("Steve").
-    player("Ramirez_Hanley/BOS").
-    player("Jones_Adam/BAL").
-    player("Harrison_Josh/PIT").
+    player("Bautista_Jose/TOR").
+    player("Darvish_Yu/TEX").
     player("Gausman_Kevin/BAL").
-    player("Schoop_Jonathan/BAL").
-    player("Despaigne_Odrisamer/SDN")
+    player("Schoop_Jonathan/BAL")
 
 
 
-#2015
-finish = ["Phil", "Eric", "Tom", "John", "Subrata", "Hagen", "Chris", "Greenwell", "Steve", "Daniel", "Jacob/Don", "Danil", "Duncan", "Michael", "Corey", "Tim"]
+#2016
+finish = ["Daniel", "Hagen", "Chris", "Danil", "Subrata", "Phil", "Eric", "Tim", "John", "Michael", "Jacob/Don", "Greenwell", "Steve", "Tom", "Duncan"]
 
-inactive_owners = ["Corey"]
+inactive_owners = ["Tim"]
+
 
 keepers = builder.build
 
 #2015
 trade_repo = TradeRepository.new(finish, 35)
-trade_repo.trade("Daniel", 7, "Corey") #OK
-trade_repo.trade("Eric", 1, "Danil") #OK
-trade_repo.trade("Eric", 5, "Danil") #OK
-trade_repo.trade("Tom", 8 , "Danil") #OK
+trade_repo.trade("Daniel", 7, "Duncan") #OK
+trade_repo.trade("Daniel", 8, "Duncan") #OK
+trade_repo.trade("Duncan", 7, "Danil") #OK
+trade_repo.trade("Greenwell", 6, "Daniel") #OK
+trade_repo.trade("Daniel", 3, "Steve") #OK
+trade_repo.trade("Daniel", 12, "Steve") #OK
 trade_repo.trade("Subrata", 15, "Danil") #OK
-trade_repo.trade("Eric",4,"Michael") #OK
-trade_repo.trade("Eric",9,"Michael") #OK
-trade_repo.trade("Tom", 9,"Michael") #OK
-trade_repo.trade("Tom",11,"Duncan")
-trade_repo.trade("Phil", 10, "Chris")
-trade_repo.trade("Tim",11,"Hagen")
-trade_repo.trade("Daniel",12,"Steve")
+trade_repo.trade("Eric", 1, "Tom") #OK
+trade_repo.trade("Eric", 3, "Greenwell") #OK
+trade_repo.trade("Eric", 4, "Tom") #OK
+trade_repo.trade("John", 13, "Tom") #OK
+trade_repo.trade("Hagen", 8, "Steve") #OK
+trade_repo.trade("Phil", 10, "Tom") #OK
+trade_repo.trade("Phil", 11, "Tom") #OK
+trade_repo.trade("Tom", 11, "Phil") #OK
+
 
 tool = CreateDraft.new(finish, keepers)
 draft = tool.create

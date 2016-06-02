@@ -38,6 +38,7 @@ class ParseGameLogs
 
         columns = r.search("td")
         game[:gameId] = columns[3].attribute("csk")
+        game[:hints][:team] = columns[4].text
 
         game[:stats][:AB] = columns[10].text.to_i
         game[:stats][:R] = columns[11].text.to_i
@@ -100,6 +101,7 @@ class ParseGameLogs
         columns = r.search("td")
         game[:gameId] = columns[3].attribute("csk")
 
+        game[:hints][:team] = columns[4].text
         game[:hints][:innings] = columns[8].text
         game[:hints][:decision] = columns[9].text
         game[:hints][:totalIP] = columns[11].text

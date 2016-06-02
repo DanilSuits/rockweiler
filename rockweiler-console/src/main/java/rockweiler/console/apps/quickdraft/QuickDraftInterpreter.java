@@ -106,7 +106,7 @@ public class QuickDraftInterpreter {
                 for(Events.PlayerStatus status : update.update) {
                     StringBuilder builder = new StringBuilder();
                     if (status.available) {
-                        builder.append("Available: ");
+                        builder.append("Available : ");
                     } else {
                         builder.append("Taken    : ");
                     }
@@ -144,11 +144,11 @@ public class QuickDraftInterpreter {
         }
 
         String describePlayer(Schema.Player p) {
-            String id = "unknown";
-            if (p.id.containsKey("mlb")) {
-                id = p.id.get("mlb");
+            String id = "00000000-0000-0000-0000-000000000000";
+            if (p.id.containsKey("uuid")) {
+                id = p.id.get("uuid");
             }
-            return p.bio.name + " " + id;
+            return id + " " + p.bio.name;
         }
     }
 

@@ -5,6 +5,8 @@
  */
 package rockweiler.web.harvester.engine;
 
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
 import org.testng.annotations.Test;
 import rockweiler.web.harvester.core.UpdateRequest;
 
@@ -24,7 +26,8 @@ public class UpdateProcessorTest {
 
         args.localDestination = File.createTempFile("kershaw.", ".html").toString();
 
-        UpdateProcessor target = new UpdateProcessor(URI.create("http://www.rotoworld.com"), TimeUnit.SECONDS.toMillis(1));
+        CloseableHttpClient client = HttpClients.createDefault();
+        UpdateProcessor target = new UpdateProcessor(client, URI.create("http://www.rotoworld.com"), TimeUnit.SECONDS.toMillis(1));
         target.process(args);
 
         System.out.println(args.localDestination);

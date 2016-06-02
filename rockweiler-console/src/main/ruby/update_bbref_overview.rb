@@ -1,5 +1,4 @@
 require 'json'
-require 'net/http'
 
 class UpdateBbrefOverview
   def schedule(year)
@@ -21,18 +20,12 @@ class UpdateBbrefOverview
 
   def fetch(url, local_file)
     update = {:remoteUri => url, :localDestination => local_file}
-
-    puts JSON.pretty_generate(update)
-
-    req = Net::HTTP::Post.new('/updates', initheader = {'Content-Type' => 'application/json'})
-    req.body = update.to_json
-
-    response = Net::HTTP.new('localhost', 8080).start { |http| http.request(req) }
+    puts JSON.generate(update)
   end
 end
 
 overview = UpdateBbrefOverview.new
 
-Array(2015).each do |year|
+Array(2016).each do |year|
   overview.schedule year
 end

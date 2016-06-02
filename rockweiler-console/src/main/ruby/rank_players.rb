@@ -1,24 +1,29 @@
 require 'json'
 
-class RankPlayers
-  ROOT = '/Users/Danil/Dropbox/OOOL/data/2014/season'
+json = File.read('/Users/Danil/Dropbox/OOOL/data/2016/database/2016.bbref.players.json')
+db = {}
+JSON.parse(json).each do |player|
+  bbref = player['id']['bbref']
+  db[bbref] = player
 end
 
-source = File.expand_path("season.scores.json", RankPlayers::ROOT)
-json = File.read(source)
-season = JSON.parse(json)
+replacements = {"S" => 90, "R" => 130, "H" => 90}
+scores = {}
 
-report = {}
-comment = {}
+json = File.read('/Users/Danil/Dropbox/OOOL/data/2015/season/scores.json')
+JSON.parse(json).each do |id, report|
+  score = 0
+  report['totals'].each do |k,v|
+    score = [ score, v - replacements[k]].max
+  end
 
-season.each do |lahman, scores|
- scores.sort_by {|t, total| total}.reverse.first(1).each do |t, total|
-   comment[lahman] = "%s: %3d %s" % [t, total, lahman]
-   report[lahman] = total
- end
+  scores[id] = score
+
 end
 
-report.sort_by {|id, total| total}.reverse.each do |id, total|
-  puts "# %s" % comment[id]
-  puts "%s %s" % [:p,id]
+ranked = []
+scores.sort_by {|k,v| v}.reverse.each do |id, score|
+  ranked << db[id]
 end
+
+puts JSON.pretty_generate(ranked)

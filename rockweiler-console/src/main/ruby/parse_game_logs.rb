@@ -13,7 +13,7 @@ class ParseGameLogs
 
   def pitchers
     Dir.glob("#{ROOT}/pitching.gamelog.*.html").each do |file|
-      /pitching.gamelog.([^\\.]+).html/.match(file) do |m|
+      /pitching.gamelog.([^0-9]+[0-9]+).html/.match(file) do |m|
         yield m[1], m[0]
       end
     end
@@ -21,7 +21,7 @@ class ParseGameLogs
 
   def hitters
     Dir.glob("#{ROOT}/batting.gamelog.*.html").each do |file|
-      /batting.gamelog.([^\\.]+).html/.match(file) do |m|
+      /batting.gamelog.([^0-9]+[0-9]+).html/.match(file) do |m|
         yield m[1], m[0]
       end
     end

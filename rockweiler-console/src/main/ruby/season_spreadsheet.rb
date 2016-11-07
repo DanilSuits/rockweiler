@@ -1,7 +1,7 @@
 require 'json'
 require 'date'
 require 'csv'
-
+require 'set'
 require 'axlsx'
 
 class SeasonSpreadsheet
@@ -27,10 +27,18 @@ class SeasonSpreadsheet
     sheets[category] = {}
   end
 
+  mondays = Set.new
+
   scores.each do |id, report|
     totals = report["totals"]
     totals["season"].each do |category, score|
       sheets[category][id] = report
+    end
+
+    totals["weekly"].each do |category, weeks|
+      weeks.each do |monday, score|
+        mondays.add(monday)
+      end
     end
   end
 
@@ -61,10 +69,13 @@ class SeasonSpreadsheet
       @view = view
       @attention = { 'AVAILABLE' => view.styles.add_style(:bg_color => "EF0920", :fg_color => "FFFFFF")}
       @attention['Danil Suits'] = view.styles.add_style(:bg_color => "D0D0D0", :fg_color => "2009EF", :b => true)
+      @currentWeek = view.styles.add_style(
+          :fg_color => "808080", :b => false)
     end
 
-    def addRow(id,name,owner,score)
-      row = @view.add_row [id,name,owner,score]
+    def addRow(id,name,owner,score,*weekly)
+      row = @view.add_row [id,name,owner,score, *weekly]
+      row.cells[4].style = @currentWeek
       if @attention.has_key? owner
         row.cells[2].style = @attention[owner]
       end
@@ -86,7 +97,7 @@ class SeasonSpreadsheet
 
 
           view.name = label
-          view.add_row ["id:bbref", "Name", "Owner", label]
+          view.add_row ["id:bbref", "Name", "Owner", label] + mondays.each.sort.reverse
 
           worksheet = Worksheet.new(view)
 
@@ -95,7 +106,11 @@ class SeasonSpreadsheet
             owner = to_owner[id]
             name = report["bio"]["name"]
             score = report["totals"]["season"][category]
-            worksheet.addRow(id, name, owner, score)
+
+            weekly_scores = Hash.new("")
+            mondays.each{ |week| weekly_scores[week] = report["totals"]["weekly"][category][week]}
+            scores_by_week = mondays.each.sort.reverse.map{ |week| weekly_scores[week]}
+            worksheet.addRow(id, name, owner, score, *scores_by_week)
           end
         end
       end
@@ -104,7 +119,7 @@ class SeasonSpreadsheet
 
         wb.add_worksheet do |view|
           view.name = position
-          view.add_row ["id:bbref", "Name", "Owner", position]
+          view.add_row ["id:bbref", "Name", "Owner", position] + mondays.each.sort.reverse
 
           views[position] = Worksheet.new(view)
         end
@@ -121,7 +136,11 @@ class SeasonSpreadsheet
 
           players[id].each do |position|
             ws = views[position]
-            ws.addRow id, name, owner, score
+
+            weekly_scores = Hash.new("")
+            mondays.each{ |week| weekly_scores[week] = report["totals"]["weekly"][category][week]}
+            scores_by_week = mondays.each.sort.reverse.map{ |week| weekly_scores[week]}
+            ws.addRow(id, name, owner, score, *scores_by_week)
           end
 
         end

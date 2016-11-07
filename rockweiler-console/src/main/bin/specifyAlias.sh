@@ -7,5 +7,5 @@ shift ; shift
 
 . $(dirname ${0})/env.sh
 
-EVENTS=${OOOL}/current.overrides
+EVENTS=${OOOL}/alias.overrides
 ruby ${ROCKWEILER_RUBY}/specify_alias.rb ${BBREF} ${ALIAS} | tee -a ${EVENTS}

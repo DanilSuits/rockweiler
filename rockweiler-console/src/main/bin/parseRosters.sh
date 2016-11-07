@@ -14,8 +14,9 @@ readGameLogs () {
 
 publishEvents () {
     assignedPlayers
-    readGameLogs
     cat ${OOOL}/current.overrides
+    readGameLogs
+    cat ${OOOL}/alias.overrides
 }
 
 publishEvents |
